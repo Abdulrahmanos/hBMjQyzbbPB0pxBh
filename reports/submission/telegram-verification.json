@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-10-22T09:16:33.602919+00:00",
+  "channel": "telegram",
+  "purpose": "synthetic_telegram_buy_sell_delivery_test",
+  "real_market_data": false,
+  "funded_execution": false,
+  "passed": true,
+  "checks": {
+    "exactly_one_buy_and_one_sell": true,
+    "both_provider_receipts_received": true,
+    "one_delivery_attempt_each": true,
+    "rescan_does_not_resend": true,
+    "ledger_reconciles_before_and_after": true
+  },
+  "synthetic_fill_count": 2,
+  "delivered_trade_alerts": 2,
+  "no_background_service_started": true,
+  "limit": "Real Telegram transport and persistent fill-outbox delivery verified using synthetic prices; no continuous service or real-market profitability claim."
+}

@@ -13,3 +13,4 @@ __pycache__
 *.pyc
 credentials*.json
 service-account*.json
+.vscode/

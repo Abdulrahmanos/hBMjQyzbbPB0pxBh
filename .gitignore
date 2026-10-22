@@ -20,3 +20,4 @@ config/google-sheet.json
 reports/milestone-4/sheet-readback.json
 reports/walkthrough/*.mp4
 reports/walkthrough/*.wav
+.vscode/

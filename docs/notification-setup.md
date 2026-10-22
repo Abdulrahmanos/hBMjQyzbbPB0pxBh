@@ -2,6 +2,8 @@
 
 The adapters are implemented, and their payloads, retries, duplicate protection and Monday boundary are tested. **Real delivery is not verified until your own credentials are supplied and the provider returns a receipt.** A local demo is not an external delivery test. Never paste tokens, passwords, client secrets or refresh tokens into chat or GitHub.
 
+The project owner completed real Telegram delivery verification on 22 October 2026: one synthetic BUY and one synthetic SELL passed through the persistent outbox, both received provider receipts, and re-scanning did not resend them. See the [verification record](../reports/submission/telegram-verification.json). These invented prices are not market observations. Gmail still awaits OAuth. A fresh clone needs its own credentials using the steps below.
+
 ## Telegram
 
 1. In Telegram, use the verified **BotFather** account to create your project bot yourself.

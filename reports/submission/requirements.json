@@ -22,8 +22,9 @@
     },
     {
       "requirement": "Telegram alert on every committed buy/sell",
-      "status": "implemented_mock_and_local_demo_verified_real_delivery_pending_credentials",
-      "evidence": "bitcoin_agent/notifications.py; tools/setup_telegram.py; docs/notification-setup.md"
+      "status": "real_buy_sell_outbox_delivery_verified_with_synthetic_prices",
+      "evidence": "bitcoin_agent/notifications.py; reports/submission/telegram-verification.json",
+      "limit": "Actual Telegram transport and persistent fill-outbox delivery verified; no continuous service or real-market trading result claimed."
     },
     {
       "requirement": "Gmail weekly report Monday 09:00",
