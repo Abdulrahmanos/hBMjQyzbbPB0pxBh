@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-10-19T08:39:49.282349+00:00",
+  "status": "collecting_forward_data",
+  "started_at": "2026-10-16T11:02:48.767398+00:00",
+  "window_ends_at": "2026-10-23T11:02:48.767398+00:00",
+  "elapsed_hours": 69.61680970861111,
+  "completed_days": 2,
+  "qualifying_days": 0,
+  "seven_day_evidence_complete": false,
+  "observations": 433,
+  "last_observation_at": "2026-10-19T08:34:07.803825+00:00",
+  "quote_coverage_fraction": 0.009598061489380886,
+  "max_observation_gap_seconds": 248113.138708,
+  "fresh_feature_observation_fraction": 0.9930715935334873,
+  "changed_config_checksums": [],
+  "observer_failures": 0,
+  "days": [
+    {
+      "day": 1,
+      "start": "2026-10-16T11:02:48.767398+00:00",
+      "end": "2026-10-17T11:02:48.767398+00:00",
+      "complete_24_hours": true,
+      "quote_coverage_fraction": 0.016589569942129626,
+      "qualifies": false
+    },
+    {
+      "day": 2,
+      "start": "2026-10-17T11:02:48.767398+00:00",
+      "end": "2026-10-18T11:02:48.767398+00:00",
+      "complete_24_hours": true,
+      "quote_coverage_fraction": 0.0,
+      "qualifies": false
+    },
+    {
+      "day": 3,
+      "start": "2026-10-18T11:02:48.767398+00:00",
+      "end": "2026-10-19T08:39:49.282349+00:00",
+      "complete_24_hours": false,
+      "quote_coverage_fraction": 0.012491979404301128,
+      "qualifies": false
+    }
+  ],
+  "strategies": {
+    "scheduled_dca": {
+      "equity_usd": "9998.9694428836",
+      "cash_usd": "9800.02",
+      "btc_units": "0.00240712",
+      "fees_usd": "1.20",
+      "net_return_fraction": "-0.00010305571164",
+      "observed_max_drawdown_fraction": "0.00010305571164"
+    },
+    "buy_and_hold": {
+      "equity_usd": "9991.78101931045",
+      "cash_usd": "0.10",
+      "btc_units": "0.12089089",
+      "fees_usd": "59.70",
+      "net_return_fraction": "-0.000821898068955",
+      "observed_max_drawdown_fraction": "0.007002807492875"
+    },
+    "cash": {
+      "equity_usd": "10000.00",
+      "cash_usd": "10000.00",
+      "btc_units": "0",
+      "fees_usd": "0",
+      "net_return_fraction": "0",
+      "observed_max_drawdown_fraction": "0"
+    },
+    "candidate": {
+      "equity_usd": "9998.99621881880",
+      "cash_usd": "9800.06",
+      "btc_units": "0.00240696",
+      "net_return_fraction": "-0.00010037811812",
+      "observed_max_drawdown_fraction": "0.0001076380828621908102067365"
+    }
+  },
+  "limits": "Coverage measures time under the configured quote-age limit. Prices are never imputed; observed drawdown can miss movements between quotes. Marked equity excludes hypothetical final exit costs. Seven days do not establish durable investment performance.",
+  "health": {
+    "healthy": false,
+    "state": "attention_required",
+    "reasons": [
+      "supervisor_heartbeat_stale",
+      "worker_heartbeat_stale",
+      "worker_stopped",
+      "accepted_quote_stale_or_missing"
+    ],
+    "supervisor_heartbeat_at": "2026-10-19T08:33:22.644444+00:00",
+    "worker_state": "stopped",
+    "last_accepted_quote_at": "2026-10-19T08:34:07.803825+00:00"
+  },
+  "ledger_audit": {
+    "passed": true,
+    "candidate": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9800.06",
+      "fees_usd": "1.20",
+      "rounding_cost_usd": "0.0128589949",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0.00240696",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 2
+    },
+    "baseline_books_reconciled": 3
+  },
+  "code_checksum": "2d410a015924a50e86a34d0ca88486c72303ed5ebc28af10724eed9d7e410001",
+  "frozen_code_checksum": "2d410a015924a50e86a34d0ca88486c72303ed5ebc28af10724eed9d7e410001",
+  "implementation_changed": false
+}

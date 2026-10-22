@@ -1,0 +1,9 @@
+{
+  "verified_on": "2026-10-12",
+  "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
+  "python": "3.14.6",
+  "tests_run": 78,
+  "failures": 0,
+  "errors": 0,
+  "source": "Completed terminal test run; scoped Windows execution approval permits Python private temporary directories."
+}

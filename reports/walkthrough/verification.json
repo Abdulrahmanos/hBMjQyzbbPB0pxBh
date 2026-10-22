@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-10-19T09:25:23.984035+00:00",
+  "status": "preview",
+  "chapters": 11,
+  "duration_seconds": 414.34331065759636,
+  "resolution": "1920x1080",
+  "fps": 10,
+  "narration": "Offline Windows Microsoft David Desktop",
+  "imageio_ffmpeg": "0.6.0, isolated media folder",
+  "full_video_decode_passed": true,
+  "video_sha256": "04e2056a85311063d19d206ae6aa760cc7134023108634aa4809163b646ccfb0",
+  "video_bytes": 10801239,
+  "uploaded": false
+}

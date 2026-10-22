@@ -1,0 +1,11 @@
+{
+  "verified_on": "2026-10-11",
+  "python_version": "3.14.6",
+  "command": ".\\.venv\\Scripts\\python.exe -m unittest discover -s tests -v",
+  "tests_run": 53,
+  "failures": 0,
+  "errors": 0,
+  "exit_code": 0,
+  "result": "passed",
+  "scope": "Foundation, research causality/execution, and persistent paper engine tests"
+}

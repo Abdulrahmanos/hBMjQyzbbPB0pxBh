@@ -1,0 +1,22 @@
+{
+  "execution_mode": "paper",
+  "cycles_completed": 3,
+  "accepted_quotes": 2,
+  "new_fills": 1,
+  "market_failures": 0,
+  "running": false,
+  "audit": {
+    "passed": true,
+    "initial_cash_usd": "10000.00",
+    "reconstructed_cash_usd": "9900.03",
+    "fees_usd": "0.60",
+    "rounding_cost_usd": "0.0069193340",
+    "cash_difference_usd": "0.00",
+    "inventory": {
+      "dca": "0.00119731",
+      "swing": "0",
+      "reserve": "0"
+    },
+    "fills": 1
+  }
+}

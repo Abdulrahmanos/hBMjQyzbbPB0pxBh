@@ -1,0 +1,79 @@
+{
+  "execution_mode": "paper",
+  "cycles_completed": 8,
+  "accepted_quotes": 8,
+  "new_fills": 1,
+  "market_failures": 0,
+  "feature_failures": 0,
+  "running": false,
+  "audit": {
+    "passed": true,
+    "initial_cash_usd": "10000.00",
+    "reconstructed_cash_usd": "9800.06",
+    "fees_usd": "1.20",
+    "rounding_cost_usd": "0.0138233871",
+    "cash_difference_usd": "0.00",
+    "inventory": {
+      "dca": "0.00240330",
+      "swing": "0",
+      "reserve": "0"
+    },
+    "fills": 2
+  },
+  "active_config_checksum": "7a96e52cfec0e0486dd0ed4c33cd0a573ac02b88d3f00312ea6e85c3fe07c403",
+  "integrations": {
+    "inbox": "reports\\milestone-4\\inbox\\index.html",
+    "outbox": [
+      {
+        "id": "fill:456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb",
+        "channel": "telegram",
+        "status": "delivered",
+        "attempts": 1,
+        "next_attempt_at": "2026-10-12T17:40:36.425794+00:00",
+        "delivered_at": "2026-10-12T17:40:36.425794+00:00",
+        "last_error": null
+      },
+      {
+        "id": "weekly:2026-10-12T06:00:00+00:00",
+        "channel": "gmail",
+        "status": "delivered",
+        "attempts": 1,
+        "next_attempt_at": "2026-10-12T17:40:36.425794+00:00",
+        "delivered_at": "2026-10-12T17:40:36.425794+00:00",
+        "last_error": null
+      },
+      {
+        "id": "fill:b1c8e258c39b6d152a18255ebeb7138795b6ecc77a0654d53d3d763648d0092e",
+        "channel": "telegram",
+        "status": "delivered",
+        "attempts": 1,
+        "next_attempt_at": "2026-10-12T17:41:55.782839+00:00",
+        "delivered_at": "2026-10-12T17:41:55.782839+00:00",
+        "last_error": null
+      }
+    ],
+    "delivery_mode": "demo",
+    "config_status": "validated_cache",
+    "config_source": "local",
+    "config_checksum": "7a96e52cfec0e0486dd0ed4c33cd0a573ac02b88d3f00312ea6e85c3fe07c403",
+    "llm_role": "shadow_only",
+    "adviser_provider": "fixture"
+  },
+  "last_features": {
+    "asof": "2026-10-12T17:00:00+00:00",
+    "daily_asof": "2026-10-12T00:00:00+00:00",
+    "close": "82406.83",
+    "atr": "397.15233040936494",
+    "ready": true,
+    "swing_signal": false,
+    "regime": "bull",
+    "confirmed_bear": false,
+    "return_24h": "-0.01681700126120944"
+  },
+  "product_rules": {
+    "base_increment": "1E-8",
+    "quote_increment": "0.01",
+    "minimum_notional_usd": "1",
+    "market_enabled": true
+  }
+}

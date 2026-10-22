@@ -1,0 +1,183 @@
+{
+  "status": "collecting_forward_data",
+  "generated_at": "2026-10-20T06:24:18.820452+00:00",
+  "started_at": "2026-10-19T09:12:29.536612+00:00",
+  "window_ends_at": "2026-10-26T09:12:29.536612+00:00",
+  "elapsed_hours": 21.19702328888889,
+  "completed_days": 0,
+  "qualifying_days": 0,
+  "seven_day_evidence_complete": false,
+  "observations": 6586,
+  "last_observation_at": "2026-10-20T06:24:15.707694+00:00",
+  "quote_coverage_fraction": 0.4390908653035515,
+  "max_observation_gap_seconds": 42761.838739,
+  "fresh_feature_observation_fraction": 0.9980261160036441,
+  "changed_config_checksums": [],
+  "observer_failures": 0,
+  "days": [
+    {
+      "day": 1,
+      "start": "2026-10-19T09:12:29.536612+00:00",
+      "end": "2026-10-20T06:24:18.820452+00:00",
+      "complete_24_hours": false,
+      "quote_coverage_fraction": 0.4390908653035515,
+      "qualifies": false
+    }
+  ],
+  "strategies": {
+    "scheduled_dca": {
+      "equity_usd": "9998.01185103045",
+      "cash_usd": "9900.01",
+      "btc_units": "0.00120047",
+      "fees_usd": "0.60",
+      "net_return_fraction": "-0.000198814896955",
+      "observed_max_drawdown_fraction": "0.000201837680415"
+    },
+    "buy_and_hold": {
+      "equity_usd": "9803.5554506191",
+      "cash_usd": "0.10",
+      "btc_units": "0.12008706",
+      "fees_usd": "59.70",
+      "net_return_fraction": "-0.01964445493809",
+      "observed_max_drawdown_fraction": "0.01994683415517"
+    },
+    "cash": {
+      "equity_usd": "10000.00",
+      "cash_usd": "10000.00",
+      "btc_units": "0",
+      "fees_usd": "0",
+      "net_return_fraction": "0",
+      "observed_max_drawdown_fraction": "0"
+    },
+    "candidate": {
+      "equity_usd": "9998.01225833405",
+      "cash_usd": "9900.03",
+      "btc_units": "0.00120023",
+      "net_return_fraction": "-0.000198774166595",
+      "observed_max_drawdown_fraction": "0.000201796345735"
+    }
+  },
+  "manifest": {
+    "baseline_rule": "DCA uses the initial DCA reference/tranche and 7-day cap; scheduled buys only. Buy-and-hold fills available cash up to the same per-quote cap. All books include idle cash and modeled fees/slippage; no final liquidation assumed.",
+    "code_checksum": "660ef78760b834ad45148540da41a43b31fe61dcd611c7e7d1fa21197d7c3b39",
+    "config": {
+      "dca": {
+        "cooldown_hours": 12,
+        "dip_reference": "last_filled_dca_buy",
+        "dip_trigger_fraction": 0.03,
+        "enabled": true,
+        "max_spend_fraction_per_7_days": 0.14,
+        "schedule_hours": 24,
+        "tranche_fraction_of_dca_budget": 0.02
+      },
+      "execution_mode": "paper",
+      "integrations": {
+        "config_refresh_seconds": 3600,
+        "gmail_enabled": true,
+        "google_sheet_enabled": false,
+        "llm_enabled": false,
+        "telegram_enabled": true
+      },
+      "market": {
+        "candle_seconds": 3600,
+        "poll_seconds": 1800,
+        "product_id": "BTC-USD",
+        "provider": "coinbase",
+        "stale_after_seconds": 120
+      },
+      "operational": {
+        "allocation_mode": "regime",
+        "allocation_update_hours": 24,
+        "bear_confirmation_days": 7,
+        "bear_exit_enabled": true,
+        "bear_targets": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bull_targets": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "crash_drop_fraction": 0.15,
+        "crash_window_hours": 24,
+        "drawdown_action": "liquidate",
+        "exposure_buffer_fraction": 0.02,
+        "feature_stale_after_seconds": 7200,
+        "high_volatility_atr_fraction": 0.06,
+        "max_btc_exposure_fraction": 0.6,
+        "max_lifetime_loss_fraction": 0.3,
+        "max_target_atr_multiple": 8.0,
+        "maximum_spread_fraction": 0.01,
+        "minimum_cash_fraction": 0.2,
+        "mixed_targets": [
+          0.3,
+          0.2,
+          0.5
+        ],
+        "momentum_days": 30,
+        "order_timeout_seconds": 300,
+        "paper_fill_cap_usd": "1000.00",
+        "recovery_days": 7,
+        "resume_cooldown_hours": 72,
+        "resume_mode": "confirmed_recovery",
+        "trend_days": 200,
+        "unknown_targets": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "portfolio": {
+        "dca_fraction": 0.5,
+        "initial_cash_usd": "10000.00",
+        "reserve_fraction": 0.2,
+        "swing_fraction": 0.3
+      },
+      "reporting": {
+        "timezone": "Asia/Riyadh",
+        "weekly_day": "monday",
+        "weekly_time": "09:00"
+      },
+      "risk": {
+        "fee_fraction_per_fill": 0.006,
+        "max_portfolio_drawdown_fraction": 0.25,
+        "slippage_fraction_per_fill": 0.001,
+        "stop_monitor_seconds": 5
+      },
+      "schema_version": 1,
+      "swing": {
+        "atr_multiplier": 1.5,
+        "atr_period": 14,
+        "breakout_lookback": 20,
+        "ema_fast_period": 20,
+        "ema_slow_period": 50,
+        "enabled": false,
+        "max_holding_hours": 72,
+        "max_notional_fraction_of_swing_budget": 0.5,
+        "max_open_positions": 1,
+        "relative_volume_lookback": 20,
+        "relative_volume_threshold": 1.5,
+        "risk_fraction_of_equity": 0.005,
+        "take_profit_r_multiple": 2.0
+      }
+    },
+    "config_checksum": "cb541bf053d084d7ee345c7adcd03c1d39df65b76f1422530e17d1ee907460e7",
+    "created_at": "2026-10-19T09:12:28.983760+00:00",
+    "environment": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "platform": "Windows",
+      "python": "3.14.6"
+    },
+    "historical_candles_count_as_forward": false,
+    "initial_cash_usd": "10000.00",
+    "llm_influences_orders": false,
+    "minimum_daily_quote_coverage": 0.99,
+    "schema_version": 1,
+    "source": "coinbase_public_stream",
+    "window_seconds": 604800
+  },
+  "limits": "Coverage measures time under the configured quote-age limit. Prices are never imputed; observed drawdown can miss movements between quotes. Marked equity excludes hypothetical final exit costs. Seven days do not establish durable investment performance."
+}

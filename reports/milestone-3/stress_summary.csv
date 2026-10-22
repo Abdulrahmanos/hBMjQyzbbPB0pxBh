@@ -1,0 +1,9 @@
+scenario,policy,net_return,max_drawdown,final_equity_usd,pre_shock_btc_exposure,ending_phase,recovery_resumes,fees_usd,pause_reasons,database,ledger_passed
+year_decline_80pct,pause_only,-0.61723755828,0.61723755828,3827.6244172,0.6999928407295644,paused,0,46.64,portfolio_drawdown,C:\Git repo\bitcoin\var\stress\79c8fc669db3\year_decline_80pct_pause_only.sqlite3,True
+year_decline_80pct,defensive,-0.029496999999999884,0.029497,9705.03,0.5999985921981679,cooldown,0,71.59,confirmed_bear,C:\Git repo\bitcoin\var\stress\79c8fc669db3\year_decline_80pct_defensive.sqlite3,True
+flash_drop_30pct,pause_only,-0.21446320537999997,0.21446320538,7855.3679462,0.6999928407295644,active,0,45.87,,C:\Git repo\bitcoin\var\stress\79c8fc669db3\flash_drop_30pct_pause_only.sqlite3,True
+flash_drop_30pct,defensive,-0.18655500000000003,0.186555,8134.45,0.5999985921981679,cooldown,0,61.18,rapid_price_decline,C:\Git repo\bitcoin\var\stress\79c8fc669db3\flash_drop_30pct_defensive.sqlite3,True
+false_rebound,pause_only,-0.37156514669999996,0.42856087230878537,6284.348533,0.6999928407295644,paused,0,45.87,portfolio_drawdown,C:\Git repo\bitcoin\var\stress\79c8fc669db3\false_rebound_pause_only.sqlite3,True
+false_rebound,defensive,-0.19177299999999997,0.191773,8082.27,0.5999985921981679,cooldown,1,62.55,rapid_price_decline;rapid_price_decline,C:\Git repo\bitcoin\var\stress\79c8fc669db3\false_rebound_defensive.sqlite3,True
+outage_during_50pct_drop,pause_only,-0.35329220495,0.35329220495,6467.0779505,0.6999928407295644,paused,0,42.10,portfolio_drawdown,C:\Git repo\bitcoin\var\stress\79c8fc669db3\outage_during_50pct_drop_pause_only.sqlite3,True
+outage_during_50pct_drop,defensive,-0.305195,0.305195,6948.05,0.5999985921981679,halted,0,54.02,lifetime_capital_floor,C:\Git repo\bitcoin\var\stress\79c8fc669db3\outage_during_50pct_drop_defensive.sqlite3,True

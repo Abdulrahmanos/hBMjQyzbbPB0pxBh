@@ -1,0 +1,30 @@
+{
+  "id": "weekly:2026-10-12T06:00:00+00:00",
+  "channel": "gmail",
+  "delivery": "local_demo",
+  "kind": "weekly_report",
+  "metrics": {
+    "accepted_marks": 6,
+    "btc_units": "0.00119731",
+    "cash_usd": "9900.03",
+    "closing_equity_usd": "9999.38474140185",
+    "closing_mark_at": "2026-10-11T11:47:49.930193+00:00",
+    "closing_mark_stale": true,
+    "coverage": "Partial period: first accepted observation 2026-10-11T10:51:03.843432+00:00. Opening value uses initial simulated cash.",
+    "execution_mode": "paper",
+    "fees_usd": "0.60",
+    "fills": 1,
+    "generated_at": "2026-10-12T17:40:36.425794+00:00",
+    "net_return_fraction": "-0.000061525859815",
+    "observed_max_drawdown_fraction": "0.000070619429265",
+    "opening_equity_usd": "10000.00",
+    "opening_mark_at": null,
+    "opening_mark_stale": false,
+    "period_end": "2026-10-12T06:00:00+00:00",
+    "period_start": "2026-10-05T06:00:00+00:00",
+    "phase_at_last_mark": "active",
+    "realized_pnl_usd": "0"
+  },
+  "subject": "Bitcoin PAPER weekly report 2026-10-12",
+  "text": "Bitcoin PAPER weekly report\nPeriod: 2026-10-05T06:00:00+00:00 to 2026-10-12T06:00:00+00:00 (start exclusive, end inclusive)\nPartial period: first accepted observation 2026-10-11T10:51:03.843432+00:00. Opening value uses initial simulated cash.\n\nOpening equity: $10000.00\nClosing equity: $9999.38\nNet period return: -0.01%\nObserved period maximum drawdown: 0.01%\nCash: 9900.03 USD | BTC: 0.00119731\nConfirmed fills: 1 | Fees: $0.60 | Realized P&L: $0.00\nLast accepted mark: 2026-10-11T11:47:49.930193+00:00\nClosing mark stale: True | Opening mark stale: False\nRisk phase at last mark: active\n\nEquity = cash + BTC valued at the accepted bid/ask midpoint. Returns include modeled fills and fees; unrealized liquidation costs are not deducted. Drawdown measures observed marks only. Sparse or stale quotes can miss losses between observations. This is a paper experiment, not a live brokerage report."
+}

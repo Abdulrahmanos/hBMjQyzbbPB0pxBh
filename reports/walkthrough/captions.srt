@@ -1,0 +1,335 @@
+1
+00:00:00,000 --> 00:00:08,512
+This project asks whether a configurable Bitcoin strategy improves returns and
+drawdown relative to simpler alternatives.
+
+2
+00:00:08,512 --> 00:00:12,099
+We assume Bitcoin remains operational and tradable.
+
+3
+00:00:12,099 --> 00:00:14,491
+We do not assume it is profitable.
+
+4
+00:00:14,491 --> 00:00:16,882
+All funds and fills are simulated.
+
+5
+00:00:16,882 --> 00:00:23,987
+The project separates historical research, an operational paper engine, and a
+prospective evaluation.
+
+6
+00:00:23,987 --> 00:00:30,459
+This walkthrough follows the money and explains the evidence, including unfavorable
+results.
+
+7
+00:00:30,459 --> 00:00:34,943
+The account starts with ten thousand dollars and zero Bitcoin.
+
+8
+00:00:34,943 --> 00:00:43,333
+In a bullish regime, five thousand dollars is assigned to DCA, three thousand to
+swing, and two thousand to reserve.
+
+9
+00:00:43,333 --> 00:00:47,094
+These are budget targets, not immediate investments.
+
+10
+00:00:47,094 --> 00:00:48,613
+DCA spends gradually.
+
+11
+00:00:48,613 --> 00:00:55,918
+Swing needs its own entry conditions and is disabled in this forward run, so its
+money stays in cash.
+
+12
+00:00:55,918 --> 00:01:02,428
+Budget reviews consider existing holdings and pending orders before moving available
+cash.
+
+13
+00:01:02,428 --> 00:01:07,560
+Daily trend compares the closing price with its two hundred day average.
+
+14
+00:01:07,560 --> 00:01:10,839
+Momentum measures the return over thirty days.
+
+15
+00:01:10,839 --> 00:01:17,397
+Both positive conditions identify a bullish regime; both negative identify a bearish
+regime.
+
+16
+00:01:17,397 --> 00:01:21,674
+Large daily true ranges can select a high volatility regime.
+
+17
+00:01:21,674 --> 00:01:24,882
+Hourly indicators use only completed candles.
+
+18
+00:01:24,882 --> 00:01:29,088
+Breakout and volume references exclude the decision candle.
+
+19
+00:01:29,088 --> 00:01:35,931
+Missing hours are recorded rather than invented, and short hourly indicators restart
+after gaps.
+
+20
+00:01:35,931 --> 00:01:44,799
+With a five thousand dollar DCA reference, a two percent tranche gives a purchase
+budget of one hundred dollars, including fees.
+
+21
+00:01:44,799 --> 00:01:49,371
+A scheduled purchase is due approximately every twenty four hours.
+
+22
+00:01:49,371 --> 00:01:56,022
+A completed hourly close at least three percent below the last actual DCA fill can
+also qualify.
+
+23
+00:01:56,022 --> 00:02:01,218
+Both routes share a twelve hour cooldown and the same rolling spending cap.
+
+24
+00:02:01,218 --> 00:02:06,691
+Fourteen percent of the reference allows seven hundred dollars over seven days.
+
+25
+00:02:06,691 --> 00:02:11,610
+The engine also checks available cash, valid data and portfolio limits.
+
+26
+00:02:11,610 --> 00:02:15,828
+A buy starts from the observed ask and adds adverse slippage.
+
+27
+00:02:15,828 --> 00:02:18,871
+A sell starts from the bid and subtracts it.
+
+28
+00:02:18,871 --> 00:02:25,787
+The simulation assumes zero point six percent fees and zero point one percent
+slippage on each fill.
+
+29
+00:02:25,787 --> 00:02:30,075
+These are experimental costs, not a verified account fee tier.
+
+30
+00:02:30,075 --> 00:02:35,401
+Decimal arithmetic and conservative rounding keep money and quantity precise.
+
+31
+00:02:35,401 --> 00:02:39,758
+Pending buys reserve cash, and pending sells reserve inventory.
+
+32
+00:02:39,758 --> 00:02:45,498
+Immutable fills allow an independent reconstruction of the account after a restart.
+
+33
+00:02:45,498 --> 00:02:53,806
+The candidate swing entry looks for upward trend, a breakout above the previous
+twenty hours, and elevated volume.
+
+34
+00:02:53,806 --> 00:02:56,867
+ATR measures movement size, not direction.
+
+35
+00:02:56,867 --> 00:03:03,280
+Position sizing begins with a planned loss budget of half a percent of portfolio
+equity.
+
+36
+00:03:03,280 --> 00:03:06,413
+The stop is one point five ATR below entry.
+
+37
+00:03:06,413 --> 00:03:11,296
+The profit target must cover costs and twice the modeled stop loss.
+
+38
+00:03:11,296 --> 00:03:14,648
+A target more than eight ATR away is rejected.
+
+39
+00:03:14,648 --> 00:03:22,446
+These filters do not prove profitability, and the current forward experiment leaves
+swing entries disabled.
+
+40
+00:03:22,446 --> 00:03:32,076
+The offline research compares forty seven distinct profiles across allocations, dip
+thresholds, volatility multipliers and defensive exits.
+
+41
+00:03:32,076 --> 00:03:36,025
+It uses twenty three nonoverlapping development episodes.
+
+42
+00:03:36,025 --> 00:03:40,044
+Each fit sees only outcomes already complete at that date.
+
+43
+00:03:40,044 --> 00:03:45,240
+The score rewards mean logarithmic return and subtracts a drawdown penalty.
+
+44
+00:03:45,240 --> 00:03:50,090
+That penalty expresses a declared preference, not a universal optimum.
+
+45
+00:03:50,090 --> 00:03:57,157
+A context model needs enough matching earlier episodes and otherwise falls back to
+the global ranking.
+
+46
+00:03:57,157 --> 00:03:58,750
+Cash is a valid winner.
+
+47
+00:03:58,750 --> 00:04:03,253
+This search is not continuously retuning the operational account.
+
+48
+00:04:03,253 --> 00:04:12,797
+In the frozen historical holdout, feature allocation returned fourteen point three
+seven percent with fourteen point six six percent maximum drawdown.
+
+49
+00:04:12,797 --> 00:04:19,287
+Buy and hold returned nine point eight two percent with twenty nine point four eight
+percent drawdown.
+
+50
+00:04:19,287 --> 00:04:25,014
+However, the longer development selector reached seventy two point three percent
+drawdown.
+
+51
+00:04:25,014 --> 00:04:30,422
+The initial swing rule lost twenty point six four percent in the holdout after costs.
+
+52
+00:04:30,422 --> 00:04:36,275
+These limitations are why the historical winner was not simply promoted into live
+operation.
+
+53
+00:04:36,275 --> 00:04:42,065
+The holdout is now observed and cannot become a fresh independent test for later
+revisions.
+
+54
+00:04:42,065 --> 00:04:47,049
+Pausing purchases alone leaves previously accumulated Bitcoin exposed.
+
+55
+00:04:47,049 --> 00:04:51,605
+The operational policy can request exits from existing holdings.
+
+56
+00:04:51,605 --> 00:04:58,084
+New purchases respect a sixty percent Bitcoin exposure cap and twenty percent minimum
+cash.
+
+57
+00:04:58,084 --> 00:05:03,138
+Price appreciation can trigger a trim above sixty two percent exposure.
+
+58
+00:05:03,138 --> 00:05:09,190
+Rapid decline, confirmed bearish days and portfolio drawdown can request liquidation.
+
+59
+00:05:09,190 --> 00:05:12,820
+The original capital floor can halt the experiment.
+
+60
+00:05:12,820 --> 00:05:16,807
+Recovery requires cooldown and distinct qualifying days.
+
+61
+00:05:16,807 --> 00:05:22,787
+A price gap or unavailable market can still produce a worse exit than the threshold.
+
+62
+00:05:22,787 --> 00:05:28,578
+The forward experiment starts fresh accounts for the candidate and three comparison
+books.
+
+63
+00:05:28,578 --> 00:05:32,824
+Each receives the same prospective observations and modeled costs.
+
+64
+00:05:32,824 --> 00:05:39,258
+All seven anchored twenty four hour days must reach at least ninety nine percent
+quote age coverage.
+
+65
+00:05:39,258 --> 00:05:43,955
+The earlier window failed after a long interruption and remains archived.
+
+66
+00:05:43,955 --> 00:05:52,963
+A separate recovery rehearsal confirmed that Task Scheduler can replace a stopped
+supervisor without changing balances or duplicating fills.
+
+67
+00:05:52,963 --> 00:05:57,596
+Historical warm up and artificial tests never count as prospective days.
+
+68
+00:05:57,596 --> 00:06:01,521
+The replacement forward run is still collecting observations.
+
+69
+00:06:01,521 --> 00:06:05,896
+There are no completed conclusions about its investment performance.
+
+70
+00:06:05,896 --> 00:06:11,107
+The video will be regenerated with the actual results after the full week passes.
+
+71
+00:06:11,107 --> 00:06:14,824
+The README provides setup and reproduction commands.
+
+72
+00:06:14,824 --> 00:06:20,183
+The formula guide connects reported values to equations and saved examples.
+
+73
+00:06:20,183 --> 00:06:30,331
+The final evaluation includes daily coverage, independent ledger reconciliation,
+source and configuration checksums, and strategy comparisons.
+
+74
+00:06:30,331 --> 00:06:36,406
+Tests cover accounting, causality, restart behavior, risk controls and release gates.
+
+75
+00:06:36,406 --> 00:06:42,623
+Real messaging, paid model calls and Docker execution remain unverified optional
+paths.
+
+76
+00:06:42,623 --> 00:06:47,697
+A successful week establishes behavior under those observed conditions.
+
+77
+00:06:47,697 --> 00:06:54,343
+It does not establish durable investment performance or a personal allocation
+recommendation.

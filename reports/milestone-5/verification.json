@@ -1,0 +1,91 @@
+{
+  "verified_at": "2026-10-16T11:09:11.905446+00:00",
+  "deployment_checkpoint_passed": true,
+  "full_milestone_complete": false,
+  "health": {
+    "checked_at": "2026-10-16T11:09:11.905446+00:00",
+    "healthy": true,
+    "state": "healthy",
+    "reasons": [],
+    "supervisor": {
+      "pid": 38116,
+      "token": "bdfbece6b38c42ccb10161838b4cb703",
+      "child_pid": 38564,
+      "state": "running",
+      "heartbeat_at": "2026-10-16T11:09:11.016015+00:00",
+      "restarts": 1
+    },
+    "worker": {
+      "pid": 38564,
+      "state": "running",
+      "heartbeat_at": "2026-10-16T11:09:11.410561+00:00",
+      "last_accepted_quote_at": "2026-10-16T11:09:11.370761+00:00",
+      "features_fresh": true,
+      "observer_failed": false,
+      "config_checksum": "cb541bf053d084d7ee345c7adcd03c1d39df65b76f1422530e17d1ee907460e7"
+    }
+  },
+  "initial_simulated_cash_usd": "10000.00",
+  "audit": {
+    "passed": true,
+    "candidate": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9900.03",
+      "fees_usd": "0.60",
+      "rounding_cost_usd": "0.0064142815",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0.00120817",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 1
+    },
+    "baseline_books_reconciled": 3
+  },
+  "worker_restart_verified": true,
+  "same_cash_inventory_fees_and_fill_count_after_restart": true,
+  "no_duplicate_trade_alert": true,
+  "paired_forward_observations": 76,
+  "accepted_candidate_quotes": 76,
+  "backup": {
+    "created_at": "2026-10-16T11:09:11.954163+00:00",
+    "path": "C:\\Git repo\\bitcoin\\var\\forward\\backups\\verified-20261016T110911905446.sqlite3",
+    "sha256": "16d749bacac0df22fcb85c0cfcaa31d77541a2483abf4113e483c9e431b3b87f",
+    "audit": {
+      "passed": true,
+      "candidate": {
+        "passed": true,
+        "initial_cash_usd": "10000.00",
+        "reconstructed_cash_usd": "9900.03",
+        "fees_usd": "0.60",
+        "rounding_cost_usd": "0.0064142815",
+        "cash_difference_usd": "0.00",
+        "inventory": {
+          "dca": "0.00120817",
+          "swing": "0",
+          "reserve": "0"
+        },
+        "fills": 1
+      },
+      "baseline_books_reconciled": 3
+    }
+  },
+  "forward_status": "collecting_forward_data",
+  "started_at": "2026-10-16T11:02:48.767398+00:00",
+  "window_ends_at": "2026-10-23T11:02:48.767398+00:00",
+  "completed_days": 0,
+  "qualifying_days": 0,
+  "observer_failures": 0,
+  "task_name": "BitcoinPaperAgent-01a129e0",
+  "task_registration_and_start_observed": true,
+  "docker_installed": false,
+  "container_build_verified": false,
+  "cloud_deployed": false,
+  "external_messages_sent": 0,
+  "llm_calls": 0,
+  "prior_demo_preserved": true,
+  "research_data_sha256": "31ae7877085693949570f3d343060c3340ffe8b292200001274b0816762c8080",
+  "first_short_startup_check_preserved": "var/forward-startup-check-20261016"
+}

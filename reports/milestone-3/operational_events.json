@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "occurred_at": "2026-10-11T10:37:52.885897+00:00",
+    "event_type": "paper_portfolio_initialized",
+    "payload_json": "{\"created_at\": \"2026-10-11T10:37:52.885897+00:00\", \"execution_mode\": \"paper\", \"funding_checksum\": \"999f2339daad5abf8d5605ad8a7ff9b83fb9cc429089c37ac868f80e9ddc0d1f\", \"initial_cash_usd\": \"10000.00\", \"schema_version\": \"1\"}"
+  },
+  {
+    "id": 2,
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "event_type": "paper_feature_context",
+    "payload_json": "{\"config_checksum\": \"6d2ebe0c9797c8dbcb4eb4c50488016991e1092fef542792c2bbbcdf16f00d41\", \"features\": {\"asof\": \"2026-10-11T10:00:00+00:00\", \"atr\": \"170.9913638920423\", \"close\": \"82961.12\", \"confirmed_bear\": false, \"daily_asof\": \"2026-10-11T00:00:00+00:00\", \"ready\": true, \"regime\": \"bull\", \"return_24h\": \"0.0021646028305937204\", \"swing_signal\": false}, \"fresh\": true}"
+  },
+  {
+    "id": 3,
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "event_type": "paper_cash_targets",
+    "payload_json": "{\"regime\": \"bull\", \"targets\": [\"0.5\", \"0.3\", \"0.2\"]}"
+  },
+  {
+    "id": 4,
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "event_type": "paper_order_intent",
+    "payload_json": "{\"order_id\": \"d607a6877d8baca4d033faf0a4e5de051a573b522e795d4e3f913df523c9c3a2\", \"quantity\": \"0.00119731\", \"reason\": \"scheduled_dca\", \"side\": \"buy\", \"sleeve\": \"dca\"}"
+  },
+  {
+    "id": 5,
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "event_type": "paper_fill",
+    "payload_json": "{\"fee_usd\": \"0.60\", \"fill_id\": \"456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb\", \"order_id\": \"d607a6877d8baca4d033faf0a4e5de051a573b522e795d4e3f913df523c9c3a2\", \"price\": \"82988.60\", \"quantity\": \"0.00119731\", \"reason\": \"scheduled_dca\", \"side\": \"buy\", \"sleeve\": \"dca\"}"
+  },
+  {
+    "id": 6,
+    "occurred_at": "2026-10-11T11:02:31.448075+00:00",
+    "event_type": "paper_feature_context",
+    "payload_json": "{\"config_checksum\": \"6d2ebe0c9797c8dbcb4eb4c50488016991e1092fef542792c2bbbcdf16f00d41\", \"features\": {\"asof\": \"2026-10-11T11:00:00+00:00\", \"atr\": \"168.67412361403947\", \"close\": \"82915.66\", \"confirmed_bear\": false, \"daily_asof\": \"2026-10-11T00:00:00+00:00\", \"ready\": true, \"regime\": \"bull\", \"return_24h\": \"0.0015994781553032578\", \"swing_signal\": false}, \"fresh\": true}"
+  }
+]

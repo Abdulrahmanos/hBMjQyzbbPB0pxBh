@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "declared_on": "2026-10-22",
+  "input_csv": "data/raw/btc_usd_1h.csv",
+  "expected_input_sha256": "31ae7877085693949570f3d343060c3340ffe8b292200001274b0816762c8080",
+  "sequence_days": 30,
+  "horizon_days": 7,
+  "train_end_exclusive": "2024-01-01T00:00:00Z",
+  "validation_end_exclusive": "2025-01-01T00:00:00Z",
+  "hidden_units": 8,
+  "max_epochs": 200,
+  "patience": 25,
+  "learning_rate": 0.003,
+  "weight_decay": 0.01,
+  "seeds": [17, 29, 43],
+  "drawdown_penalty": 0.75,
+  "bootstrap_block_weeks": 4,
+  "bootstrap_repetitions": 2000,
+  "primary_model": "mean_prediction_of_three_fixed_seed_LSTMs",
+  "selection_rule": "largest predicted seven-day net log return minus 0.75 times drawdown; reserve wins ties",
+  "rules_baseline": "bear/high_volatility/unknown -> reserve; otherwise prior completed hourly swing signal -> swing; otherwise DCA",
+  "scope": "Retrospective weekly flat-to-flat research; not the continuous operational paper account. Previously inspected historical prices are not a pristine independent holdout."
+}

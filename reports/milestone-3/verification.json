@@ -1,0 +1,161 @@
+{
+  "operational_ledger": {
+    "passed": true,
+    "initial_cash_usd": "10000.00",
+    "reconstructed_cash_usd": "9900.03",
+    "fees_usd": "0.60",
+    "rounding_cost_usd": "0.0069193340",
+    "cash_difference_usd": "0.00",
+    "inventory": {
+      "dca": "0.00119731",
+      "swing": "0",
+      "reserve": "0"
+    },
+    "fills": 1
+  },
+  "operational_status": {
+    "execution_mode": "paper",
+    "phase": "active",
+    "pause_reason": null,
+    "last_quote_at": "2026-10-11T11:47:49.930193+00:00",
+    "last_price": "82981.635",
+    "cash_usd": "9900.03",
+    "btc_units": "0.00119731",
+    "equity_usd": "9999.38474140185",
+    "max_lifetime_drawdown": "0.000070619429265",
+    "risk_epoch": 0,
+    "recovery_days": 0,
+    "targets": [
+      "0.5",
+      "0.3",
+      "0.2"
+    ],
+    "balances": {
+      "dca": {
+        "cash": "4900.03",
+        "btc": "0.00119731"
+      },
+      "swing": {
+        "cash": "3000.00",
+        "btc": "0"
+      },
+      "reserve": {
+        "cash": "2000.00",
+        "btc": "0"
+      }
+    },
+    "positions": [
+      {
+        "sleeve": "dca",
+        "quantity": "0.00119731",
+        "cost_basis_usd": "99.97",
+        "average_entry": "82988.60",
+        "opened_at": "2026-10-11T10:51:12.841690+00:00",
+        "stop_price": null,
+        "target_price": null
+      },
+      {
+        "sleeve": "swing",
+        "quantity": "0",
+        "cost_basis_usd": "0",
+        "average_entry": "0",
+        "opened_at": null,
+        "stop_price": null,
+        "target_price": null
+      }
+    ],
+    "active_orders": [],
+    "fills": 1
+  },
+  "original_research_data_unchanged": true,
+  "first_demo": {
+    "execution_mode": "paper",
+    "cycles_completed": 3,
+    "accepted_quotes": 2,
+    "new_fills": 1,
+    "market_failures": 0,
+    "running": false,
+    "audit": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9900.03",
+      "fees_usd": "0.60",
+      "rounding_cost_usd": "0.0069193340",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0.00119731",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 1
+    }
+  },
+  "restart_demo": {
+    "execution_mode": "paper",
+    "cycles_completed": 2,
+    "accepted_quotes": 2,
+    "new_fills": 0,
+    "market_failures": 0,
+    "feature_failures": 0,
+    "running": false,
+    "audit": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9900.03",
+      "fees_usd": "0.60",
+      "rounding_cost_usd": "0.0069193340",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0.00119731",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 1
+    },
+    "last_features": {
+      "asof": "2026-10-11T11:00:00+00:00",
+      "daily_asof": "2026-10-11T00:00:00+00:00",
+      "close": "82915.66",
+      "atr": "168.67412361403947",
+      "ready": true,
+      "swing_signal": false,
+      "regime": "bull",
+      "confirmed_bear": false,
+      "return_24h": "0.0015994781553032578"
+    },
+    "product_rules": {
+      "base_increment": "1E-8",
+      "quote_increment": "0.01",
+      "minimum_notional_usd": "1",
+      "market_enabled": true
+    }
+  },
+  "stress_ledgers_passed": true,
+  "first_fill": {
+    "id": "456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb",
+    "order_id": "d607a6877d8baca4d033faf0a4e5de051a573b522e795d4e3f913df523c9c3a2",
+    "quote_id": "dde0d4da8d5e92169383137f602748e78a584023a8d587d85d5cacdf7839462c",
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "side": "buy",
+    "sleeve": "dca",
+    "quantity": "0.00119731",
+    "price": "82988.60",
+    "notional_usd": "99.37",
+    "fee_usd": "0.60",
+    "slippage_usd": "0.0992689721",
+    "rounding_usd": "0.0069193340",
+    "realized_pnl_usd": "0"
+  },
+  "paper_config_checksum": "6d2ebe0c9797c8dbcb4eb4c50488016991e1092fef542792c2bbbcdf16f00d41",
+  "recorded_automated_tests": {
+    "verified_on": "2026-10-11",
+    "python_version": "3.14.6",
+    "command": ".\\.venv\\Scripts\\python.exe -m unittest discover -s tests -v",
+    "tests_run": 53,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "result": "passed",
+    "scope": "Foundation, research causality/execution, and persistent paper engine tests"
+  }
+}

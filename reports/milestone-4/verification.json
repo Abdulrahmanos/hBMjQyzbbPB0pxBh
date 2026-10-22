@@ -1,0 +1,99 @@
+{
+  "verified_at": "2026-10-12T17:59:39.321634+00:00",
+  "python": "3.14.6",
+  "passed": true,
+  "tests": {
+    "verified_on": "2026-10-12",
+    "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
+    "python": "3.14.6",
+    "tests_run": 78,
+    "failures": 0,
+    "errors": 0,
+    "source": "Completed terminal test run; scoped Windows execution approval permits Python private temporary directories."
+  },
+  "archived_data_sha256": "31ae7877085693949570f3d343060c3340ffe8b292200001274b0816762c8080",
+  "foundation_portfolio_preserved": true,
+  "native_sheet_values_match_local_controls": true,
+  "native_sheet_url": null,
+  "native_sheet_url_publication_note": "Private Sheet URL omitted from source publication; the original verification and native readback remain local. Numerical verification results are unchanged.",
+  "local_messages": 3,
+  "fill_alerts": 2,
+  "weekly_reports": 1,
+  "restart_duplicate_messages": 0,
+  "weekly_return_independently_reconciled": true,
+  "weekly_drawdown_independently_reconciled": true,
+  "weekly_period_excludes_later_fill": true,
+  "audit": {
+    "passed": true,
+    "initial_cash_usd": "10000.00",
+    "reconstructed_cash_usd": "9800.06",
+    "fees_usd": "1.20",
+    "rounding_cost_usd": "0.0138233871",
+    "cash_difference_usd": "0.00",
+    "inventory": {
+      "dca": "0.00240330",
+      "swing": "0",
+      "reserve": "0"
+    },
+    "fills": 2
+  },
+  "portfolio": {
+    "execution_mode": "paper",
+    "phase": "active",
+    "pause_reason": null,
+    "last_quote_at": "2026-10-12T17:42:25.818997+00:00",
+    "last_price": "82339.565",
+    "cash_usd": "9800.06",
+    "btc_units": "0.00240330",
+    "equity_usd": "9997.94667656450",
+    "max_lifetime_drawdown": "0.00021301809695",
+    "risk_epoch": 0,
+    "recovery_days": 0,
+    "targets": [
+      "0.5",
+      "0.3",
+      "0.2"
+    ],
+    "balances": {
+      "dca": {
+        "cash": "4800.77",
+        "btc": "0.00240330"
+      },
+      "swing": {
+        "cash": "2999.57",
+        "btc": "0"
+      },
+      "reserve": {
+        "cash": "1999.72",
+        "btc": "0"
+      }
+    },
+    "positions": [
+      {
+        "sleeve": "dca",
+        "quantity": "0.00240330",
+        "cost_basis_usd": "199.94",
+        "average_entry": "82688.87638368077227146007573",
+        "opened_at": "2026-10-11T10:51:12.841690+00:00",
+        "stop_price": null,
+        "target_price": null
+      },
+      {
+        "sleeve": "swing",
+        "quantity": "0",
+        "cost_basis_usd": "0",
+        "average_entry": "0",
+        "opened_at": null,
+        "stop_price": null,
+        "target_price": null
+      }
+    ],
+    "active_orders": [],
+    "fills": 2
+  },
+  "shadow_records": 1,
+  "actual_llm_calls": 0,
+  "external_messages_sent": 0,
+  "runtime_google_oauth_verified": false,
+  "service_running": false
+}

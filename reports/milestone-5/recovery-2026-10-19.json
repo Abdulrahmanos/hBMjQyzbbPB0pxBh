@@ -1,0 +1,35 @@
+{
+  "verified_at": "2026-10-19T09:12:12.699021+00:00",
+  "tests_run": 101,
+  "tests_passed": true,
+  "source_checksum": "660ef78760b834ad45148540da41a43b31fe61dcd611c7e7d1fa21197d7c3b39",
+  "automatic_supervisor_recovery_verified": true,
+  "same_cash_inventory_fees_and_fill_count": true,
+  "candidate_and_baselines_reconcile": true,
+  "windowless_python": true,
+  "windows_awake_request_accepted": true,
+  "old_supervisor_pid": 43632,
+  "new_supervisor_pid": 33448,
+  "maximum_rehearsal_gap_seconds": 21.939664,
+  "rehearsal_observations": 208,
+  "counts_toward_new_forward_window": false,
+  "backup_sha256": "5cf425eea74b70cf7243a93496726f21fd5a9031a6c60c21938ed75eed1d1b12",
+  "audit": {
+    "passed": true,
+    "candidate": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9900.03",
+      "fees_usd": "0.60",
+      "rounding_cost_usd": "0.0062443770",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0.00120010",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 1
+    },
+    "baseline_books_reconciled": 3
+  }
+}

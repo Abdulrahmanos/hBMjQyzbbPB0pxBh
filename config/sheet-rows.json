@@ -1,0 +1,87 @@
+[
+  [
+    "Setting",
+    "Value",
+    "Meaning"
+  ],
+  [
+    "dca.enabled",
+    true,
+    "Enable new scheduled/dip paper buys"
+  ],
+  [
+    "dca.schedule_hours",
+    24,
+    "Hours between scheduled buys"
+  ],
+  [
+    "dca.cooldown_hours",
+    12,
+    "Minimum hours between dip buys"
+  ],
+  [
+    "dca.dip_trigger_fraction",
+    0.03,
+    "Drop from the last filled DCA price (0.03 = 3%)"
+  ],
+  [
+    "dca.tranche_fraction_of_dca_budget",
+    0.02,
+    "Budget fraction per buy; cannot exceed the local limit"
+  ],
+  [
+    "dca.max_spend_fraction_per_7_days",
+    0.14,
+    "Rolling seven-day cap; cannot exceed the local limit"
+  ],
+  [
+    "swing.enabled",
+    false,
+    "Enable new swing entries; existing protection stays active"
+  ],
+  [
+    "swing.atr_multiplier",
+    1.5,
+    "Initial stop distance in ATR; applies to new entries"
+  ],
+  [
+    "swing.take_profit_r_multiple",
+    2.0,
+    "Net profit target in units of initial risk"
+  ],
+  [
+    "swing.relative_volume_threshold",
+    1.5,
+    "Volume confirmation for a new swing entry"
+  ],
+  [
+    "swing.risk_fraction_of_equity",
+    0.005,
+    "Risk per swing entry; cannot exceed the local limit"
+  ],
+  [
+    "swing.max_holding_hours",
+    72,
+    "Maximum holding time; cannot exceed the local limit"
+  ],
+  [
+    "operational.bull_targets",
+    "[0.5, 0.3, 0.2]",
+    "DCA, swing, cash fractions; sum to 1"
+  ],
+  [
+    "operational.mixed_targets",
+    "[0.3, 0.2, 0.5]",
+    "DCA, swing, cash fractions; sum to 1"
+  ],
+  [
+    "operational.bear_targets",
+    "[0.0, 0.0, 1.0]",
+    "DCA, swing, cash fractions; local baseline requires cash"
+  ],
+  [
+    "operational.unknown_targets",
+    "[0.0, 0.0, 1.0]",
+    "DCA, swing, cash fractions; local baseline requires cash"
+  ]
+]

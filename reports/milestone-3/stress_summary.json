@@ -1,0 +1,242 @@
+{
+  "kind": "synthetic_control_test",
+  "run_id": "79c8fc669db3",
+  "config_checksum": "6d2ebe0c9797c8dbcb4eb4c50488016991e1092fef542792c2bbbcdf16f00d41",
+  "assumptions": {
+    "synthetic_start_price": 100,
+    "warmup_accumulation_days": 60,
+    "prior_flat_daily_history": 200,
+    "quote_observations": "Daily plus five-second partial-exit ticks at the same modeled price",
+    "swing_entries": false,
+    "feature_timing": "Previous daily close only; 200-day mean, 30-day momentum, seven bearish days",
+    "comparison": "Combined controls; pre-shock exposure differs. This does not isolate any one control or estimate future returns."
+  },
+  "results": [
+    {
+      "scenario": "year_decline_80pct",
+      "policy": "pause_only",
+      "net_return": -0.61723755828,
+      "max_drawdown": 0.61723755828,
+      "final_equity_usd": 3827.6244172,
+      "pre_shock_btc_exposure": 0.6999928407295644,
+      "ending_phase": "paused",
+      "recovery_resumes": 0,
+      "fees_usd": "46.64",
+      "pause_reasons": "portfolio_drawdown",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\year_decline_80pct_pause_only.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "year_decline_80pct",
+      "policy": "defensive",
+      "net_return": -0.029496999999999884,
+      "max_drawdown": 0.029497,
+      "final_equity_usd": 9705.03,
+      "pre_shock_btc_exposure": 0.5999985921981679,
+      "ending_phase": "cooldown",
+      "recovery_resumes": 0,
+      "fees_usd": "71.59",
+      "pause_reasons": "confirmed_bear",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\year_decline_80pct_defensive.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "flash_drop_30pct",
+      "policy": "pause_only",
+      "net_return": -0.21446320537999997,
+      "max_drawdown": 0.21446320538,
+      "final_equity_usd": 7855.3679462,
+      "pre_shock_btc_exposure": 0.6999928407295644,
+      "ending_phase": "active",
+      "recovery_resumes": 0,
+      "fees_usd": "45.87",
+      "pause_reasons": "",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\flash_drop_30pct_pause_only.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "flash_drop_30pct",
+      "policy": "defensive",
+      "net_return": -0.18655500000000003,
+      "max_drawdown": 0.186555,
+      "final_equity_usd": 8134.45,
+      "pre_shock_btc_exposure": 0.5999985921981679,
+      "ending_phase": "cooldown",
+      "recovery_resumes": 0,
+      "fees_usd": "61.18",
+      "pause_reasons": "rapid_price_decline",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\flash_drop_30pct_defensive.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "false_rebound",
+      "policy": "pause_only",
+      "net_return": -0.37156514669999996,
+      "max_drawdown": 0.42856087230878537,
+      "final_equity_usd": 6284.348533,
+      "pre_shock_btc_exposure": 0.6999928407295644,
+      "ending_phase": "paused",
+      "recovery_resumes": 0,
+      "fees_usd": "45.87",
+      "pause_reasons": "portfolio_drawdown",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\false_rebound_pause_only.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "false_rebound",
+      "policy": "defensive",
+      "net_return": -0.19177299999999997,
+      "max_drawdown": 0.191773,
+      "final_equity_usd": 8082.27,
+      "pre_shock_btc_exposure": 0.5999985921981679,
+      "ending_phase": "cooldown",
+      "recovery_resumes": 1,
+      "fees_usd": "62.55",
+      "pause_reasons": "rapid_price_decline;rapid_price_decline",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\false_rebound_defensive.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "outage_during_50pct_drop",
+      "policy": "pause_only",
+      "net_return": -0.35329220495,
+      "max_drawdown": 0.35329220495,
+      "final_equity_usd": 6467.0779505,
+      "pre_shock_btc_exposure": 0.6999928407295644,
+      "ending_phase": "paused",
+      "recovery_resumes": 0,
+      "fees_usd": "42.10",
+      "pause_reasons": "portfolio_drawdown",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\outage_during_50pct_drop_pause_only.sqlite3",
+      "ledger_passed": true
+    },
+    {
+      "scenario": "outage_during_50pct_drop",
+      "policy": "defensive",
+      "net_return": -0.305195,
+      "max_drawdown": 0.305195,
+      "final_equity_usd": 6948.05,
+      "pre_shock_btc_exposure": 0.5999985921981679,
+      "ending_phase": "halted",
+      "recovery_resumes": 0,
+      "fees_usd": "54.02",
+      "pause_reasons": "lifetime_capital_floor",
+      "database": "C:\\Git repo\\bitcoin\\var\\stress\\79c8fc669db3\\outage_during_50pct_drop_defensive.sqlite3",
+      "ledger_passed": true
+    }
+  ],
+  "audits": {
+    "year_decline_80pct:pause_only": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "2258.56",
+      "fees_usd": "46.64",
+      "rounding_cost_usd": "0.4859179548",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "78.45322086",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 96
+    },
+    "year_decline_80pct:defensive": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "9705.03",
+      "fees_usd": "71.59",
+      "rounding_cost_usd": "0.3028385244",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0E-8",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 56
+    },
+    "flash_drop_30pct:pause_only": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "2356.80",
+      "fees_usd": "45.87",
+      "rounding_cost_usd": "0.2723653703",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "78.55097066",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 56
+    },
+    "flash_drop_30pct:defensive": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "8134.45",
+      "fees_usd": "61.18",
+      "rounding_cost_usd": "0.2537226840",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0E-8",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 48
+    },
+    "false_rebound:pause_only": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "2356.80",
+      "fees_usd": "45.87",
+      "rounding_cost_usd": "0.2723653703",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "78.55097066",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 56
+    },
+    "false_rebound:defensive": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "8082.27",
+      "fees_usd": "62.55",
+      "rounding_cost_usd": "0.2671530619",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0E-8",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 50
+    },
+    "outage_during_50pct_drop:pause_only": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "2984.86",
+      "fees_usd": "42.10",
+      "rounding_cost_usd": "0.2467759188",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "69.64435901",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 51
+    },
+    "outage_during_50pct_drop:defensive": {
+      "passed": true,
+      "initial_cash_usd": "10000.00",
+      "reconstructed_cash_usd": "6948.05",
+      "fees_usd": "54.02",
+      "rounding_cost_usd": "0.2295100756",
+      "cash_difference_usd": "0.00",
+      "inventory": {
+        "dca": "0E-8",
+        "swing": "0",
+        "reserve": "0"
+      },
+      "fills": 46
+    }
+  }
+}

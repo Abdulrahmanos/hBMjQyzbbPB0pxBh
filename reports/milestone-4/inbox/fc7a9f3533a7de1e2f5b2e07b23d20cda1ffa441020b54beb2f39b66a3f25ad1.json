@@ -1,0 +1,24 @@
+{
+  "id": "fill:456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb",
+  "channel": "telegram",
+  "delivery": "local_demo",
+  "fill": {
+    "fee_usd": "0.60",
+    "id": "456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb",
+    "notional_usd": "99.37",
+    "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+    "order_id": "d607a6877d8baca4d033faf0a4e5de051a573b522e795d4e3f913df523c9c3a2",
+    "price": "82988.60",
+    "quantity": "0.00119731",
+    "quote_id": "dde0d4da8d5e92169383137f602748e78a584023a8d587d85d5cacdf7839462c",
+    "realized_pnl_usd": "0",
+    "reason": "scheduled_dca",
+    "rounding_usd": "0.0069193340",
+    "side": "buy",
+    "sleeve": "dca",
+    "slippage_usd": "0.0992689721"
+  },
+  "kind": "paper_fill",
+  "subject": "Paper trade confirmation",
+  "text": "PAPER trade confirmed: BUY 0.00119731 BTC\nSleeve: dca | Reason: scheduled_dca\nFill price: $82988.60 | Notional: $99.37 | Fee: $0.60\nObserved: 2026-10-11T10:51:12.841690+00:00\nFill ID: 456323e52d395371509626daf15b8e69401132a8f030e4892f6d0575027cabeb\nSimulated execution; no funded order."
+}

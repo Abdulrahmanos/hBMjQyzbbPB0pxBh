@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-10-22T08:44:00.714702+00:00",
+  "all_tests_passed": true,
+  "tests_run": 117,
+  "failures": 0,
+  "errors": 0,
+  "command": "python -B -m unittest discover -s tests -v",
+  "lstm_three_seeds_reproduced": true,
+  "collector_stopped": true,
+  "obsolete_windows_task_disabled": true,
+  "chat_heartbeat_deleted": true,
+  "actual_external_delivery_verified": false,
+  "docker_build_verified": false,
+  "docker_health_checks_verified": true
+}

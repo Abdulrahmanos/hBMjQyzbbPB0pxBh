@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-10-22T08:26:23.506725+00:00",
+  "scope": "Retrospective weekly flat-to-flat research; not the continuous operational paper account. Previously inspected historical prices are not a pristine independent holdout.",
+  "test_start": "2025-01-06T00:00:00+00:00",
+  "test_end": "2025-10-20T00:00:00+00:00",
+  "split_counts": {
+    "train": 100,
+    "validation": 52,
+    "test": 41
+  },
+  "features": [
+    "return_1",
+    "return_7",
+    "return_30",
+    "volatility_20",
+    "range_fraction",
+    "volume_relative",
+    "sma_distance",
+    "ema_distance"
+  ],
+  "input_sha256": "31ae7877085693949570f3d343060c3340ffe8b292200001274b0816762c8080",
+  "experiment_code_sha256": "3b04d70d98fb3a566012318312fa2d96b0ca4a0740a4000ae125c343d211766e",
+  "settings_sha256": "575818483281aa2dd5a2cac217984dd4573187dc8de4719af12bb8b29c7e9c09",
+  "environment": {
+    "python": "3.14.6",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "torch": "2.14.1+cpu"
+  },
+  "model_seeds": [
+    {
+      "seed": 17,
+      "selected_epoch": 41,
+      "validation_mse_standardized": 0.7078138589859009,
+      "parameters": 612
+    },
+    {
+      "seed": 29,
+      "selected_epoch": 42,
+      "validation_mse_standardized": 0.6851488351821899,
+      "parameters": 612
+    },
+    {
+      "seed": 43,
+      "selected_epoch": 46,
+      "validation_mse_standardized": 0.7088670134544373,
+      "parameters": 612
+    }
+  ],
+  "metrics": {
+    "Rules alone": {
+      "final_equity_usd": 8936.785928990346,
+      "net_return": -0.10632140710096538,
+      "max_drawdown": 0.11492357271894538,
+      "fees_usd": 934.0556363959143,
+      "fills": 290,
+      "mean_btc_exposure": 0.0626961890898404,
+      "choices": {
+        "reserve": 5,
+        "dca": 32,
+        "swing": 4
+      }
+    },
+    "LSTM ensemble": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "Ridge comparator": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "Training-average mode": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "Always DCA": {
+      "final_equity_usd": 9347.437581249002,
+      "net_return": -0.06525624187509982,
+      "max_drawdown": 0.07425368310470293,
+      "fees_usd": 595.292815219556,
+      "fills": 328,
+      "mean_btc_exposure": 0.07600116810232056,
+      "choices": {
+        "reserve": 0,
+        "dca": 41,
+        "swing": 0
+      }
+    },
+    "Always swing": {
+      "final_equity_usd": 6865.208835331661,
+      "net_return": -0.3134791164668339,
+      "max_drawdown": 0.3134791164668339,
+      "fees_usd": 2689.1312307827584,
+      "fills": 224,
+      "mean_btc_exposure": 0.029567490070327957,
+      "choices": {
+        "reserve": 0,
+        "dca": 0,
+        "swing": 41
+      }
+    },
+    "Always reserve": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "LSTM seed 17": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "LSTM seed 29": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    },
+    "LSTM seed 43": {
+      "final_equity_usd": 10000.0,
+      "net_return": 0.0,
+      "max_drawdown": 0.0,
+      "fees_usd": 0.0,
+      "fills": 0,
+      "mean_btc_exposure": 0.0,
+      "choices": {
+        "reserve": 41,
+        "dca": 0,
+        "swing": 0
+      }
+    }
+  },
+  "prediction_metrics": {
+    "LSTM ensemble": {
+      "mae_log_return": 0.042618593367468385,
+      "rmse_log_return": 0.05395160151457733,
+      "direction_accuracy": 0.4634146341463415
+    },
+    "Ridge comparator": {
+      "mae_log_return": 0.04244971549656891,
+      "rmse_log_return": 0.054374573854223465,
+      "direction_accuracy": 0.5365853658536586
+    },
+    "Zero return": {
+      "mae_log_return": 0.03977958684064262,
+      "rmse_log_return": 0.051624185718453064,
+      "direction_accuracy": null
+    }
+  },
+  "best_realized_utility_choice_accuracy": 0.8292682926829268,
+  "paired_bootstrap": {
+    "mean_weekly_log_return_difference": 0.0027416849810439924,
+    "ci95": [
+      0.0011394075723902474,
+      0.004149862012339452
+    ],
+    "block_weeks": 4,
+    "repetitions": 2000
+  },
+  "conclusion": "The LSTM chose reserve in every test week. It avoided rules' losses but matched the no-model cash baseline; no added value over always-reserve was demonstrated.",
+  "checks": {
+    "input_checksum_matches_declared_archive": true,
+    "training_outcomes_finish_before_validation": true,
+    "validation_outcomes_finish_before_test": true,
+    "test_starts_after_training_and_validation": true,
+    "nonoverlapping_target_periods": true,
+    "all_models_use_same_test_episodes_and_action_set": true,
+    "all_fixed_seeds_reported": true,
+    "reserve_has_zero_return_and_costs": true,
+    "finite_predictions_and_equities": true,
+    "not_a_pristine_project_level_holdout": true
+  },
+  "limitations": [
+    "Previously inspected historical archive; retrospective model test only.",
+    "Small weekly sample and one cryptocurrency; no hyperparameter search or fresh prospective validation.",
+    "Weekly liquidation/reset differs from continuous DCA; mode budgets are not equal immediate exposure.",
+    "No live broker, latency or observed depth; fixed modeled transaction costs.",
+    "Bootstrap interval does not remove researcher selection or regime dependence."
+  ]
+}

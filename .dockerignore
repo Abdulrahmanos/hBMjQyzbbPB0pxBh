@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+.env.*
+!.env.example
+var
+data
+reports
+tests
+docs
+config/google-sheet.json
+__pycache__
+*.pyc
+credentials*.json
+service-account*.json

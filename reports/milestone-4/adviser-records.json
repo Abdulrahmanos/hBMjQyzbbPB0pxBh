@@ -1,0 +1,54 @@
+[
+  {
+    "id": "abeb27d75931b06416be4f24e6ae7da6eba95725f76050558ef60c38bd06c297",
+    "attempted_at": "2026-10-12T17:41:55.782839+00:00",
+    "model": "deterministic-demo-fixture",
+    "prompt_version": "shadow-allocation-v1",
+    "context_json": "{\"config_checksum\": \"7a96e52cfec0e0486dd0ed4c33cd0a573ac02b88d3f00312ea6e85c3fe07c403\", \"execution_mode\": \"paper\", \"features\": {\"asof\": \"2026-10-12T17:00:00+00:00\", \"atr\": \"397.15233040936494\", \"close\": \"82406.83\", \"confirmed_bear\": false, \"daily_asof\": \"2026-10-12T00:00:00+00:00\", \"ready\": true, \"regime\": \"bull\", \"return_24h\": \"-0.01681700126120944\", \"swing_signal\": false}, \"limits\": {\"max_btc_exposure_fraction\": 0.6, \"max_lifetime_loss_fraction\": 0.3, \"minimum_cash_fraction\": 0.2}, \"permitted_suggestions\": [\"keep_rule_targets\", \"prefer_cash\", \"prefer_mixed\"], \"portfolio\": {\"btc_units\": \"0.00240330\", \"cash_usd\": \"9800.06\", \"equity_usd\": \"9997.87320768350\", \"phase\": \"active\", \"targets\": [\"0.5\", \"0.3\", \"0.2\"]}}",
+    "status": "shadow_recorded",
+    "advice_json": "{\"suggestion\": \"keep_rule_targets\", \"reason\": \"Demo fixture uses the observed regime to exercise the shadow record.\", \"limitation\": \"This is a deterministic test fixture, not a model response or investment conclusion.\"}",
+    "error": null,
+    "context": {
+      "config_checksum": "7a96e52cfec0e0486dd0ed4c33cd0a573ac02b88d3f00312ea6e85c3fe07c403",
+      "execution_mode": "paper",
+      "features": {
+        "asof": "2026-10-12T17:00:00+00:00",
+        "atr": "397.15233040936494",
+        "close": "82406.83",
+        "confirmed_bear": false,
+        "daily_asof": "2026-10-12T00:00:00+00:00",
+        "ready": true,
+        "regime": "bull",
+        "return_24h": "-0.01681700126120944",
+        "swing_signal": false
+      },
+      "limits": {
+        "max_btc_exposure_fraction": 0.6,
+        "max_lifetime_loss_fraction": 0.3,
+        "minimum_cash_fraction": 0.2
+      },
+      "permitted_suggestions": [
+        "keep_rule_targets",
+        "prefer_cash",
+        "prefer_mixed"
+      ],
+      "portfolio": {
+        "btc_units": "0.00240330",
+        "cash_usd": "9800.06",
+        "equity_usd": "9997.87320768350",
+        "phase": "active",
+        "targets": [
+          "0.5",
+          "0.3",
+          "0.2"
+        ]
+      }
+    },
+    "advice": {
+      "suggestion": "keep_rule_targets",
+      "reason": "Demo fixture uses the observed regime to exercise the shadow record.",
+      "limitation": "This is a deterministic test fixture, not a model response or investment conclusion."
+    },
+    "applied_to_trades": false
+  }
+]

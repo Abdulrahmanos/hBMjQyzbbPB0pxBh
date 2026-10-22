@@ -1,0 +1,572 @@
+{
+  "generated_at": "2026-10-22T08:26:14.048427+00:00",
+  "accounts": [
+    {
+      "account": "public_connectivity_demo",
+      "source": "var/operational.sqlite3",
+      "first_actual_quote": "2026-10-11T10:51:03.843432+00:00",
+      "last_actual_quote": "2026-10-12T17:42:25.818997+00:00",
+      "accepted_quotes": 14,
+      "observed_calendar_days": 2,
+      "largest_gap_between_actual_quotes_seconds": 107640.837671,
+      "snapshot_sha256": "6628c390cc26e228dd25a6a80951b84d7a50aaa208d738b34393d4943fbcb5fb",
+      "audit": {
+        "passed": true,
+        "initial_cash_usd": "10000.00",
+        "reconstructed_cash_usd": "9800.06",
+        "fees_usd": "1.20",
+        "rounding_cost_usd": "0.0138233871",
+        "cash_difference_usd": "0.00",
+        "inventory": {
+          "dca": "0.00240330",
+          "swing": "0",
+          "reserve": "0"
+        },
+        "fills": 2
+      },
+      "provenance": {
+        "source": "coinbase_public_connectivity_demo",
+        "independently_stream_manifested": false
+      },
+      "first_equity_usd": "10000.000",
+      "last_equity_usd": "9997.94667656450",
+      "fills": [
+        {
+          "occurred_at": "2026-10-11T10:51:12.841690+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00119731",
+          "price": "82988.60",
+          "fee_usd": "0.60"
+        },
+        {
+          "occurred_at": "2026-10-12T17:41:55.782839+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00120599",
+          "price": "82391.31",
+          "fee_usd": "0.60"
+        }
+      ],
+      "role": "Connectivity demonstration"
+    },
+    {
+      "account": "oct16_interrupted",
+      "source": "var/archive/forward-20261016-interrupted/ledger.sqlite3",
+      "first_actual_quote": "2026-10-16T11:02:48.767398+00:00",
+      "last_actual_quote": "2026-10-19T08:34:07.803825+00:00",
+      "accepted_quotes": 433,
+      "observed_calendar_days": 2,
+      "largest_gap_between_actual_quotes_seconds": 248113.138708,
+      "snapshot_sha256": "1eb55a661b947afcff99b715d2b889ea128482d05f0e4ffad60354b27d110b27",
+      "audit": {
+        "passed": true,
+        "candidate": {
+          "passed": true,
+          "initial_cash_usd": "10000.00",
+          "reconstructed_cash_usd": "9800.06",
+          "fees_usd": "1.20",
+          "rounding_cost_usd": "0.0128589949",
+          "cash_difference_usd": "0.00",
+          "inventory": {
+            "dca": "0.00240696",
+            "swing": "0",
+            "reserve": "0"
+          },
+          "fills": 2
+        },
+        "baseline_books_reconciled": 3
+      },
+      "provenance": {
+        "baseline_rule": "DCA uses the initial DCA reference/tranche and 7-day cap; scheduled buys only. Buy-and-hold fills available cash up to the same per-quote cap. All books include idle cash and modeled fees/slippage; no final liquidation assumed.",
+        "code_checksum": "2d410a015924a50e86a34d0ca88486c72303ed5ebc28af10724eed9d7e410001",
+        "config": {
+          "dca": {
+            "cooldown_hours": 12,
+            "dip_reference": "last_filled_dca_buy",
+            "dip_trigger_fraction": 0.03,
+            "enabled": true,
+            "max_spend_fraction_per_7_days": 0.14,
+            "schedule_hours": 24,
+            "tranche_fraction_of_dca_budget": 0.02
+          },
+          "execution_mode": "paper",
+          "integrations": {
+            "config_refresh_seconds": 3600,
+            "gmail_enabled": true,
+            "google_sheet_enabled": false,
+            "llm_enabled": false,
+            "telegram_enabled": true
+          },
+          "market": {
+            "candle_seconds": 3600,
+            "poll_seconds": 1800,
+            "product_id": "BTC-USD",
+            "provider": "coinbase",
+            "stale_after_seconds": 120
+          },
+          "operational": {
+            "allocation_mode": "regime",
+            "allocation_update_hours": 24,
+            "bear_confirmation_days": 7,
+            "bear_exit_enabled": true,
+            "bear_targets": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bull_targets": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "crash_drop_fraction": 0.15,
+            "crash_window_hours": 24,
+            "drawdown_action": "liquidate",
+            "exposure_buffer_fraction": 0.02,
+            "feature_stale_after_seconds": 7200,
+            "high_volatility_atr_fraction": 0.06,
+            "max_btc_exposure_fraction": 0.6,
+            "max_lifetime_loss_fraction": 0.3,
+            "max_target_atr_multiple": 8.0,
+            "maximum_spread_fraction": 0.01,
+            "minimum_cash_fraction": 0.2,
+            "mixed_targets": [
+              0.3,
+              0.2,
+              0.5
+            ],
+            "momentum_days": 30,
+            "order_timeout_seconds": 300,
+            "paper_fill_cap_usd": "1000.00",
+            "recovery_days": 7,
+            "resume_cooldown_hours": 72,
+            "resume_mode": "confirmed_recovery",
+            "trend_days": 200,
+            "unknown_targets": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "portfolio": {
+            "dca_fraction": 0.5,
+            "initial_cash_usd": "10000.00",
+            "reserve_fraction": 0.2,
+            "swing_fraction": 0.3
+          },
+          "reporting": {
+            "timezone": "Asia/Riyadh",
+            "weekly_day": "monday",
+            "weekly_time": "09:00"
+          },
+          "risk": {
+            "fee_fraction_per_fill": 0.006,
+            "max_portfolio_drawdown_fraction": 0.25,
+            "slippage_fraction_per_fill": 0.001,
+            "stop_monitor_seconds": 5
+          },
+          "schema_version": 1,
+          "swing": {
+            "atr_multiplier": 1.5,
+            "atr_period": 14,
+            "breakout_lookback": 20,
+            "ema_fast_period": 20,
+            "ema_slow_period": 50,
+            "enabled": false,
+            "max_holding_hours": 72,
+            "max_notional_fraction_of_swing_budget": 0.5,
+            "max_open_positions": 1,
+            "relative_volume_lookback": 20,
+            "relative_volume_threshold": 1.5,
+            "risk_fraction_of_equity": 0.005,
+            "take_profit_r_multiple": 2.0
+          }
+        },
+        "config_checksum": "cb541bf053d084d7ee345c7adcd03c1d39df65b76f1422530e17d1ee907460e7",
+        "created_at": "2026-10-16T11:02:47.959623+00:00",
+        "environment": {
+          "numpy": "2.5.4",
+          "pandas": "3.0.6",
+          "platform": "Windows",
+          "python": "3.14.6"
+        },
+        "historical_candles_count_as_forward": false,
+        "initial_cash_usd": "10000.00",
+        "llm_influences_orders": false,
+        "minimum_daily_quote_coverage": 0.99,
+        "schema_version": 1,
+        "source": "coinbase_public_stream",
+        "window_seconds": 604800
+      },
+      "first_equity_usd": "10000.000",
+      "last_equity_usd": "9998.99621881880",
+      "fills": [
+        {
+          "occurred_at": "2026-10-16T11:02:53.809968+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00120817",
+          "price": "82243.05",
+          "fee_usd": "0.60"
+        },
+        {
+          "occurred_at": "2026-10-19T08:20:00.566506+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00119879",
+          "price": "82886.54",
+          "fee_usd": "0.60"
+        }
+      ],
+      "role": "Interrupted prospective account"
+    },
+    {
+      "account": "oct19_recovery_rehearsal",
+      "source": "var/archive/forward-20261019-recovery-rehearsal/ledger.sqlite3",
+      "first_actual_quote": "2026-10-19T08:54:30.393551+00:00",
+      "last_actual_quote": "2026-10-19T09:12:21.501656+00:00",
+      "accepted_quotes": 210,
+      "observed_calendar_days": 1,
+      "largest_gap_between_actual_quotes_seconds": 21.939664,
+      "snapshot_sha256": "f7e5d67868ad0e9f979534c1b21d24ab18be2e11f10897fb4bb705fe73393c8c",
+      "audit": {
+        "passed": true,
+        "candidate": {
+          "passed": true,
+          "initial_cash_usd": "10000.00",
+          "reconstructed_cash_usd": "9900.03",
+          "fees_usd": "0.60",
+          "rounding_cost_usd": "0.0062443770",
+          "cash_difference_usd": "0.00",
+          "inventory": {
+            "dca": "0.00120010",
+            "swing": "0",
+            "reserve": "0"
+          },
+          "fills": 1
+        },
+        "baseline_books_reconciled": 3
+      },
+      "provenance": {
+        "baseline_rule": "DCA uses the initial DCA reference/tranche and 7-day cap; scheduled buys only. Buy-and-hold fills available cash up to the same per-quote cap. All books include idle cash and modeled fees/slippage; no final liquidation assumed.",
+        "code_checksum": "660ef78760b834ad45148540da41a43b31fe61dcd611c7e7d1fa21197d7c3b39",
+        "config": {
+          "dca": {
+            "cooldown_hours": 12,
+            "dip_reference": "last_filled_dca_buy",
+            "dip_trigger_fraction": 0.03,
+            "enabled": true,
+            "max_spend_fraction_per_7_days": 0.14,
+            "schedule_hours": 24,
+            "tranche_fraction_of_dca_budget": 0.02
+          },
+          "execution_mode": "paper",
+          "integrations": {
+            "config_refresh_seconds": 3600,
+            "gmail_enabled": true,
+            "google_sheet_enabled": false,
+            "llm_enabled": false,
+            "telegram_enabled": true
+          },
+          "market": {
+            "candle_seconds": 3600,
+            "poll_seconds": 1800,
+            "product_id": "BTC-USD",
+            "provider": "coinbase",
+            "stale_after_seconds": 120
+          },
+          "operational": {
+            "allocation_mode": "regime",
+            "allocation_update_hours": 24,
+            "bear_confirmation_days": 7,
+            "bear_exit_enabled": true,
+            "bear_targets": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bull_targets": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "crash_drop_fraction": 0.15,
+            "crash_window_hours": 24,
+            "drawdown_action": "liquidate",
+            "exposure_buffer_fraction": 0.02,
+            "feature_stale_after_seconds": 7200,
+            "high_volatility_atr_fraction": 0.06,
+            "max_btc_exposure_fraction": 0.6,
+            "max_lifetime_loss_fraction": 0.3,
+            "max_target_atr_multiple": 8.0,
+            "maximum_spread_fraction": 0.01,
+            "minimum_cash_fraction": 0.2,
+            "mixed_targets": [
+              0.3,
+              0.2,
+              0.5
+            ],
+            "momentum_days": 30,
+            "order_timeout_seconds": 300,
+            "paper_fill_cap_usd": "1000.00",
+            "recovery_days": 7,
+            "resume_cooldown_hours": 72,
+            "resume_mode": "confirmed_recovery",
+            "trend_days": 200,
+            "unknown_targets": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "portfolio": {
+            "dca_fraction": 0.5,
+            "initial_cash_usd": "10000.00",
+            "reserve_fraction": 0.2,
+            "swing_fraction": 0.3
+          },
+          "reporting": {
+            "timezone": "Asia/Riyadh",
+            "weekly_day": "monday",
+            "weekly_time": "09:00"
+          },
+          "risk": {
+            "fee_fraction_per_fill": 0.006,
+            "max_portfolio_drawdown_fraction": 0.25,
+            "slippage_fraction_per_fill": 0.001,
+            "stop_monitor_seconds": 5
+          },
+          "schema_version": 1,
+          "swing": {
+            "atr_multiplier": 1.5,
+            "atr_period": 14,
+            "breakout_lookback": 20,
+            "ema_fast_period": 20,
+            "ema_slow_period": 50,
+            "enabled": false,
+            "max_holding_hours": 72,
+            "max_notional_fraction_of_swing_budget": 0.5,
+            "max_open_positions": 1,
+            "relative_volume_lookback": 20,
+            "relative_volume_threshold": 1.5,
+            "risk_fraction_of_equity": 0.005,
+            "take_profit_r_multiple": 2.0
+          }
+        },
+        "config_checksum": "cb541bf053d084d7ee345c7adcd03c1d39df65b76f1422530e17d1ee907460e7",
+        "created_at": "2026-10-19T08:54:29.765528+00:00",
+        "environment": {
+          "numpy": "2.5.4",
+          "pandas": "3.0.6",
+          "platform": "Windows",
+          "python": "3.14.6"
+        },
+        "historical_candles_count_as_forward": false,
+        "initial_cash_usd": "10000.00",
+        "llm_influences_orders": false,
+        "minimum_daily_quote_coverage": 0.99,
+        "schema_version": 1,
+        "source": "coinbase_public_stream",
+        "window_seconds": 604800
+      },
+      "first_equity_usd": "10000.000",
+      "last_equity_usd": "9999.27006731650",
+      "fills": [
+        {
+          "occurred_at": "2026-10-19T08:54:35.465682+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00120010",
+          "price": "82796.23",
+          "fee_usd": "0.60"
+        }
+      ],
+      "role": "Recovery rehearsal, excluded from timed validation"
+    },
+    {
+      "account": "oct19_interrupted",
+      "source": "var/forward/ledger.sqlite3",
+      "first_actual_quote": "2026-10-19T09:12:29.536612+00:00",
+      "last_actual_quote": "2026-10-22T08:23:14.486673+00:00",
+      "accepted_quotes": 16255,
+      "observed_calendar_days": 4,
+      "largest_gap_between_actual_quotes_seconds": 64967.770674,
+      "snapshot_sha256": "53323de54f7aa2ebc26d9076751a0351fc7f5f640ee8f74b7a52804069c90ba2",
+      "audit": {
+        "passed": true,
+        "candidate": {
+          "passed": true,
+          "initial_cash_usd": "10000.00",
+          "reconstructed_cash_usd": "9700.09",
+          "fees_usd": "1.80",
+          "rounding_cost_usd": "0.0194169570",
+          "cash_difference_usd": "0.00",
+          "inventory": {
+            "dca": "0.00361196",
+            "swing": "0",
+            "reserve": "0"
+          },
+          "fills": 3
+        },
+        "baseline_books_reconciled": 3
+      },
+      "provenance": {
+        "baseline_rule": "DCA uses the initial DCA reference/tranche and 7-day cap; scheduled buys only. Buy-and-hold fills available cash up to the same per-quote cap. All books include idle cash and modeled fees/slippage; no final liquidation assumed.",
+        "code_checksum": "660ef78760b834ad45148540da41a43b31fe61dcd611c7e7d1fa21197d7c3b39",
+        "config": {
+          "dca": {
+            "cooldown_hours": 12,
+            "dip_reference": "last_filled_dca_buy",
+            "dip_trigger_fraction": 0.03,
+            "enabled": true,
+            "max_spend_fraction_per_7_days": 0.14,
+            "schedule_hours": 24,
+            "tranche_fraction_of_dca_budget": 0.02
+          },
+          "execution_mode": "paper",
+          "integrations": {
+            "config_refresh_seconds": 3600,
+            "gmail_enabled": true,
+            "google_sheet_enabled": false,
+            "llm_enabled": false,
+            "telegram_enabled": true
+          },
+          "market": {
+            "candle_seconds": 3600,
+            "poll_seconds": 1800,
+            "product_id": "BTC-USD",
+            "provider": "coinbase",
+            "stale_after_seconds": 120
+          },
+          "operational": {
+            "allocation_mode": "regime",
+            "allocation_update_hours": 24,
+            "bear_confirmation_days": 7,
+            "bear_exit_enabled": true,
+            "bear_targets": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "bull_targets": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "crash_drop_fraction": 0.15,
+            "crash_window_hours": 24,
+            "drawdown_action": "liquidate",
+            "exposure_buffer_fraction": 0.02,
+            "feature_stale_after_seconds": 7200,
+            "high_volatility_atr_fraction": 0.06,
+            "max_btc_exposure_fraction": 0.6,
+            "max_lifetime_loss_fraction": 0.3,
+            "max_target_atr_multiple": 8.0,
+            "maximum_spread_fraction": 0.01,
+            "minimum_cash_fraction": 0.2,
+            "mixed_targets": [
+              0.3,
+              0.2,
+              0.5
+            ],
+            "momentum_days": 30,
+            "order_timeout_seconds": 300,
+            "paper_fill_cap_usd": "1000.00",
+            "recovery_days": 7,
+            "resume_cooldown_hours": 72,
+            "resume_mode": "confirmed_recovery",
+            "trend_days": 200,
+            "unknown_targets": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "portfolio": {
+            "dca_fraction": 0.5,
+            "initial_cash_usd": "10000.00",
+            "reserve_fraction": 0.2,
+            "swing_fraction": 0.3
+          },
+          "reporting": {
+            "timezone": "Asia/Riyadh",
+            "weekly_day": "monday",
+            "weekly_time": "09:00"
+          },
+          "risk": {
+            "fee_fraction_per_fill": 0.006,
+            "max_portfolio_drawdown_fraction": 0.25,
+            "slippage_fraction_per_fill": 0.001,
+            "stop_monitor_seconds": 5
+          },
+          "schema_version": 1,
+          "swing": {
+            "atr_multiplier": 1.5,
+            "atr_period": 14,
+            "breakout_lookback": 20,
+            "ema_fast_period": 20,
+            "ema_slow_period": 50,
+            "enabled": false,
+            "max_holding_hours": 72,
+            "max_notional_fraction_of_swing_budget": 0.5,
+            "max_open_positions": 1,
+            "relative_volume_lookback": 20,
+            "relative_volume_threshold": 1.5,
+            "risk_fraction_of_equity": 0.005,
+            "take_profit_r_multiple": 2.0
+          }
+        },
+        "config_checksum": "cb541bf053d084d7ee345c7adcd03c1d39df65b76f1422530e17d1ee907460e7",
+        "created_at": "2026-10-19T09:12:28.983760+00:00",
+        "environment": {
+          "numpy": "2.5.4",
+          "pandas": "3.0.6",
+          "platform": "Windows",
+          "python": "3.14.6"
+        },
+        "historical_candles_count_as_forward": false,
+        "initial_cash_usd": "10000.00",
+        "llm_influences_orders": false,
+        "minimum_daily_quote_coverage": 0.99,
+        "schema_version": 1,
+        "source": "coinbase_public_stream",
+        "window_seconds": 604800
+      },
+      "first_equity_usd": "10000.000",
+      "last_equity_usd": "9996.0836565916",
+      "fills": [
+        {
+          "occurred_at": "2026-10-19T09:12:34.570391+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00120023",
+          "price": "82787.14",
+          "fee_usd": "0.60"
+        },
+        {
+          "occurred_at": "2026-10-20T09:23:40.609607+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00121996",
+          "price": "81448.11",
+          "fee_usd": "0.60"
+        },
+        {
+          "occurred_at": "2026-10-21T10:08:32.389983+00:00",
+          "side": "buy",
+          "sleeve": "dca",
+          "quantity": "0.00119177",
+          "price": "83374.76",
+          "fee_usd": "0.60"
+        }
+      ],
+      "role": "Interrupted prospective account"
+    }
+  ],
+  "calendar_span_days": 10.897345407881945,
+  "continuous_week_passed": false,
+  "accounts_combined_into_one_portfolio": false,
+  "historical_or_synthetic_quotes_substituted": false,
+  "scope": "Dated real-data logs spanning more than a calendar week, with gaps and separate account identities. This is evidence of interrupted operation, not seven uninterrupted days or successful 24/7 deployment."
+}

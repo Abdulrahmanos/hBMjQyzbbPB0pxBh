@@ -1,0 +1,12 @@
+{
+  "verified_at": "2026-10-22T08:35:39.975666+00:00",
+  "passed": true,
+  "test_episodes": 41,
+  "all_policy_compounding_recomputed": true,
+  "prediction_choices_recomputed": true,
+  "training_only_target_normalization_checked": true,
+  "all_seed_weights_and_epoch_selection_checked": true,
+  "price_forecast_error_recomputed": true,
+  "plots_visually_inspected": true,
+  "limitations_preserved": true
+}

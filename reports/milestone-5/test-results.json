@@ -1,0 +1,9 @@
+{
+  "verified_on": "2026-10-16",
+  "command": ".venv/Scripts/python.exe -m unittest discover -s tests -v",
+  "python": "3.14.6",
+  "tests_run": 98,
+  "failures": 0,
+  "errors": 0,
+  "source": "Completed approved terminal run, including the real child-PID/library-load check. Seven-day coverage tests use constructed fixtures, not forward data."
+}

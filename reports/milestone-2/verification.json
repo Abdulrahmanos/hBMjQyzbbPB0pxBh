@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "verified_at_utc": "2026-10-22T08:35:41.085785+00:00",
+  "summary_sha256": "854f1e99f60c9c4cbd0b5e28cb6fe0a10eb24eab0818f4c7fde499a623108f14",
+  "checks": [
+    "input_checksum",
+    "training_outcome_cutoff",
+    "frozen_holdout_models",
+    "fill_cash_reconciliation",
+    "inventory_reconciliation",
+    "nonnegative_cash",
+    "allocation_totals"
+  ],
+  "strategies_audited": 18,
+  "details": [
+    {
+      "period": "development",
+      "strategy": "Cash",
+      "fills": 0,
+      "cash_reconciliation_error_usd": "0.0"
+    },
+    {
+      "period": "development",
+      "strategy": "Buy and hold",
+      "fills": 2,
+      "cash_reconciliation_error_usd": "2.30702645370E-12"
+    },
+    {
+      "period": "development",
+      "strategy": "Scheduled DCA",
+      "fills": 51,
+      "cash_reconciliation_error_usd": "3.61111415539E-12"
+    },
+    {
+      "period": "development",
+      "strategy": "Dip DCA",
+      "fills": 51,
+      "cash_reconciliation_error_usd": "1.2270801627E-13"
+    },
+    {
+      "period": "development",
+      "strategy": "Swing only",
+      "fills": 266,
+      "cash_reconciliation_error_usd": "3.131793536363E-12"
+    },
+    {
+      "period": "development",
+      "strategy": "Fixed hybrid",
+      "fills": 167,
+      "cash_reconciliation_error_usd": "2.38244997053E-12"
+    },
+    {
+      "period": "development",
+      "strategy": "Defensive hybrid",
+      "fills": 218,
+      "cash_reconciliation_error_usd": "5.7369297098E-14"
+    },
+    {
+      "period": "development",
+      "strategy": "Optimized global",
+      "fills": 107,
+      "cash_reconciliation_error_usd": "2.04138229991E-12"
+    },
+    {
+      "period": "development",
+      "strategy": "Feature allocation",
+      "fills": 107,
+      "cash_reconciliation_error_usd": "2.04138229991E-12"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Cash",
+      "fills": 0,
+      "cash_reconciliation_error_usd": "0.0"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Buy and hold",
+      "fills": 2,
+      "cash_reconciliation_error_usd": "8.6466601506E-13"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Scheduled DCA",
+      "fills": 51,
+      "cash_reconciliation_error_usd": "9.898544669E-14"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Dip DCA",
+      "fills": 51,
+      "cash_reconciliation_error_usd": "9.898544669E-14"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Swing only",
+      "fills": 136,
+      "cash_reconciliation_error_usd": "8.622622652122E-12"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Fixed hybrid",
+      "fills": 189,
+      "cash_reconciliation_error_usd": "7.51694318801E-13"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Defensive hybrid",
+      "fills": 227,
+      "cash_reconciliation_error_usd": "2.69373145723E-12"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Optimized global",
+      "fills": 0,
+      "cash_reconciliation_error_usd": "0.0"
+    },
+    {
+      "period": "holdout",
+      "strategy": "Feature allocation",
+      "fills": 54,
+      "cash_reconciliation_error_usd": "5.2794879234E-13"
+    }
+  ],
+  "swing_holdout_profit_target_exits": 18,
+  "swing_holdout_profit_target_exits_with_net_loss": 4
+}

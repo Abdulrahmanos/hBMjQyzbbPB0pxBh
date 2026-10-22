@@ -1,0 +1,22 @@
+{
+  "services": {
+    "paper": {
+      "build": ".",
+      "restart": "on-failure:5",
+      "init": true,
+      "read_only": true,
+      "user": "10001:10001",
+      "volumes": ["paper_state:/app/var"],
+      "tmpfs": ["/tmp"],
+      "cap_drop": ["ALL"],
+      "security_opt": ["no-new-privileges:true"],
+      "stop_grace_period": "90s",
+      "healthcheck": {
+        "test": ["CMD", "python", "tools/check_service_health.py"],
+        "interval": "30s", "timeout": "10s", "retries": 3, "start_period": "180s"
+      },
+      "logging": {"driver": "json-file", "options": {"max-size": "5m", "max-file": "3"}}
+    }
+  },
+  "volumes": {"paper_state": {}}
+}

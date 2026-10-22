@@ -1,0 +1,40 @@
+{
+  "execution_mode": "paper",
+  "cycles_completed": 2,
+  "accepted_quotes": 2,
+  "new_fills": 0,
+  "market_failures": 0,
+  "feature_failures": 0,
+  "running": false,
+  "audit": {
+    "passed": true,
+    "initial_cash_usd": "10000.00",
+    "reconstructed_cash_usd": "9900.03",
+    "fees_usd": "0.60",
+    "rounding_cost_usd": "0.0069193340",
+    "cash_difference_usd": "0.00",
+    "inventory": {
+      "dca": "0.00119731",
+      "swing": "0",
+      "reserve": "0"
+    },
+    "fills": 1
+  },
+  "last_features": {
+    "asof": "2026-10-11T11:00:00+00:00",
+    "daily_asof": "2026-10-11T00:00:00+00:00",
+    "close": "82915.66",
+    "atr": "168.67412361403947",
+    "ready": true,
+    "swing_signal": false,
+    "regime": "bull",
+    "confirmed_bear": false,
+    "return_24h": "0.0015994781553032578"
+  },
+  "product_rules": {
+    "base_increment": "1E-8",
+    "quote_increment": "0.01",
+    "minimum_notional_usd": "1",
+    "market_enabled": true
+  }
+}

@@ -1,0 +1,4 @@
+drawdown_penalty,profile_id,episodes,mean_log_return,mean_drawdown,worst_drawdown,mean_return,mean_fees_usd,score
+0.0,d0_s0_r1_scheduled_atr1.5_exit0,7,0.0,0.0,0.0,0.0,0.0,0.0
+0.75,d0_s0_r1_scheduled_atr1.5_exit0,7,0.0,0.0,0.0,0.0,0.0,0.0
+1.5,d0_s0_r1_scheduled_atr1.5_exit0,7,0.0,0.0,0.0,0.0,0.0,0.0

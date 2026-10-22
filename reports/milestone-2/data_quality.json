@@ -1,0 +1,56 @@
+{
+  "rows": 59384,
+  "first_candle_utc": "2020-01-01T00:00:00+00:00",
+  "last_candle_utc": "2026-10-10T23:00:00+00:00",
+  "invalid_rows": 0,
+  "duplicate_timestamps": 0,
+  "off_grid_timestamps": 0,
+  "sorted": true,
+  "missing_hours": 16,
+  "gaps": [
+    {
+      "start_utc": "2020-01-30T17:00:00+00:00",
+      "end_utc": "2020-01-30T17:00:00+00:00",
+      "hours": 1
+    },
+    {
+      "start_utc": "2020-09-04T23:00:00+00:00",
+      "end_utc": "2020-09-04T23:00:00+00:00",
+      "hours": 1
+    },
+    {
+      "start_utc": "2020-10-20T20:00:00+00:00",
+      "end_utc": "2020-10-20T20:00:00+00:00",
+      "hours": 1
+    },
+    {
+      "start_utc": "2023-03-04T18:00:00+00:00",
+      "end_utc": "2023-03-04T20:00:00+00:00",
+      "hours": 3
+    },
+    {
+      "start_utc": "2025-10-25T16:00:00+00:00",
+      "end_utc": "2025-10-25T20:00:00+00:00",
+      "hours": 5
+    },
+    {
+      "start_utc": "2026-05-08T02:00:00+00:00",
+      "end_utc": "2026-05-08T06:00:00+00:00",
+      "hours": 5
+    }
+  ],
+  "gap_policy": "No price imputation. Reset hourly indicators and prohibit entries across a missing candle.",
+  "source": "Coinbase Exchange public REST candles",
+  "source_url": "https://api.exchange.coinbase.com/products/BTC-USD/candles",
+  "product_id": "BTC-USD",
+  "granularity_seconds": 3600,
+  "requested_start_utc": "2020-01-01T00:00:00+00:00",
+  "requested_end_exclusive_utc": "2026-10-11T00:00:00+00:00",
+  "retrieved_at_utc": "2026-10-11T09:43:24.437370+00:00",
+  "requests": 205,
+  "cache_hits": 199,
+  "duplicate_response_rows": 0,
+  "gap_recovery_attempts": 6,
+  "recovered_hours": 0,
+  "csv_sha256": "31ae7877085693949570f3d343060c3340ffe8b292200001274b0816762c8080"
+}

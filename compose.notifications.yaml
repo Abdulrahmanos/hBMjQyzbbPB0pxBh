@@ -1,0 +1,8 @@
+{
+  "services": {
+    "paper": {
+      "env_file": [".env"],
+      "command": ["python", "-m", "bitcoin_agent", "--config", "config/notifications.paper.json", "--db", "var/service/ledger.sqlite3", "run-paper", "--cycles", "0", "--runtime", "var/service/market", "--integrations", "config/integrations.notifications.json", "--output", "var/service/last-run.json"]
+    }
+  }
+}
