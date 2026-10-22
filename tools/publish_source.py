@@ -12,6 +12,7 @@ from publish_project import ROOT, OWNER, REPOSITORY, REMOTE, api, audit_staged_f
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--publish", action="store_true")
+    parser.add_argument("--message", default="Add historical LSTM comparison, project report and notification setup")
     args = parser.parse_args()
     settings = json.loads((ROOT / "config/submission.json").read_text())
     if settings.get("uploads_authorized") is not True or "github_repository" not in settings.get("authorized_channels", []):
@@ -53,7 +54,7 @@ def main():
         if any(value in text for value in private_values):
             raise ValueError("A private delivery destination was found in staged source; no content printed")
     if git("diff", "--cached", "--quiet", check=False).returncode:
-        git("commit", "-m", "Add historical LSTM comparison, project report and notification setup")
+        git("commit", "-m", args.message)
     from urllib.error import HTTPError
     try:
         repo = api(token, "/repos/" + REPOSITORY)

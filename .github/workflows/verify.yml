@@ -15,3 +15,7 @@ jobs:
       - run: docker compose config --quiet
       - run: docker build --tag bitcoin-paper:test .
       - run: docker run --rm bitcoin-paper:test python -m bitcoin_agent --config config/paper.json validate-config
+      - name: Check account writes and reconciliation in the Compose volume
+        run: |
+          docker compose run --rm --no-deps paper python -m bitcoin_agent --config config/paper.json paper-init
+          docker compose run --rm --no-deps paper python -m bitcoin_agent --config config/paper.json paper-audit

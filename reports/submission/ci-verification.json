@@ -1,0 +1,20 @@
+{
+  "verified_on": "2026-10-22",
+  "repository": "Abdulrahmanos/qytbcf1pULIvwxUO",
+  "commit": "3c62b14c7bc6ecd792cf2486799715723918e4fb",
+  "run_id": 39750052488,
+  "job_id": 119728062812,
+  "url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488",
+  "conclusion": "success",
+  "runner": "ubuntu-latest",
+  "tests_passed": 117,
+  "research_dependency_install_passed": true,
+  "compose_validation_passed": true,
+  "actual_docker_build_passed": true,
+  "container_configuration_command_passed": true,
+  "limits": [
+    "No cloud server or continuous uptime verified.",
+    "No provider credentials or real Telegram/Gmail delivery verified by this workflow.",
+    "The LSTM training run was performed locally; CI tests chronology and accounting without fitting PyTorch models."
+  ]
+}

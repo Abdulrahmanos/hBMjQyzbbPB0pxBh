@@ -26,7 +26,7 @@ Create a Python environment and install `requirements-runtime.lock.txt` for pape
 
 `docker compose up -d --build` starts the plain paper service with persistent state. For real notifications after account setup, use `docker compose -f compose.yaml -f compose.notifications.yaml up -d --build`. The notification override uses the same persistent service account path, so choose configuration before creating that account. The image runs as a non-root user with a read-only filesystem, scoped writable state, and a read-only quote-freshness check. Credentials enter through ignored `.env`, never the image or Sheet. Review the cloud operator's secret storage, network, backups and availability before running on AWS or DigitalOcean. No cloud account was provisioned.
 
-GitHub CI runs tests, validates Compose, builds the image and checks the CLI. A workflow file alone is not a successful build; inspect the actual run status. Running Docker on this Windows host was unavailable.
+GitHub CI runs tests, validates Compose, builds the image and checks the CLI. The [22 October run](https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488) passed all 117 tests, the actual image build and container configuration check. This is packaging evidence, not a cloud deployment or uptime result. Running Docker on this Windows host was unavailable.
 
 ## Scope and limitations
 

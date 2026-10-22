@@ -92,20 +92,20 @@ Backups remain on this computer and do not protect against loss of the whole dis
 
 One controlled worker interruption was performed during startup verification. The script checked the actual worker PID, parent supervisor, ledger path and token before stopping only that worker. The supervisor restarted it, fresh quotes resumed and the candidate retained exactly the same cash, BTC and fill count. The maximum observed collection gap was recorded. The initial short check that exposed Windows' launcher process indirection is archived in `var/forward-startup-check-20261016` and does not count toward the timed week.
 
-## Docker files prepared for later use
+## Ordinary continuous service with Docker
 
-The Dockerfile uses the official Python 3.14.8 slim Bookworm image, pinned calculation-library versions, an unprivileged numeric user and explicit application/config copies. The build context excludes `.env`, local state, raw data, credentials and reports. Compose uses a persistent named volume for state, a read-only root filesystem, no published ports, dropped capabilities, bounded logs and a health command. It retries a failed supervisor up to five times; normal completion/stops are not automatically restarted. After a Docker daemon/host restart, run Compose again to resume an unfinished window.
+The Dockerfile uses the official Python 3.14 slim Bookworm image, pinned calculation-library versions, an unprivileged numeric user and explicit application/config copies. The build context excludes `.env`, local state, raw data, private Sheet metadata, credentials and reports. Compose uses a persistent named volume for state, a read-only root filesystem, no published ports, dropped capabilities, bounded logs and a quote-freshness health command. It runs `run-paper --cycles 0` continuously until stopped, retrying a failed process up to five times. Normal stops are not automatically restarted. After a Docker daemon/host restart, run Compose again. This ordinary service does not resume or relabel the archived timed experiment.
 
 ```powershell
 docker compose config
 docker compose build
 docker compose up -d
-docker compose exec paper python -m bitcoin_agent health
+docker compose exec paper python tools/check_service_health.py
 docker compose logs --tail 50 paper
 docker compose down
 ```
 
-Docker is unavailable here; these build/runtime commands remain unverified. Start a separate fresh Docker experiment rather than moving the Windows evaluation database across an environment change. Do not run two deployments against the same SQLite file. Cloud deployment and external-provider setup are optional future work selected by the owner.
+The actual [GitHub Actions build](https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488), Compose validation and container configuration command passed on Linux. Docker is unavailable on the development Windows host, and no cloud service or uninterrupted deployment was demonstrated. Start a new service account rather than moving the Windows evaluation database across an environment change. Do not run two deployments against the same SQLite file. To enable real notifications after account setup, use the override and instructions in [notification-setup.md](notification-setup.md).
 
 ## Primary references
 

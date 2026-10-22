@@ -4,15 +4,61 @@
   "claims_all_live_requirements_verified": false,
   "youtube_owner_waived": true,
   "items": [
-    {"requirement": "Configurable budget, DCA, ATR hybrid and strategy modes", "status": "implemented_and_unit_tested", "evidence": "bitcoin_agent/paper_engine.py; config/paper.json; tests/test_paper_engine.py"},
-    {"requirement": "Adaptive behavior and justified LLM use", "status": "rule_adaptation_implemented_llm_shadow_only", "evidence": "bitcoin_agent/adviser.py; docs/integrations.md", "limit": "No real LLM request or learned improvement verified."},
-    {"requirement": "Google Sheet hourly configuration with cached fallback", "status": "implemented_native_sheet_demo_verified_runtime_oauth_unverified", "evidence": "bitcoin_agent/remote_config.py; reports/milestone-4/review.md"},
-    {"requirement": "Telegram alert on every committed buy/sell", "status": "implemented_mock_and_local_demo_verified_real_delivery_pending_credentials", "evidence": "bitcoin_agent/notifications.py; tools/setup_telegram.py; docs/notification-setup.md"},
-    {"requirement": "Gmail weekly report Monday 09:00", "status": "implemented_schedule_and_report_tests_pass_real_delivery_pending_oauth", "evidence": "bitcoin_agent/notifications.py; tools/setup_gmail_oauth.py; docs/notification-setup.md", "timezone": "Asia/Riyadh"},
-    {"requirement": "Dockerized locally runnable and cloud-deployable", "status": "packaged_ci_build_pending", "evidence": "Dockerfile; compose.yaml; compose.notifications.yaml; .github/workflows/verify.yml", "limit": "No cloud server provisioned; local Docker unavailable."},
-    {"requirement": "One-week real-data evaluation log", "status": "interrupted_logs_delivered_continuous_week_not_achieved", "evidence": "reports/real-data-evaluation/review.md", "limit": "Actual logs span 11–22 October across separate accounts; missing periods remain missing."},
-    {"requirement": "Clean code and setup/system report", "status": "provided", "evidence": "README.md; docs/project-report.md"},
-    {"requirement": "Public YouTube walkthrough", "status": "waived_by_owner", "evidence": "Owner explicitly stated YouTube is not required; no video upload authorized."},
-    {"requirement": "Historical LSTM allocation comparison (owner extension)", "status": "completed_retrospective_experiment", "evidence": "reports/lstm-comparison/review.md", "limit": "Always-reserve result; no demonstrated model value over cash."}
+    {
+      "requirement": "Configurable budget, DCA, ATR hybrid and strategy modes",
+      "status": "implemented_and_unit_tested",
+      "evidence": "bitcoin_agent/paper_engine.py; config/paper.json; tests/test_paper_engine.py"
+    },
+    {
+      "requirement": "Adaptive behavior and justified LLM use",
+      "status": "rule_adaptation_implemented_llm_shadow_only",
+      "evidence": "bitcoin_agent/adviser.py; docs/integrations.md",
+      "limit": "No real LLM request or learned improvement verified."
+    },
+    {
+      "requirement": "Google Sheet hourly configuration with cached fallback",
+      "status": "implemented_native_sheet_demo_verified_runtime_oauth_unverified",
+      "evidence": "bitcoin_agent/remote_config.py; reports/milestone-4/review.md"
+    },
+    {
+      "requirement": "Telegram alert on every committed buy/sell",
+      "status": "implemented_mock_and_local_demo_verified_real_delivery_pending_credentials",
+      "evidence": "bitcoin_agent/notifications.py; tools/setup_telegram.py; docs/notification-setup.md"
+    },
+    {
+      "requirement": "Gmail weekly report Monday 09:00",
+      "status": "implemented_schedule_and_report_tests_pass_real_delivery_pending_oauth",
+      "evidence": "bitcoin_agent/notifications.py; tools/setup_gmail_oauth.py; docs/notification-setup.md",
+      "timezone": "Asia/Riyadh"
+    },
+    {
+      "requirement": "Dockerized locally runnable and cloud-deployable",
+      "status": "ci_build_compose_and_container_config_verified_no_cloud_uptime",
+      "evidence": "Dockerfile; compose.yaml; compose.notifications.yaml; .github/workflows/verify.yml",
+      "limit": "Actual Linux CI image build and container configuration command passed. No cloud service or uninterrupted deployment verified.",
+      "ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488"
+    },
+    {
+      "requirement": "One-week real-data evaluation log",
+      "status": "interrupted_logs_delivered_continuous_week_not_achieved",
+      "evidence": "reports/real-data-evaluation/review.md",
+      "limit": "Actual logs span 11\u00e2\u20ac\u201c22 October across separate accounts; missing periods remain missing."
+    },
+    {
+      "requirement": "Clean code and setup/system report",
+      "status": "provided",
+      "evidence": "README.md; docs/project-report.md"
+    },
+    {
+      "requirement": "Public YouTube walkthrough",
+      "status": "waived_by_owner",
+      "evidence": "Owner explicitly stated YouTube is not required; no video upload authorized."
+    },
+    {
+      "requirement": "Historical LSTM allocation comparison (owner extension)",
+      "status": "completed_retrospective_experiment",
+      "evidence": "reports/lstm-comparison/review.md",
+      "limit": "Always-reserve result; no demonstrated model value over cash."
+    }
   ]
 }

@@ -10,6 +10,8 @@ The project asks: **assuming Bitcoin remains operational and tradable, can a con
 
 [LSTM comparison](reports/lstm-comparison/review.md) | [Requirements audit](reports/submission/requirements.md) | [Formula guide](docs/modeling-guide.md) | [Telegram/Gmail setup](docs/notification-setup.md) | [Real-data logs](reports/real-data-evaluation/review.md)
 
+**Verified:** all 117 tests passed locally and on GitHub's Linux runner. The Docker image built and its configuration command passed in [GitHub Actions](https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488). This verifies packaging, not cloud uptime or external delivery.
+
 ## Problem and scope
 
 DCA spreads purchases over time but can keep accumulating through a prolonged decline. Swing trading adds entry and exit rules but incurs more execution costs. A cash reserve reduces participation in both losses and rallies. This project makes those tradeoffs explicit and preserves the data, settings, decisions and accounting needed to examine them.
@@ -110,7 +112,7 @@ Operational equity marks open positions without deducting a hypothetical final e
 
 ## Reproduce locally
 
-Python 3.11 or newer is required. The recorded environment uses **Python 3.14.6**; pinned dependency files record its package versions. A clean installation on another machine has not been verified.
+Python 3.11 or newer is required. The recorded Windows research environment uses **Python 3.14.6**; pinned dependency files record its package versions. A clean Python 3.14 installation with those research dependencies passed all 117 tests on GitHub's Linux runner.
 
 On Windows PowerShell, from the project root:
 
@@ -147,7 +149,7 @@ A new API download may differ from the archived checksum. Raw data, cached API p
 
 ## Local deployment and forward evaluation
 
-The Windows deployment includes single-worker supervision, logon startup, freshness monitoring, bounded restart backoff and independently audited SQLite backups. Docker/Compose packaging is prepared but unbuilt on this Docker-free host. No cloud deployment was performed.
+The Windows deployment includes single-worker supervision, logon startup, freshness monitoring, bounded restart backoff and independently audited SQLite backups. Docker/Compose packaging passed an actual Linux CI build and container configuration check; Docker is unavailable on the development Windows host. No cloud deployment was performed. Use the [ordinary continuous-service instructions](docs/project-report.md#local-or-cloud-startup) for a new deployment; the old timed experiment is archived.
 
 The forward candidate and scheduled-DCA, buy-and-hold and cash books use the same prospective observations and modeled costs. Historical candles only warm indicators; they never replace missing prospective observations. Each of seven 24-hour days must reach at least 99% quote-age coverage, with no configuration change or recorded observer-integrity failure.
 
@@ -190,26 +192,25 @@ See the [integration guide](docs/integrations.md) for configuration and recovery
 | [docs/modeling-guide.md](docs/modeling-guide.md) | Equations and worked examples |
 | [docs/milestones.md](docs/milestones.md) | Delivered work and remaining acceptance requirements |
 | [deploy/windows/](deploy/windows/) | Start, stop, logon-task installation and recovery-check scripts |
-| [Dockerfile](Dockerfile), [compose.yaml](compose.yaml) | Prepared container packaging; build/runtime unverified |
+| [Dockerfile](Dockerfile), [compose.yaml](compose.yaml) | CI-verified image build and configuration check; long-running deployment unverified |
 | `var/`, `data/`, `.venv/` | Local runtime state, source data and environment; excluded from Git |
 
 The recorded 16 October verification passed **98 automated tests**, including actual Windows worker-process ownership. Those tests verify implementation behavior on defined cases; they do not substitute for seven days of prospective observations.
 
-The 19 October runtime recovery revision passed 101 implementation tests. Additional finalization checks reject elapsed time alone, altered settings and missing observations; publication checks enforce the owner's upload prohibition before credential or network access.
+The 19 October runtime recovery revision passed 101 implementation tests. The 22 October suite passes 117 tests, including the LSTM chronology checks and container health behavior. Additional finalization checks preserve the failed prospective experiment; source publication follows the owner's renewed GitHub authorization. No other uploads are authorized.
 
 ## Walkthrough and finalization
 
-The optional [walkthrough script](reports/walkthrough/script.md) explains budgets, causal indicators, costs, swing sizing, historical findings, defensive exits and evaluation. A local narrated 1080p preview is generated with offline Windows speech; it is explicitly labeled incomplete while the week runs. MP4 files stay local and out of source control. YouTube and public video URLs are not completion requirements; [submission settings](config/submission.json) explicitly disable uploads.
+The optional [walkthrough script](reports/walkthrough/script.md) is an earlier preview explaining budgets, causal indicators, costs, swing sizing, historical findings, defensive exits and evaluation. Its original incomplete label is preserved; the interrupted week did not pass. MP4 files stay local and out of source control. YouTube and public video URLs were waived by the owner; [submission settings](config/submission.json) authorize GitHub source publication only.
 
 Media generation uses a separate ignored folder, preserving the frozen trading environment:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install --target var/media-libs --no-deps -r requirements-walkthrough.lock.txt
 .\.venv\Scripts\python.exe -B tools/create_walkthrough.py --render
-.\.venv\Scripts\python.exe -B tools/finalize_project.py --require-complete
 ```
 
-Offline narration requires PowerShell 7 with System.Speech and Microsoft David Desktop. Once acceptance passes, the optional local video can be regenerated with `tools/create_walkthrough.py --final --render`. The retained publication helper is disabled by the owner's latest instruction, including before credential/network operations. It must not be enabled without renewed explicit authorization. No source or video has been uploaded.
+Offline narration requires PowerShell 7 with System.Speech and Microsoft David Desktop. The historical finalization helper still rejects the failed prospective week. GitHub source and the truthful reports have been published; no video or Apziva submission was uploaded.
 
 ## Remaining work and limitations
 

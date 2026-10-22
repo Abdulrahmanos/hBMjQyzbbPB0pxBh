@@ -10,6 +10,8 @@
   "obsolete_windows_task_disabled": true,
   "chat_heartbeat_deleted": true,
   "actual_external_delivery_verified": false,
-  "docker_build_verified": false,
-  "docker_health_checks_verified": true
+  "docker_build_verified": true,
+  "docker_health_checks_verified": true,
+  "container_config_command_verified": true,
+  "github_ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488"
 }
