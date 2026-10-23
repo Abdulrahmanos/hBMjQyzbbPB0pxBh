@@ -1,5 +1,15 @@
 # Completion and publication plan
 
+## Current owner direction — 24 October 2026
+
+The owner requested real LLM use and a new week of evidence, chose an always-on server and their own OpenAI API key, then requested a free hosting alternative. AWS Free account plan is the proposed host; the owner is creating the account and configuring their key locally. See docs/cloud-evaluation.md. No new experiment has started and no real OpenAI call has yet been verified.
+
+New cloud packaging uses a distinct account/volume and read-only shadow adviser with a 28-attempt lifetime budget. The current source revision adds provider receipt recording without changing execution policy. Old source remains preserved in Git commit 8a9d0b19b8db57f31736f7a63c7b8af18c31faed. Do not resume or relabel the October accounts using this changed source. Do not recreate the old chat heartbeat or Windows task.
+
+Only use the owner's key from the explicit private file; an inherited executor OPENAI_API_KEY is not authorization to use that credential. Do not create paid resources or upgrade accounts. Verify the Free plan and credits before deployment. GitHub source publication remains authorized; YouTube and external submission remain excluded. Real model proof does not establish improved returns, and seven days must actually elapse on the new server.
+
+
+
 ## Current owner direction — 22 October 2026
 
 This section supersedes the older plan below. The owner explicitly requested finishing the historical LSTM comparison and publishing the GitHub repository, then supplied the complete Apziva brief and requested real Telegram/Gmail integration. GitHub source publication to `Abdulrahmanos/qytbcf1pULIvwxUO` is authorized again; other uploads and Apziva submission are not. YouTube remains waived. No new heartbeat or milestone stop is authorized or needed.

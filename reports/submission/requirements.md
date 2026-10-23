@@ -22,3 +22,7 @@ The brief does not mandate LSTM, a 99% uptime threshold, or seven separately qua
 Telegram bot/private-chat setup and real BUY/SELL delivery have been verified using synthetic prices. Complete Gmail Desktop OAuth using the [guide](../../docs/notification-setup.md), then run its explicit delivery test and retain the provider receipt. Phone numbers and private usernames alone cannot configure Telegram Bot API delivery. Personal destinations and secrets stay in ignored `.env`.
 
 For unattended operation, keep the process/network available or deploy the supplied container on an appropriate host. Google Sheet and optional LLM providers require their own credentials and verification. The noisy Codex heartbeat was deleted, and the obsolete Windows collector task was disabled. Nothing in this repository silently reinstalls them.
+
+## 24 October cloud preparation
+
+The owner requested real LLM use and a new week on an always-on server, then selected a free hosting alternative. [AWS Free-plan setup](../../docs/cloud-evaluation.md), a separate paper account and a read-only OpenAI observer are prepared. All 127 local tests pass, including ten new cloud checks. The owner is creating the free account and saving their own API key locally. **No server deployment, actual OpenAI response or new prospective day is yet verified.** Earlier results and missing Gmail/Sheet authorization remain as stated above.

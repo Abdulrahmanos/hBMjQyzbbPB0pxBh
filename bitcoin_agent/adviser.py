@@ -47,21 +47,27 @@ class FixtureAdviser:
 
 
 class OpenAIAdviser:
+    def __init__(self):
+        self.last_receipt = None
+
     @property
     def model(self):
-        # Deliberate explicit model choice: no hidden default or moving alias.
+        # Deliberate explicit identifier; provider weight updates are not controlled here.
         model = require_env("LLM_MODEL")
         if not re.fullmatch(r"[A-Za-z0-9._:/-]{1,120}", model):
             raise DeliveryError("invalid_model_configuration", permanent=True)
         return model
 
     def suggest(self, context):
+        self.last_receipt = None
         payload = {"model": self.model, "store": False, "max_output_tokens": 300,
                    "instructions": SYSTEM_PROMPT, "input": json.dumps(context, sort_keys=True),
                    "text": {"format": {"type": "json_schema", "name": "shadow_advice", "strict": True, "schema": SCHEMA}}}
+        if self.model == "gpt-6-luna":
+            payload["reasoning"] = {"effort": "none"}
         if len(json.dumps(payload).encode()) > 12000:
             raise ValueError("Advice request too large")
-        result = http_json("https://api.openai.com/v1/responses", body=payload, timeout=8,
+        result = http_json("https://api.openai.com/v1/responses", body=payload, timeout=20,
                            headers={"Authorization": "Bearer " + require_env("OPENAI_API_KEY")})
         if result.get("status") != "completed":
             raise ValueError("Advice incomplete")
@@ -80,7 +86,16 @@ class OpenAIAdviser:
         texts = [part.get("text") for part in parts if part.get("type") == "output_text"]
         if len(texts) != 1 or not isinstance(texts[0], str):
             raise ValueError("Advice missing")
-        return json.loads(texts[0], object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+        advice = validate_advice(json.loads(texts[0], object_pairs_hook=_unique_object, parse_constant=_reject_constant))
+        # Retain only nonsecret provider metadata after a validated response.
+        response_id, returned_model, usage = result.get("id"), result.get("model"), result.get("usage", {})
+        if (isinstance(response_id, str) and re.fullmatch(r"resp_[A-Za-z0-9_-]{1,200}", response_id)
+                and isinstance(returned_model, str) and re.fullmatch(r"[A-Za-z0-9._:/-]{1,120}", returned_model)
+                and isinstance(usage, dict)):
+            counts = {key: usage.get(key) for key in ("input_tokens", "output_tokens", "total_tokens")}
+            if all(type(value) is int and value >= 0 for value in counts.values()):
+                self.last_receipt = {"response_id": response_id, "returned_model": returned_model, **counts}
+        return advice
 
 
 class ShadowAdviser:

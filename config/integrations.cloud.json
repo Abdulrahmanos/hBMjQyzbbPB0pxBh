@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "delivery_mode": "demo",
+  "config_source": "none",
+  "adviser_provider": "none",
+  "local_rows_path": "config/sheet-rows.json",
+  "cache_path": "var/cloud-week/config-cache.json",
+  "inbox_path": "var/cloud-week/inbox"
+}

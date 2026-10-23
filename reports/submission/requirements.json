@@ -1,5 +1,5 @@
 {
-  "reviewed_on": "2026-10-22",
+  "reviewed_on": "2026-10-24",
   "source": "Full project brief pasted by the owner on 22 October; original page requires sign-in.",
   "claims_all_live_requirements_verified": false,
   "youtube_owner_waived": true,
@@ -12,8 +12,8 @@
     {
       "requirement": "Adaptive behavior and justified LLM use",
       "status": "rule_adaptation_implemented_llm_shadow_only",
-      "evidence": "bitcoin_agent/adviser.py; docs/integrations.md",
-      "limit": "No real LLM request or learned improvement verified."
+      "evidence": "bitcoin_agent/adviser.py; tools/cloud_evaluation.py; config/cloud-protocol.json; docs/cloud-evaluation.md",
+      "limit": "Actual model use awaits owner's private API key; receipt handling and observer isolation tested with labelled mocks. No learned improvement claimed."
     },
     {
       "requirement": "Google Sheet hourly configuration with cached fallback",
@@ -37,7 +37,8 @@
       "status": "ci_build_compose_and_container_config_verified_no_cloud_uptime",
       "evidence": "Dockerfile; compose.yaml; compose.notifications.yaml; .github/workflows/verify.yml",
       "limit": "Actual Linux CI image build and container configuration command passed. No cloud service or uninterrupted deployment verified.",
-      "ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488"
+      "ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488",
+      "cloud_preparation": "Separate frozen week, read-only OpenAI observer and boot service prepared; actual server pending eligible AWS Free-plan signup."
     },
     {
       "requirement": "One-week real-data evaluation log",
@@ -61,5 +62,15 @@
       "evidence": "reports/lstm-comparison/review.md",
       "limit": "Always-reserve result; no demonstrated model value over cash."
     }
-  ]
+  ],
+  "cloud_preparation": {
+    "guide": "docs/cloud-evaluation.md",
+    "composition": "compose.evaluation.yaml",
+    "automated_local_tests": 127,
+    "new_cloud_isolation_tests": 10,
+    "actual_cloud_deployment_verified": false,
+    "actual_openai_response_verified": false,
+    "new_week_started": false,
+    "owner_selected_free_hosting": true
+  }
 }

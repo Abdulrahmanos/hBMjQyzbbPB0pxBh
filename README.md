@@ -149,6 +149,8 @@ A new API download may differ from the archived checksum. Raw data, cached API p
 
 ## Local deployment and forward evaluation
 
+A new [AWS Free-plan deployment guide](docs/cloud-evaluation.md) prepares a separate cloud account and bounded real OpenAI shadow adviser using [compose.evaluation.yaml](compose.evaluation.yaml). **Deployment has not started, real OpenAI use remains unverified, and no completed week is claimed.** The owner is setting up the free account and private API key. Earlier evidence below retains its original status.
+
 The Windows deployment includes single-worker supervision, logon startup, freshness monitoring, bounded restart backoff and independently audited SQLite backups. Docker/Compose packaging passed an actual Linux CI build and container configuration check; Docker is unavailable on the development Windows host. No cloud deployment was performed. Use the [ordinary continuous-service instructions](docs/project-report.md#local-or-cloud-startup) for a new deployment; the old timed experiment is archived.
 
 The forward candidate and scheduled-DCA, buy-and-hold and cash books use the same prospective observations and modeled costs. Historical candles only warm indicators; they never replace missing prospective observations. Each of seven 24-hour days must reach at least 99% quote-age coverage, with no configuration change or recorded observer-integrity failure.
@@ -197,7 +199,7 @@ See the [integration guide](docs/integrations.md) for configuration and recovery
 
 The recorded 16 October verification passed **98 automated tests**, including actual Windows worker-process ownership. Those tests verify implementation behavior on defined cases; they do not substitute for seven days of prospective observations.
 
-The 19 October runtime recovery revision passed 101 implementation tests. The 22 October suite passes 117 tests, including the LSTM chronology checks and container health behavior. Additional finalization checks preserve the failed prospective experiment; source publication follows the owner's renewed GitHub authorization. No other uploads are authorized.
+The 19 October runtime recovery revision passed 101 implementation tests. The 22 October suite passes 117 tests, including the LSTM chronology checks and container health behavior. The 24 October cloud preparation passes 127 local tests, including ten new isolation/integrity checks. Actual cloud uptime and real OpenAI responses remain unverified. Additional finalization checks preserve the failed prospective experiment; source publication follows the owner's renewed GitHub authorization. No other uploads are authorized.
 
 ## Walkthrough and finalization
 
