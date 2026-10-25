@@ -158,6 +158,25 @@ class CloudTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cloud.export_review(self.runtime, self.state, self.root / "final", require_complete=True)
 
+    def test_repeated_genuine_preflight_preserves_receipt_and_does_not_regenerate(self):
+        path = self.account()
+        before = audit_paper(path)
+        provider = self.provider().provider
+        output = self.root / "var/probe"
+        frozen = cloud.fingerprint()
+        with patch.object(cloud, "fingerprint", return_value=frozen), patch.object(cloud, "ROOT", self.root), patch.object(cloud, "now_utc", return_value=NOW), \
+             patch.object(cloud, "make_provider", return_value=provider), \
+             patch("bitcoin_agent.local_adviser.http_json", return_value=self.response()) as request:
+            first = cloud.probe_llm(None, output, self.runtime)
+            saved = (output / "verification.json").read_bytes()
+            second = cloud.probe_llm(None, output, self.runtime)
+        self.assertTrue(first["provider_response_verified"])
+        self.assertEqual(second["status"], "already_verified")
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual((output / "verification.json").read_bytes(), saved)
+        self.assertEqual(len(list((output / "attempts").glob("*.json"))), 1)
+        self.assertEqual(audit_paper(path), before)
+
     def test_compose_adviser_has_read_only_paper_mount_and_no_external_secrets(self):
         compose = json.loads((ROOT / "compose.evaluation.yaml").read_text(encoding="utf-8"))
         self.assertIn("cloud_paper:/app/evidence:ro", compose["services"]["adviser"]["volumes"])

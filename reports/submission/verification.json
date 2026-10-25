@@ -1,7 +1,7 @@
 {
-  "verified_at": "2026-10-25T13:05:17.602777+00:00",
+  "verified_at": "2026-10-25T13:22:17.521747+00:00",
   "all_tests_passed": true,
-  "tests_run": 142,
+  "tests_run": 143,
   "failures": 0,
   "errors": 0,
   "command": "python -B -m unittest discover -s tests -v",
@@ -19,7 +19,7 @@
   "gmail_external_delivery_verified": false,
   "actual_external_delivery_scope": "all_requested_channels",
   "telegram_verification": "reports/submission/telegram-verification.json",
-  "cloud_isolation_tests": 10,
+  "cloud_isolation_tests": 11,
   "cloud_deployment_verified": false,
   "real_openai_response_verified": false,
   "free_local_model_tests": 15,

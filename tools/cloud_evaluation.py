@@ -294,15 +294,30 @@ def probe_llm(secret_file, output, runtime):
     output.mkdir(parents=True, exist_ok=True)
     config = load_config(CONFIG)
     features = Features.from_dict(read_json(Path(runtime) / "market/features.json"))
-    path = output / "demonstration.sqlite3"
-    initialize_paper(path, config)
+    if not features.is_fresh(now_utc(), config.data["operational"]["feature_stale_after_seconds"]):
+        raise ValueError("Completed features are stale; refresh warm-up before model verification")
     provider = make_provider(secret_file)
+    protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+    identity = {"features_asof": features.asof.isoformat(), "config_checksum": config.checksum,
+                "source_checksum": hashlib.sha256(json.dumps(fingerprint(), sort_keys=True).encode()).hexdigest(),
+                "model_sha256": protocol.get("model_sha256")}
+    previous = read_json(output / "verification.json")
+    if (previous and previous.get("provider_response_verified") is True
+            and all(previous.get(key) == value for key, value in identity.items())
+            and previous.get("receipt", {}).get("returned_model") == provider.model
+            and previous.get("receipt", {}).get("model_sha256") == protocol.get("model_sha256")):
+        return {"status": "already_verified", "provider_response_verified": True,
+                "counts_as_week_evidence": False, "output": str(output)}
+    # A changed source version gets distinct demonstration state; prior attempts remain intact.
+    path = output / ("demonstration-" + identity["source_checksum"][:16] + ".sqlite3")
+    initialize_paper(path, config)
     adviser = ShadowAdviser(path, provider)
     result = adviser.observe(config, features, paper_status(path), now_utc())
     receipt = provider.last_receipt
     proof = {"observed_at": now_utc().isoformat(), "demonstration_only": True,
              "counts_as_week_evidence": False, "provider_response_verified": bool(receipt),
-             "profit_improvement_tested": False, **result, "receipt": receipt}
+             "profit_improvement_tested": False, **identity, **result, "receipt": receipt}
+    atomic_json(output / "attempts" / (uuid.uuid4().hex + ".json"), proof)
     atomic_json(output / "verification.json", proof)
     if not receipt:
         raise ValueError("No genuine model receipt; the prospective week must not start")

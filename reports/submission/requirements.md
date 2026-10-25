@@ -29,4 +29,4 @@ The owner requested real LLM use and a new week on an always-on server, then sel
 
 ## 25 October free-model update
 
-The owner chose a free local Qwen model instead of OpenAI API billing. A pinned CPU runtime, model-file verification, private inference network and bounded shadow adviser are prepared. All 142 local tests pass. The AWS base image and market-feed preflight are confirmed; a real model response on the owner's server and a completed continuous week remain pending. No API key is required for this deployment. Gmail and runtime Sheet OAuth remain separately unverified.
+The owner chose a free local Qwen model instead of OpenAI API billing. A pinned CPU runtime, model-file verification, private inference network and bounded shadow adviser are prepared. All 143 local tests pass. The AWS base image and market-feed preflight are confirmed; a real model response on the owner's server and a completed continuous week remain pending. No API key is required for this deployment. Gmail and runtime Sheet OAuth remain separately unverified.

@@ -66,8 +66,8 @@
   "cloud_preparation": {
     "guide": "docs/cloud-evaluation.md",
     "composition": "compose.evaluation.yaml",
-    "automated_local_tests": 142,
-    "new_cloud_isolation_tests": 10,
+    "automated_local_tests": 143,
+    "new_cloud_isolation_tests": 11,
     "actual_cloud_deployment_verified": false,
     "actual_openai_response_verified": false,
     "new_week_started": false,

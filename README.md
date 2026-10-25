@@ -228,4 +228,4 @@ Offline narration requires PowerShell 7 with System.Speech and Microsoft David D
 
 The repository identifier specified by the project brief is `qytbcf1pULIvwxUO`.
 
-The 25 October free-model revision passes 142 local tests. Linux CI additionally runs real CPU inference with explicitly synthetic context; that test is separate from a real-data forward week.
+The 25 October free-model revision passes 143 local tests. Linux CI additionally runs real CPU inference with explicitly synthetic context; that test is separate from a real-data forward week.
