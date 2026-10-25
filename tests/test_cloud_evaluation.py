@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from bitcoin_agent.adviser import OpenAIAdviser, ShadowAdviser
+from bitcoin_agent.local_adviser import LocalLlamaAdviser
 from bitcoin_agent.config import load_config
 from bitcoin_agent.forward import ForwardEvaluation
 from bitcoin_agent.paper_engine import PaperEngine
@@ -33,9 +34,9 @@ class CloudTests(unittest.TestCase):
         self.config = load_config(cloud.CONFIG)
 
     def response(self):
-        return {"status":"completed","id":"resp_unit_test","model":"gpt-6-luna",
-                "usage":{"input_tokens":240,"output_tokens":60,"total_tokens":300},
-                "output":[{"type":"message","content":[{"type":"output_text","text":json.dumps(ADVICE)}]}]}
+        return {"id":"chatcmpl-unit_test","model":"bitcoin-qwen-0.5b",
+                "usage":{"prompt_tokens":240,"completion_tokens":60,"total_tokens":300},
+                "choices":[{"finish_reason":"stop","message":{"role":"assistant","content":json.dumps(ADVICE)}}]}
 
     def account(self):
         cloud.freeze(self.runtime)
@@ -49,7 +50,7 @@ class CloudTests(unittest.TestCase):
         return path
 
     def provider(self):
-        return ShadowAdviser(self.state / "shadow.sqlite3", OpenAIAdviser())
+        return ShadowAdviser(self.state / "shadow.sqlite3", LocalLlamaAdviser(json.loads((ROOT / "config/open-model.json").read_text(encoding="utf-8"))))
 
     def test_private_file_does_not_use_inherited_credentials(self):
         path = self.root / ".env"
@@ -98,18 +99,18 @@ class CloudTests(unittest.TestCase):
         provider = self.provider()
         with patch.dict(os.environ, {"OPENAI_API_KEY":"test-only","LLM_MODEL":"gpt-6-luna"}), \
              patch.object(cloud, "runtime_health", return_value={"healthy":True}), \
-             patch("bitcoin_agent.adviser.http_json", return_value=self.response()) as request:
+             patch("bitcoin_agent.local_adviser.http_json", return_value=self.response()) as request:
             result = cloud.observe_once(self.runtime, self.state, self.config, provider, NOW)
             self.assertTrue(result["provider_receipt_verified"])
             self.assertFalse(result["applied_to_trades"])
-            self.assertEqual(request.call_args.kwargs["body"]["reasoning"], {"effort":"none"})
-            self.assertFalse(request.call_args.kwargs["body"]["store"])
+            self.assertTrue(request.call_args.kwargs["body"]["response_format"]["json_schema"]["strict"])
+            self.assertNotIn("Authorization", request.call_args.kwargs.get("headers", {}))
             self.assertEqual(cloud.observe_once(self.runtime, self.state, self.config, provider, NOW)["status"], "already_observed")
             self.assertEqual(request.call_count, 1)
         receipts = list((self.state / "receipts").glob("*.json"))
         self.assertEqual(len(receipts), 1)
         receipt = json.loads(receipts[0].read_text(encoding="utf-8"))
-        self.assertEqual(receipt["response_id"], "resp_unit_test")
+        self.assertEqual(receipt["response_id"], "chatcmpl-unit_test")
         self.assertNotIn("test-only", receipts[0].read_text(encoding="utf-8"))
         self.assertEqual(audit_paper(path), before)
         with connection(path) as db:
@@ -140,9 +141,9 @@ class CloudTests(unittest.TestCase):
     def test_valid_json_without_provider_metadata_is_not_claimed_as_proof(self):
         response = self.response()
         del response["id"]
-        provider = OpenAIAdviser()
+        provider = self.provider().provider
         with patch.dict(os.environ, {"OPENAI_API_KEY":"test-only","LLM_MODEL":"gpt-6-luna"}), \
-             patch("bitcoin_agent.adviser.http_json", return_value=response):
+             patch("bitcoin_agent.local_adviser.http_json", return_value=response):
             self.assertEqual(provider.suggest({"features":{}}), ADVICE)
             self.assertIsNone(provider.last_receipt)
 
@@ -151,17 +152,20 @@ class CloudTests(unittest.TestCase):
         report = cloud.export_review(self.runtime, self.state, self.root / "report")
         self.assertFalse(report["complete"])
         self.assertFalse(report["checks"]["seven_prospective_days_pass"])
-        self.assertFalse(report["checks"]["real_openai_response_recorded"])
+        self.assertFalse(report["checks"]["real_model_response_recorded"])
         self.assertTrue(report["checks"]["candidate_and_three_baselines_reconcile"])
         self.assertTrue(report["checks"]["all_accepted_quotes_paired"])
         with self.assertRaises(ValueError):
             cloud.export_review(self.runtime, self.state, self.root / "final", require_complete=True)
 
-    def test_compose_adviser_has_read_only_paper_mount_and_only_one_secret(self):
+    def test_compose_adviser_has_read_only_paper_mount_and_no_external_secrets(self):
         compose = json.loads((ROOT / "compose.evaluation.yaml").read_text(encoding="utf-8"))
         self.assertIn("cloud_paper:/app/evidence:ro", compose["services"]["adviser"]["volumes"])
         self.assertNotIn("secrets", compose["services"]["paper"])
-        self.assertEqual(list(compose["secrets"]), ["openai"])
+        self.assertNotIn("secrets", compose)
+        self.assertTrue(compose["networks"]["inference"]["internal"])
+        self.assertNotIn("ports", compose["services"]["model"])
+        self.assertIn("model_weights:/models:ro", compose["services"]["adviser"]["volumes"])
         self.assertNotIn("ports", compose["services"]["paper"])
 
 

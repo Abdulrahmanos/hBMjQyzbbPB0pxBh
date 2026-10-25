@@ -1,5 +1,14 @@
 # Completion and publication plan
 
+## Current owner direction — 25 October 2026
+
+The owner selected a free open model instead of OpenAI API billing. Use the pinned Qwen2.5-0.5B GGUF and CPU-only llama.cpp image in config/open-model.json. No OpenAI account or API key is needed for the current cloud deployment. See docs/cloud-evaluation.md.
+
+The owner created an AWS Free-plan instance, verified its account credits privately, enabled encrypted storage, and connected through EC2 Instance Connect. Direct SSH from this computer still times out despite a restricted source rule. Browser login works after allowing the regional AWS managed prefix. The owner pasted the verified 6fa29d8 setup block; a terminal screenshot confirms MARKET_FEED_READY and SERVER_SETUP_READY. These markers prove image preparation and public-data access, not a running collector or seven days.
+
+A new source revision adds local inference before any timed account exists. Publish and verify it in CI, then update the server to that exact commit, verify the pinned weights and real inference receipt, and only then declare/start the prospective account. Preserve the prepared checkout and all earlier accounts. No new chat heartbeat or Windows collector task is authorized. Keep all cloud addresses, account IDs and key paths private.
+
+
 ## Current owner direction — 24 October 2026
 
 The owner requested real LLM use and a new week of evidence, chose an always-on server and their own OpenAI API key, then requested a free hosting alternative. AWS Free account plan is the proposed host; the owner is creating the account and configuring their key locally. See docs/cloud-evaluation.md. No new experiment has started and no real OpenAI call has yet been verified.

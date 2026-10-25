@@ -26,3 +26,7 @@ For unattended operation, keep the process/network available or deploy the suppl
 ## 24 October cloud preparation
 
 The owner requested real LLM use and a new week on an always-on server, then selected a free hosting alternative. [AWS Free-plan setup](../../docs/cloud-evaluation.md), a separate paper account and a read-only OpenAI observer are prepared. All 127 local tests pass, including ten new cloud checks. The owner is creating the free account and saving their own API key locally. **No server deployment, actual OpenAI response or new prospective day is yet verified.** Earlier results and missing Gmail/Sheet authorization remain as stated above.
+
+## 25 October free-model update
+
+The owner chose a free local Qwen model instead of OpenAI API billing. A pinned CPU runtime, model-file verification, private inference network and bounded shadow adviser are prepared. All 142 local tests pass. The AWS base image and market-feed preflight are confirmed; a real model response on the owner's server and a completed continuous week remain pending. No API key is required for this deployment. Gmail and runtime Sheet OAuth remain separately unverified.

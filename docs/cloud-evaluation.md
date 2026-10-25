@@ -1,134 +1,97 @@
-# Free-plan server and real OpenAI verification
+# Free open model and prospective cloud week
 
-Prepared 24 October 2026. **Deployment has not started; no new prospective week is claimed.** Earlier interrupted accounts and their dates remain preserved. No Windows task or chat heartbeat is re-enabled.
+Updated 25 October 2026. The owner chose a free open model instead of paid OpenAI API access. No API key is needed for this deployment. The previously prepared AWS image and market-feed check passed; the new model and timed account still require verification on that server.
 
-## Owner setup
+## Model and purpose
 
-Create an account through [AWS Free Tier](https://aws.amazon.com/free/) and select **Free account plan**, if eligible. AWS currently gives new customers $100 of credits; Free plan ends after six months or exhausted credits and does not charge unless upgraded to Paid. Check eligibility and remaining credits in the console. Do not upgrade to Paid for this test.
+The model is Qwen2.5-0.5B-Instruct in Q4_K_M GGUF format, downloaded from [Qwen's own repository](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF). Its exact repository revision, 491,400,032-byte size and SHA-256 are stored in config/open-model.json. The CPU-only [llama.cpp server image](https://github.com/ggml-org/llama.cpp/blob/master/docs/docker.md) is also pinned by digest.
 
-[Official plan rules](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier.html) and [eligible EC2 options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-free-tier-usage.html).
+The model reads completed-bar features and simulated balances, then returns one permitted shadow suggestion with a short explanation. The paper rules retain exclusive control of trades, allocations and risk limits. A real model response demonstrates model use; it does not establish improved returns. This remains separate from the historical LSTM study.
 
-OpenAI API usage is separate from AWS credits and is not promised free. Configure a restricted project API key and billing controls privately. Put your own OPENAI_API_KEY in the ignored local .env file. Never paste or commit it. The helper explicitly requires this file and ignores inherited executor credentials.
+Only the model downloader can write the weights volume. Inference and adviser mount it read-only and verify its checksum. The model server and adviser use an internal Docker network with no external route or published ports. There is no paid API fallback and no cloud inference account. Public model downloads and Coinbase data access use the separate setup/paper network.
 
-The protocol requests gpt-6-luna, reasoning effort none, strict JSON, no tools, store=false, a 300-token output cap and a 20-second timeout. Only whitelisted market features, simulated balances and risk limits are sent. This is an API adviser, separate from the historical LSTM. The requested model name is frozen; the provider may update underlying weights. Receipts record the actual returned model and usage.
+## Resource limits
 
-[Model documentation](https://developers.openai.com/api/docs/models/gpt-6-luna) and [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
+The model service has a 768 MiB memory limit, one CPU thread, a 2,048-token context, one inference slot, 128-token processing batches and a 256-token output limit. Explanations are limited to 200 characters each through schema-constrained generation. Paper and adviser services have separate memory limits. The 2 GiB server must still pass its real preflight and be checked for OOM/restarts; small weight size alone does not prove reliable coexistence.
 
-## Real model demonstration before deployment
+Runtime attempts are reserved before I/O, with four attempts per UTC day, six hours between attempts and 28 total. Failure consumes quota. Advice never changes the ledger. Source, architecture, model checksum, configuration, protocol and calculation-library versions are frozen for the new account.
 
-Once the private key is saved, from Windows PowerShell:
+## Hosting
 
-~~~powershell
-.\.venv\Scripts\python.exe -B tools/cloud_evaluation.py probe --secret-file .env --output var/llm-proof
-.\.venv\Scripts\python.exe -B tools/cloud_evaluation.py prepare-secret
-~~~
+The owner's AWS Free plan was verified privately. AWS credits are consumed by the VM, disk and public IPv4; do not upgrade to a Paid plan or add unrelated resources. The setup targets Ubuntu 24.04 x86_64, a t3.small, and a 30 GiB encrypted gp3 root disk.
 
-The probe uses freshly refreshed completed candles and a separate initial simulated portfolio. It records a validated real provider response privately, places no trades and counts as zero prospective days. Missing receipts, refusals or unavailable access are not model verification. Repeat attempts consume the persistent quota.
+SSH login remains restricted. The owner's EC2 Instance Connect browser session works after allowing AWS's regional managed prefix list. Do not expose the model port to the internet. All addresses, SSH keys and account identifiers stay out of Git.
 
-Only OPENAI_API_KEY is copied to ignored var/secrets/cloud-openai.env. Telegram/Gmail/Google credentials and personal destinations are excluded.
+For a new server, install Docker using deploy/linux/bootstrap-ubuntu.sh. For the already prepared server, keep the existing folder and update only to a reviewed, CI-verified commit before the new account starts.
 
-## Create one EC2 instance
+## Prepare the model without starting the week
 
-Use [the EC2 console](https://console.aws.amazon.com/ec2/) and [AWS's launch guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
-
-- Select one t3.small x86_64 instance (2 GB RAM), only if marked eligible under your current Free plan.
-- Choose official Canonical Ubuntu Server 24.04 LTS x86_64 without paid Marketplace software.
-- Use a 30 GiB encrypted gp3 root disk. Leave extra disks, load balancers, NAT gateways and Elastic IP allocations off.
-- Use on-demand capacity; interruptible Spot capacity is unsuitable for this week.
-- Download an SSH key pair privately. Ubuntu's login user is ubuntu.
-- Permit inbound SSH port 22 only from your current public IP. The collector needs outbound HTTPS/DNS and no public application ports.
-- Check the final estimate and credit balance. Instance, disk and public IPv4 usage consume credits; the Free plan prevents charges without a paid upgrade.
-- Share only the public server address, SSH username and local private-key path with the working agent. Never paste private keys or credentials.
-
-Verify public Coinbase product/ticker connectivity before declaring the account. If a provider blocks a region, preserve any started evidence and declare a separate deployment; never relabel a failed account.
-
-## Prepare the new Ubuntu host
-
-These commands install software and build the image without starting the week:
+From /opt/bitcoin on the server, after checking out the verified new commit:
 
 ~~~bash
-sudo install -d -o ubuntu -g ubuntu /opt/bitcoin
-git clone https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO.git /opt/bitcoin
-cd /opt/bitcoin
-git rev-parse HEAD
-sudo bash deploy/linux/bootstrap-ubuntu.sh
-sudo docker compose -f compose.evaluation.yaml build
+sudo docker compose -f compose.evaluation.yaml build paper model
+sudo docker compose -f compose.evaluation.yaml run --rm --no-deps model-download
+sudo docker compose -f compose.evaluation.yaml up -d --no-build --wait model
+sudo docker compose -f compose.evaluation.yaml run --rm --no-deps paper python tools/cloud_evaluation.py warmup
+sudo docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python tools/cloud_evaluation.py probe --runtime /app/evidence/cloud-week --output var/cloud-adviser/probe
+sudo docker stats --no-stream
 ~~~
 
-Use a reviewed published commit. Preserve that checkout and image throughout collection: do not pull, rebuild, change the model/configuration or upgrade calculation libraries. The bootstrap is restricted to a fresh Ubuntu 24.04 host and follows [Docker's official Ubuntu installation](https://docs.docker.com/engine/install/ubuntu/).
+The downloader verifies size and SHA-256 before activating the model. Every model-container start checks the checksum again; the adviser checks the read-only file independently. Warm-up writes only historical candles/features and refuses an existing declared account. The probe uses those freshly completed real-data features with a separate initial simulated portfolio.
 
-Copy the scoped secret from Windows with your actual key path and server address:
+A successful probe reports provider_response_verified=true and counts_as_week_evidence=false. It saves the advice, local inference response ID, model digest and token counts in the adviser volume. Missing metadata, a timeout, truncated output, invalid JSON or missing model receipts cannot pass the preflight. The CLI fails rather than claiming success.
 
-~~~powershell
-scp -i "<private-key-path>" var/secrets/cloud-openai.env ubuntu@<server-address>:/opt/bitcoin/cloud-openai.env
-~~~
+CI also makes an actual CPU inference request using explicitly synthetic context. Its receipt verifies inference plumbing and resource behavior, not a prospective day or a trading result. Do not present the CI smoke context as observed market data.
 
-Then on the server:
+## Declare and start the separate account
+
+Do this only after the model preflight succeeds, memory is acceptable and no OOM/restart is reported:
 
 ~~~bash
-cd /opt/bitcoin
-sudo install -d -m 0700 var/secrets
-sudo install -o 10001 -g 10001 -m 0400 cloud-openai.env var/secrets/cloud-openai.env
-unlink cloud-openai.env
-sudo docker compose -f compose.evaluation.yaml config --quiet
-sudo docker run --rm bitcoin-evaluation:local python -c "from bitcoin_agent.paper_service import public_json, PRODUCT_URL; print(public_json(PRODUCT_URL)['id'])"
-~~~
-
-File-backed Compose secrets retain host ownership. UID 10001 and mode 0400 let the nonroot adviser read its key; the paper container receives no secret. The key is excluded from Git and the image build context.
-
-## Start the new week
-
-~~~bash
-cd /opt/bitcoin
 sudo install -m 0644 deploy/linux/bitcoin-evaluation.service /etc/systemd/system/bitcoin-evaluation.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now bitcoin-evaluation
 sudo docker compose -f compose.evaluation.yaml ps
-sudo docker compose -f compose.evaluation.yaml logs --tail 30 paper adviser
-~~~
-
-The boot service restores existing containers after reboot without rebuilding, resetting volumes or removing STOP/COMPLETE. Recovery is bounded; actual outages still count as gaps.
-
-The paper service freezes source/config/protocol/environment before creating the new account in the bitcoin-evaluation_cloud_paper volume. The clock starts at the **first actual accepted quote**, not server creation, launch or historical warm-up.
-
-The adviser mounts that paper volume **read-only** and writes its own bitcoin-evaluation_cloud_adviser volume. It skips stale data and stops on STOP/COMPLETE. Attempts are reserved before network I/O: at most four per UTC day, six hours apart, and 28 total. Failures consume quota; restarts do not restore it. API failures cannot alter risk controls, orders or balances.
-
-This frozen week has no live Telegram/Gmail delivery or remote Sheet edits. Those integrations remain separate. Swing entries remain disabled under the existing operational policy. This run verifies real LLM use and reliability, not LLM-controlled trading profitability or a new DCA-versus-swing optimum.
-
-## Inspect progress without chat automation
-
-~~~bash
-cd /opt/bitcoin
 sudo docker compose -f compose.evaluation.yaml exec paper python tools/cloud_evaluation.py health
 sudo docker compose -f compose.evaluation.yaml exec paper python -m bitcoin_agent --db var/cloud-week/ledger.sqlite3 forward-report --output var/cloud-week/reports
+~~~
+
+The new paper account uses the bitcoin-evaluation_cloud_paper volume. The adviser uses bitcoin-evaluation_cloud_adviser, and model weights use bitcoin-evaluation_model_weights. The old Windows accounts are never imported or reset.
+
+The week starts at the first actual accepted quote. Server creation, container build, model tests and historical candles count as zero prospective time. The source/config/environment manifest is saved before the account is initialized. Every accepted quote must pair with its candidate and three baseline observations.
+
+The boot service restores existing containers without rebuilding images or clearing STOP/COMPLETE. Collection ends automatically at the original seven-day boundary. Each of seven anchored 24-hour days must meet the existing 99% quote-age coverage criterion. Recovery never fills missing observations.
+
+Swing entries remain disabled under the previously declared operational policy. No live Telegram/Gmail delivery or remote Sheet edits are enabled in this frozen experiment. Their setup and older verification remain separate.
+
+## Inspect and preserve
+
+~~~bash
+sudo docker compose -f compose.evaluation.yaml exec paper python tools/cloud_evaluation.py health
 sudo docker compose -f compose.evaluation.yaml exec adviser cat var/cloud-adviser/status.json
+sudo docker compose -f compose.evaluation.yaml logs --tail 40 model adviser
+sudo docker stats --no-stream
 df -h /var/lib/docker
 ~~~
 
-The supervisor writes reports each minute and audited SQLite backups hourly. Each of seven anchored 24-hour days must meet the existing 99% quote-age coverage protocol. Missing observations remain missing. Keep sufficient disk space: the full week and hourly backups may occupy tens of gigabytes. A healthy collector cannot repair a failed day. No hourly chat messages are scheduled.
+The supervisor writes reports each minute and audited backups hourly. Watch disk capacity: a full week with hourly snapshots can occupy tens of gigabytes. No Codex heartbeat or recurring chat messages are created. Closing the browser does not stop a running systemd-managed deployment.
 
-For an independently audited interim review:
+Never pull code, rebuild the images, replace weights, change the model protocol or upgrade calculation libraries while the account is frozen. A failed window must retain its original identity, start and deadline.
+
+For an interim review:
 
 ~~~bash
 sudo docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python tools/cloud_evaluation.py export --runtime /app/evidence/cloud-week
 ~~~
 
-## At the actual seven-day boundary
-
-The supervisor stops collection and writes COMPLETE after seven elapsed days. COMPLETE alone is **not a pass**. The adviser stops API calls. Finalize independently:
+At the actual seven-day boundary:
 
 ~~~bash
 sudo docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python tools/cloud_evaluation.py export --runtime /app/evidence/cloud-week --require-complete
 ~~~
 
-The exporter checks every daily threshold, candidate and three baseline ledgers, paired quotes, source/config/environment freeze, observer integrity, stopped collectors, backups, matching API receipts and attempt budget. Failure writes an honest interim report and returns a failing status. Never extend or re-anchor an experiment to manufacture a pass.
+Finalization verifies daily coverage, four reconciled books, quote pairing, source/config/environment freeze, stopped collectors, backups, matching inference receipts, the model-file checksum and the attempt budget. COMPLETE is only a time-boundary marker; it is not a validation pass.
 
-Copy reports and both preserved volumes privately before terminating the server or losing free-plan access. After services exit, their stopped containers remain available for docker cp. Report files are under /app/var/cloud-adviser/reports in the adviser container. Do not publish raw secrets or private identifiers.
+Copy reports and both evidence volumes privately and verify hashes before stopping or deleting server storage. Model weights can be downloaded again from their pinned source; ledgers and observations cannot. The optional OpenAI adapter remains available elsewhere in the repository, but this deployment never uses it or any inherited API credential.
 
-Stop the service after exporting:
-
-~~~bash
-sudo systemctl stop bitcoin-evaluation
-~~~
-
-Verify offline copies and backup hashes before deleting server storage. This project never auto-upgrades an account or purchases paid services. Sanitized report publication is separate and requires actual evidence.
+Gmail OAuth and runtime Google Sheet OAuth remain separately unverified. YouTube is waived by the owner. GitHub source publication is authorized; Apziva submission remains the owner's action.

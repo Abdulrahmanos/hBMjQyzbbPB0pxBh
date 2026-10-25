@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "provider": "local_llama_cpp",
+  "alias": "bitcoin-qwen-0.5b",
+  "repository": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+  "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+  "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "bytes": 491400032,
+  "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "runtime_image": "ghcr.io/ggml-org/llama.cpp@sha256:1fa7f8f0ca663fdcf3203dc125a7e0b5c9e49c9ed054b049599666cd7e300eb0",
+  "context_tokens": 2048,
+  "maximum_output_tokens": 256,
+  "cpu_threads": 1,
+  "seed": 17
+}

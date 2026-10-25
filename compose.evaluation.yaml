@@ -44,7 +44,8 @@
         "timeout": "15s",
         "retries": 3,
         "start_period": "600s"
-      }
+      },
+      "mem_limit": "768m"
     },
     "adviser": {
       "build": ".",
@@ -79,25 +80,117 @@
       ],
       "volumes": [
         "cloud_paper:/app/evidence:ro",
-        "cloud_adviser:/app/var"
-      ],
-      "secrets": [
-        "openai"
+        "cloud_adviser:/app/var",
+        "model_weights:/models:ro"
       ],
       "depends_on": {
         "paper": {
           "condition": "service_started"
+        },
+        "model": {
+          "condition": "service_healthy"
         }
+      },
+      "networks": [
+        "inference"
+      ],
+      "mem_limit": "320m"
+    },
+    "model": {
+      "restart": "on-failure:5",
+      "init": true,
+      "read_only": true,
+      "user": "10001:10001",
+      "tmpfs": [
+        "/tmp"
+      ],
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "stop_grace_period": "90s",
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "5m",
+          "max-file": "3"
+        }
+      },
+      "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile.model"
+      },
+      "image": "bitcoin-local-model:locked",
+      "volumes": [
+        "model_weights:/models:ro"
+      ],
+      "environment": {
+        "MODEL_SHA256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+      },
+      "networks": [
+        "inference"
+      ],
+      "mem_limit": "768m",
+      "cpus": 1.0,
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8080/health"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 12,
+        "start_period": "120s"
       }
+    },
+    "model-download": {
+      "restart": "no",
+      "init": true,
+      "read_only": true,
+      "user": "10001:10001",
+      "tmpfs": [
+        "/tmp"
+      ],
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "stop_grace_period": "90s",
+      "logging": {
+        "driver": "json-file",
+        "options": {
+          "max-size": "5m",
+          "max-file": "3"
+        }
+      },
+      "build": ".",
+      "image": "bitcoin-evaluation:local",
+      "profiles": [
+        "setup"
+      ],
+      "command": [
+        "python",
+        "tools/prepare_open_model.py"
+      ],
+      "volumes": [
+        "model_weights:/app/var"
+      ]
     }
   },
   "volumes": {
     "cloud_paper": {},
-    "cloud_adviser": {}
+    "cloud_adviser": {},
+    "model_weights": {}
   },
-  "secrets": {
-    "openai": {
-      "file": "./var/secrets/cloud-openai.env"
+  "networks": {
+    "inference": {
+      "internal": true
     }
   }
 }

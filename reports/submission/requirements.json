@@ -1,5 +1,5 @@
 {
-  "reviewed_on": "2026-10-24",
+  "reviewed_on": "2026-10-25",
   "source": "Full project brief pasted by the owner on 22 October; original page requires sign-in.",
   "claims_all_live_requirements_verified": false,
   "youtube_owner_waived": true,
@@ -11,9 +11,9 @@
     },
     {
       "requirement": "Adaptive behavior and justified LLM use",
-      "status": "rule_adaptation_implemented_llm_shadow_only",
-      "evidence": "bitcoin_agent/adviser.py; tools/cloud_evaluation.py; config/cloud-protocol.json; docs/cloud-evaluation.md",
-      "limit": "Actual model use awaits owner's private API key; receipt handling and observer isolation tested with labelled mocks. No learned improvement claimed."
+      "status": "rule_adaptation_and_free_local_llm_prepared",
+      "evidence": "bitcoin_agent/local_adviser.py; config/open-model.json; docs/cloud-evaluation.md",
+      "limit": "Actual CPU inference is checked separately from unit fixtures; owner-server real-data inference still needs verification. Shadow suggestions cannot change trades and no profit improvement is claimed."
     },
     {
       "requirement": "Google Sheet hourly configuration with cached fallback",
@@ -66,11 +66,15 @@
   "cloud_preparation": {
     "guide": "docs/cloud-evaluation.md",
     "composition": "compose.evaluation.yaml",
-    "automated_local_tests": 127,
+    "automated_local_tests": 142,
     "new_cloud_isolation_tests": 10,
     "actual_cloud_deployment_verified": false,
     "actual_openai_response_verified": false,
     "new_week_started": false,
-    "owner_selected_free_hosting": true
+    "owner_selected_free_hosting": true,
+    "provider": "free local Qwen model",
+    "api_key_required": false,
+    "base_aws_image_and_market_feed_preflight": true,
+    "actual_model_server_inference_verified": false
   }
 }

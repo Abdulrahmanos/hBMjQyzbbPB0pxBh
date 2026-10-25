@@ -21,14 +21,24 @@ jobs:
           docker compose run --rm --no-deps paper python -m bitcoin_agent --config config/paper.json paper-init
           docker compose run --rm --no-deps paper python -m bitcoin_agent --config config/paper.json paper-audit
 
-      - name: Validate isolated cloud composition
+      - name: Validate and build the free CPU model composition
         run: |
-          mkdir -p var/secrets
-          printf '%s\n' 'OPENAI_API_KEY=ci-placeholder' > var/secrets/cloud-openai.env
+          bash -n deploy/linux/launch-model.sh
           docker compose -f compose.evaluation.yaml config --quiet
           docker tag bitcoin-paper:test bitcoin-evaluation:local
+          docker compose -f compose.evaluation.yaml build model
           docker run --rm bitcoin-evaluation:local python tools/cloud_evaluation.py --help
-      - name: Check cloud paper and read-only adviser volumes
+      - name: Check paper ledger and read-only adviser volume
         run: |
           docker compose -f compose.evaluation.yaml run --rm --no-deps paper python -c "from tools.cloud_evaluation import freeze, CONFIG; from bitcoin_agent.config import load_config; from bitcoin_agent.paper_store import initialize_paper; from bitcoin_agent.forward import ForwardEvaluation,audit_forward; freeze('var/cloud-week'); c=load_config(CONFIG); initialize_paper('var/cloud-week/ledger.sqlite3',c); ForwardEvaluation('var/cloud-week/ledger.sqlite3',c); assert audit_forward('var/cloud-week/ledger.sqlite3')['passed']"
-          docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python -c "import os; from pathlib import Path; from tools.cloud_evaluation import private_key,bind_observer; from bitcoin_agent.paper_store import paper_status; from bitcoin_agent.adviser import ShadowAdviser,FixtureAdviser; assert private_key('/run/secrets/openai')=='ci-placeholder'; p=Path('/app/var/cloud-adviser'); p.mkdir(parents=True,exist_ok=True); bind_observer('/app/evidence/cloud-week',p); assert not os.access('/app/evidence/cloud-week/ledger.sqlite3',os.W_OK); assert paper_status('/app/evidence/cloud-week/ledger.sqlite3')['execution_mode']=='paper'; ShadowAdviser(p/'shadow.sqlite3',FixtureAdviser())"
+          docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python -c "import os; from pathlib import Path; from tools.cloud_evaluation import bind_observer; from bitcoin_agent.paper_store import paper_status; p=Path('/app/var/cloud-adviser'); p.mkdir(parents=True,exist_ok=True); bind_observer('/app/evidence/cloud-week',p); assert not os.access('/app/evidence/cloud-week/ledger.sqlite3',os.W_OK); assert paper_status('/app/evidence/cloud-week/ledger.sqlite3')['execution_mode']=='paper'"
+      - name: Real CPU model inference with explicitly synthetic context
+        run: |
+          docker compose -f compose.evaluation.yaml run --rm --no-deps model-download
+          docker compose -f compose.evaluation.yaml up -d --no-build --wait model
+          docker compose -f compose.evaluation.yaml run --rm --no-deps adviser python tools/cloud_evaluation.py model-smoke
+          docker stats --no-stream
+          test "$(docker inspect "$(docker compose -f compose.evaluation.yaml ps -q model)" --format '{{.State.OOMKilled}} {{.RestartCount}}')" = "false 0"
+      - name: Preserve model diagnostics
+        if: always()
+        run: docker compose -f compose.evaluation.yaml logs --tail 80 model

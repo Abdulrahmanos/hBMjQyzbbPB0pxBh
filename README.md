@@ -149,7 +149,7 @@ A new API download may differ from the archived checksum. Raw data, cached API p
 
 ## Local deployment and forward evaluation
 
-A new [AWS Free-plan deployment guide](docs/cloud-evaluation.md) prepares a separate cloud account and bounded real OpenAI shadow adviser using [compose.evaluation.yaml](compose.evaluation.yaml). **Deployment has not started, real OpenAI use remains unverified, and no completed week is claimed.** The owner is setting up the free account and private API key. Earlier evidence below retains its original status.
+The [AWS deployment guide](docs/cloud-evaluation.md) now uses a free local Qwen2.5-0.5B model with a pinned CPU runtime and verified weights through [compose.evaluation.yaml](compose.evaluation.yaml). No OpenAI key or paid inference service is needed. The server image and public market-feed preflight passed; the new model still needs its real server check. **The new prospective week has not started, and no completed week is claimed.** Model advice remains separate from rule-controlled paper trades.
 
 The Windows deployment includes single-worker supervision, logon startup, freshness monitoring, bounded restart backoff and independently audited SQLite backups. Docker/Compose packaging passed an actual Linux CI build and container configuration check; Docker is unavailable on the development Windows host. No cloud deployment was performed. Use the [ordinary continuous-service instructions](docs/project-report.md#local-or-cloud-startup) for a new deployment; the old timed experiment is archived.
 
@@ -218,7 +218,7 @@ Offline narration requires PowerShell 7 with System.Speech and Microsoft David D
 
 <!-- COMPLETION_WORK_START -->
 - Complete Gmail authorization and verify its real provider receipt using the [setup guide](docs/notification-setup.md). Telegram BUY/SELL provider receipts are verified; bot credentials and the numeric chat ID stay local.
-- Verify runtime Google Sheet OAuth and optional real LLM calls if those integrations are enabled. Shadow suggestions do not control trades.
+- Verify runtime Google Sheet OAuth separately. The free local LLM has a pinned model and CPU runtime; its actual server inference preflight and seven-day collection remain to be verified. Shadow suggestions do not control trades.
 - Validate uninterrupted operation on an always-available host before claiming 24/7 reliability. The old failed week remains preserved.
 - GitHub source publication is authorized. Apziva submission remains the owner's action; YouTube is waived.
 <!-- COMPLETION_WORK_END -->
@@ -227,3 +227,5 @@ Offline narration requires PowerShell 7 with System.Speech and Microsoft David D
 - Keep operational reliability separate from investment performance. A seven-day successful run would establish behavior over those conditions, not long-term investment merit.
 
 The repository identifier specified by the project brief is `qytbcf1pULIvwxUO`.
+
+The 25 October free-model revision passes 142 local tests. Linux CI additionally runs real CPU inference with explicitly synthetic context; that test is separate from a real-data forward week.

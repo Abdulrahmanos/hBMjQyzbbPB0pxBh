@@ -1,10 +1,11 @@
-"""Fresh cloud week and isolated OpenAI observer. No infrastructure provisioning."""
+"""Fresh cloud week and isolated local-model observer. No infrastructure provisioning."""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import os
+import platform
 import signal
 import sqlite3
 import sys
@@ -16,6 +17,7 @@ from threading import Event
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from bitcoin_agent.adviser import OpenAIAdviser, ShadowAdviser
+from bitcoin_agent.local_adviser import LocalLlamaAdviser, verify_model_file
 from bitcoin_agent.config import load_config
 from bitcoin_agent.forward import environment_versions, forward_summary, source_checksum
 from bitcoin_agent.paper_store import connection, paper_status
@@ -57,11 +59,28 @@ def prepare_secret(source, destination):
     return {"prepared": True, "path": str(destination.relative_to(ROOT)), "contains_only_openai_key": True}
 
 
+
+def make_provider(secret_file=None):
+    protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+    if protocol.get("provider") == "local_llama_cpp":
+        lock = json.loads((ROOT / "config/open-model.json").read_text(encoding="utf-8"))
+        if protocol["model"] != lock["alias"] or protocol["model_sha256"] != lock["sha256"]:
+            raise ValueError("Model protocol differs from the pinned file")
+        verify_model_file("/models/model.gguf", lock["sha256"], lock["bytes"])
+        return LocalLlamaAdviser(lock)
+    if protocol.get("provider", "openai") != "openai":
+        raise ValueError("Unrecognized model provider")
+    os.environ["OPENAI_API_KEY"] = private_key(secret_file)
+    os.environ["LLM_MODEL"] = protocol["model"]
+    return OpenAIAdviser()
+
+
 def fingerprint():
     files = ["config/cloud-paper.json", "config/integrations.cloud.json",
              "config/cloud-protocol.json", "requirements-runtime.lock.txt",
-             "tools/cloud_evaluation.py", "Dockerfile", "compose.evaluation.yaml"]
-    return {"application_sha256": source_checksum(), "environment": environment_versions(),
+             "tools/cloud_evaluation.py", "Dockerfile", "Dockerfile.model", "compose.evaluation.yaml",
+             "config/open-model.json", "tools/prepare_open_model.py", "deploy/linux/launch-model.sh"]
+    return {"application_sha256": source_checksum(), "environment": environment_versions(), "architecture": platform.machine(),
             "files": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in files},
             "protocol": json.loads(PROTOCOL.read_text(encoding="utf-8"))}
 
@@ -134,14 +153,12 @@ def observe_once(runtime, state, config, adviser, now=None):
 
 def run_adviser(runtime, state, secret_file):
     protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
-    os.environ["OPENAI_API_KEY"] = private_key(secret_file)
-    os.environ["LLM_MODEL"] = protocol["model"]
     state = Path(state)
     stop = Event()
     for name in ("SIGTERM", "SIGINT"):
         signal.signal(getattr(signal, name), lambda *_: stop.set())
     with ProcessLock(state / "adviser.lock"):
-        provider = OpenAIAdviser()
+        provider = make_provider(secret_file)
         adviser = ShadowAdviser(state / "shadow.sqlite3", provider,
                                 daily_calls=protocol["daily_attempts"],
                                 interval_hours=protocol["interval_hours"])
@@ -156,6 +173,14 @@ def run_adviser(runtime, state, secret_file):
             if result["status"] == "stopped":
                 return
             stop.wait(60)
+
+
+def weights_match_protocol(protocol):
+    try:
+        lock = json.loads((ROOT / "config/open-model.json").read_text(encoding="utf-8"))
+        return verify_model_file("/models/model.gguf", protocol["model_sha256"], lock["bytes"]) == protocol["model_sha256"]
+    except (OSError, ValueError, KeyError):
+        return False
 
 
 def export_review(runtime, state, output, require_complete=False):
@@ -185,7 +210,9 @@ def export_review(runtime, state, output, require_complete=False):
                     and receipt.get("attempt_id") == row["id"]
                     and receipt.get("advice") == json.loads(row["advice_json"])
                     and receipt.get("applied_to_trades") is False
-                    and receipt.get("response_id") and receipt.get("returned_model")):
+                    and receipt.get("response_id") and receipt.get("returned_model")
+                    and receipt.get("provider") == "local_llama_cpp"
+                    and receipt.get("model_sha256") == json.loads(PROTOCOL.read_text(encoding="utf-8")).get("model_sha256")):
                 receipts.append(receipt)
         # Preserve a consistent shadow evidence snapshot as well.
         target = output / "snapshots" / (stamp + "-shadow.sqlite3")
@@ -214,7 +241,8 @@ def export_review(runtime, state, output, require_complete=False):
         "window_closed_and_collectors_stopped": (runtime / "COMPLETE").exists()
             and worker.get("state") == supervisor.get("state") == "stopped",
         "independent_backups_available": bool(previous_backups),
-        "real_openai_response_recorded": bool(receipts),
+        "real_model_response_recorded": bool(receipts),
+        "model_weights_match_protocol": weights_match_protocol(protocol) if receipts else False,
         "observer_bound_to_this_run": read_json(state / "observer-manifest.json") == manifest and bool(manifest),
         "attempt_budget_respected": attempts <= protocol["maximum_attempts"],
     }
@@ -225,9 +253,9 @@ def export_review(runtime, state, output, require_complete=False):
               "llm": {"attempts": attempts, "validated_suggestions": successes,
                       "provider_receipts": len(receipts), "applied_to_trades": False,
                       "profit_improvement_tested": False, "requested_model": protocol["model"],
-                      "model_weights_immutability_guaranteed": False}}
+                      "model_weights_immutability_guaranteed": protocol.get("requested_model_is_immutable_weights", False)}}
     atomic_json(output / "verification.json", report)
-    atomic_json(output / "openai-receipts.json", receipts)
+    atomic_json(output / "model-receipts.json", receipts)
     lines = ["# Cloud paper week", "", "Status: **" + ("verified completed week" if verified else "incomplete") + "**", "",
              f"Actual first quote: {summary.get('started_at', 'not received')}. Boundary: {summary.get('window_ends_at', 'not started')}.", "",
              f"Qualifying days: {summary['qualifying_days']}/7. Observations: {summary['observations']}.", "",
@@ -235,8 +263,8 @@ def export_review(runtime, state, output, require_complete=False):
              "| --- | ---: | ---: | ---: |"]
     for name, row in summary.get("strategies", {}).items():
         lines.append(f"| {name} | {float(row['equity_usd']):.2f} | {float(row['net_return_fraction']):.2%} | {float(row['observed_max_drawdown_fraction']):.2%} |")
-    lines += ["", f"OpenAI attempts: {attempts}; validated advice: {successes}; matching provider receipts: {len(receipts)}.",
-              "LLM suggestions were recorded separately and did not affect any trade. This verifies real model use, not improved returns. The requested model name is frozen; the provider may update underlying weights.",
+    lines += ["", f"Local model attempts: {attempts}; validated advice: {successes}; matching provider receipts: {len(receipts)}.",
+              "LLM suggestions were recorded separately and did not affect any trade. This verifies real model use, not improved returns. Model weights and the CPU runtime image are pinned by checksum; inference uses the private container network.",
               "", "Only observed prospective quotes count; historical warm-up never fills gaps. The original 99% daily coverage protocol remains. Seven days cannot establish durable profitability.", "",
               "Swing remains disabled under the existing operational policy. This week is separate from the historical LSTM comparison and earlier interrupted accounts.", ""]
     lines += [f"- {'PASS' if value else 'PENDING / FAIL'}: {key.replace('_', ' ')}" for key, value in checks.items()]
@@ -247,22 +275,28 @@ def export_review(runtime, state, output, require_complete=False):
 
 
 
-def probe_llm(secret_file, output):
-    """A real current-feature API demonstration, separate from prospective evidence."""
+def warmup(runtime):
     from bitcoin_agent.paper_service import refresh_features
+    runtime = Path(runtime).resolve()
+    if (runtime / "cloud-manifest.json").exists() or (runtime / "ledger.sqlite3").exists():
+        raise ValueError("Warm-up is only for the new, not-yet-started cloud account")
+    config, at = load_config(CONFIG), now_utc()
+    features = refresh_features(config, ROOT / "data/raw/btc_usd_1h.csv", runtime / "market", at)
+    return {"features_ready": features.is_fresh(now_utc(), config.data["operational"]["feature_stale_after_seconds"]),
+            "asof": features.asof.isoformat(), "counts_as_week_evidence": False}
+
+def probe_llm(secret_file, output, runtime):
+    """A real current-feature model demonstration, separate from forward evidence."""
     from bitcoin_agent.paper_store import initialize_paper
-    protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
-    os.environ["OPENAI_API_KEY"] = private_key(secret_file)
-    os.environ["LLM_MODEL"] = protocol["model"]
     output = Path(output).resolve()
     if not output.is_relative_to((ROOT / "var").resolve()):
-        raise ValueError("LLM demonstration output must stay in ignored var")
+        raise ValueError("Model demonstration output must stay in ignored var")
     output.mkdir(parents=True, exist_ok=True)
-    config, at = load_config(CONFIG), now_utc()
-    features = refresh_features(config, ROOT / "data/raw/btc_usd_1h.csv", output / "market", at)
+    config = load_config(CONFIG)
+    features = Features.from_dict(read_json(Path(runtime) / "market/features.json"))
     path = output / "demonstration.sqlite3"
     initialize_paper(path, config)
-    provider = OpenAIAdviser()
+    provider = make_provider(secret_file)
     adviser = ShadowAdviser(path, provider)
     result = adviser.observe(config, features, paper_status(path), now_utc())
     receipt = provider.last_receipt
@@ -270,13 +304,29 @@ def probe_llm(secret_file, output):
              "counts_as_week_evidence": False, "provider_response_verified": bool(receipt),
              "profit_improvement_tested": False, **result, "receipt": receipt}
     atomic_json(output / "verification.json", proof)
+    if not receipt:
+        raise ValueError("No genuine model receipt; the prospective week must not start")
     return {"status": result["status"], "provider_response_verified": bool(receipt),
             "counts_as_week_evidence": False, "output": str(output)}
+
+def smoke_model(output):
+    """Actual inference using explicitly synthetic context. Never a prospective day."""
+    provider = make_provider()
+    advice = provider.suggest({"context_source": "synthetic_runtime_smoke_test",
+        "execution_mode": "paper", "features": {"regime": "unknown", "return_24h": "0",
+        "ready": False}, "permitted_suggestions": ["keep_rule_targets", "prefer_cash", "prefer_mixed"],
+        "portfolio": {"cash_usd": "10000", "btc_units": "0"}})
+    proof = {"synthetic_context": True, "actual_model_inference": bool(provider.last_receipt),
+             "counts_as_week_evidence": False, "advice": advice, "receipt": provider.last_receipt}
+    atomic_json(Path(output) / "model-smoke.json", proof)
+    if not provider.last_receipt:
+        raise ValueError("No actual model receipt")
+    return proof
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["prepare-secret", "probe", "paper", "adviser", "health", "export"])
+    parser.add_argument("action", choices=["prepare-secret", "warmup", "model-smoke", "probe", "paper", "adviser", "health", "export"])
     parser.add_argument("--runtime", default="var/cloud-week")
     parser.add_argument("--state", default="var/cloud-adviser")
     parser.add_argument("--secret-file", default="/run/secrets/openai")
@@ -288,8 +338,12 @@ def main():
     try:
         if args.action == "prepare-secret":
             result = prepare_secret(args.source, args.destination)
+        elif args.action == "warmup":
+            result = warmup(args.runtime)
+        elif args.action == "model-smoke":
+            result = smoke_model(args.output)
         elif args.action == "probe":
-            result = probe_llm(args.secret_file, args.output)
+            result = probe_llm(args.secret_file, args.output, args.runtime)
         elif args.action == "paper":
             with ProcessLock(Path(args.runtime) / "cloud-launch.lock"):
                 freeze(args.runtime)
@@ -311,7 +365,7 @@ def main():
         print(json.dumps(result))
         return 0
     except (OSError, ValueError, ArithmeticError, sqlite3.Error):
-        print("Cloud operation could not complete; check private setup and recorded status. No secret details displayed.", file=sys.stderr)
+        print("Cloud operation could not complete; check model setup and recorded status. No secret details displayed.", file=sys.stderr)
         return 3
 
 
