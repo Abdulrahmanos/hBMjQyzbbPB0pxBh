@@ -9,14 +9,14 @@
   "collector_stopped": true,
   "obsolete_windows_task_disabled": true,
   "chat_heartbeat_deleted": true,
-  "actual_external_delivery_verified": false,
+  "actual_external_delivery_verified": true,
   "docker_build_verified": true,
   "docker_health_checks_verified": true,
   "container_config_command_verified": true,
   "github_ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488",
   "telegram_external_delivery_verified": true,
   "telegram_buy_sell_outbox_verified": true,
-  "gmail_external_delivery_verified": false,
+  "gmail_external_delivery_verified": true,
   "actual_external_delivery_scope": "all_requested_channels",
   "telegram_verification": "reports/submission/telegram-verification.json",
   "cloud_isolation_tests": 11,
@@ -28,5 +28,7 @@
   "actual_aws_base_image_and_market_preflight_verified": true,
   "free_model_server_preflight_verified": false,
   "storage_recovery_unit_tests": 6,
-  "storage_recovery_container_verified": false
+  "storage_recovery_container_verified": false,
+  "gmail_verification": "reports/submission/gmail-verification.json",
+  "scheduled_cloud_gmail_delivery_verified": false
 }

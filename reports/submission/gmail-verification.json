@@ -1,0 +1,16 @@
+{
+  "verified_at": "2026-10-26T11:10:31.598325+00:00",
+  "gmail_send_only_oauth_completed": true,
+  "provider_accepted_test_email": true,
+  "provider_receipt_received": true,
+  "test_type": "labelled_paper_integration_self_test",
+  "real_money_traded": false,
+  "scheduled_aws_sender_deployed": false,
+  "scheduled_weekly_delivery_observed": false,
+  "recipient_and_credentials_published": false,
+  "scope": "https://www.googleapis.com/auth/gmail.send",
+  "schedule": "Monday 09:00 Asia/Riyadh",
+  "cloud_sender_tests_passed": 8,
+  "existing_integration_tests_passed": 25,
+  "limitation": "Google External/Testing refresh token expires after seven days. AWS sender installation and server-originated delivery still pending."
+}

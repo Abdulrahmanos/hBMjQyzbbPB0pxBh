@@ -8,7 +8,7 @@ Reviewed against the full brief pasted by the owner on **22 October 2026**. The 
 | Adaptive strategy behavior; justified LLM use | [Methodology](../../docs/methodology.md), [adviser](../../bitcoin_agent/adviser.py) | Rule adaptation works; LLM is restricted to shadow suggestions; real calls unverified |
 | Hourly Google Sheet controls and cached fallback | [Configuration module](../../bitcoin_agent/remote_config.py), [integration review](../milestone-4/review.md) | Code/cache tests and native Sheet demonstration complete; runtime OAuth unverified |
 | Telegram alerts for every buy and sell | [Notification module](../../bitcoin_agent/notifications.py), [real delivery verification](telegram-verification.json) | Two synthetic fills passed through the real Telegram outbox with BUY/SELL receipts, one attempt each and no duplicate delivery on re-scan |
-| Gmail report each Monday at 09:00 | [Notification setup](../../docs/notification-setup.md), [saved report](../milestone-4/weekly-report.md) | Monday 09:00 Riyadh boundary and figures tested; actual Gmail delivery awaits OAuth |
+| Gmail report each Monday at 09:00 | [Notification setup](../../docs/notification-setup.md), [saved report](../milestone-4/weekly-report.md) | Real Gmail self-test has a provider receipt; Monday timing and isolated outbox tested; AWS installation pending ([record](gmail-verification.json)) |
 | Dockerized and cloud-deployable operation | [Dockerfile](../../Dockerfile), [Compose](../../compose.yaml), [actual CI run](https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488) | Image build, Compose validation and container configuration command passed on Linux; no cloud server or uninterrupted service verified |
 | One-week real-data evaluation log | [Actual observations and daily coverage](../real-data-evaluation/review.md) | Logs span 11–22 October with separate accounts and explicit gaps; continuous 24/7 week failed |
 | Clean code and setup/system report | [README](../../README.md), [project report](../../docs/project-report.md) | Provided |
@@ -30,3 +30,7 @@ The owner requested real LLM use and a new week on an always-on server, then sel
 ## 25 October free-model update
 
 The owner chose a free local Qwen model instead of OpenAI API billing. A pinned CPU runtime, model-file verification, private inference network and bounded shadow adviser are prepared. All 143 local tests pass. The AWS base image and market-feed preflight are confirmed; a real model response on the owner's server and a completed continuous week remain pending. No API key is required for this deployment. Gmail and runtime Sheet OAuth remain separately unverified.
+
+## Gmail update — 26 October 2026
+
+Send-only OAuth and one labelled real Gmail test email have been verified. The isolated cloud sender passes eight new tests plus 25 existing integration tests. It has not yet been installed on AWS, and no scheduled weekly report has yet been observed. See [cloud Gmail setup](../../docs/cloud-gmail.md). Personal destinations and secrets remain private.

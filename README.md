@@ -5,7 +5,7 @@ A reproducible Python project comparing Bitcoin accumulation, conditional swing 
 The project asks: **assuming Bitcoin remains operational and tradable, can a configurable strategy improve return and drawdown relative to simpler alternatives, including during prolonged declines?** Profitability is evaluated rather than assumed. All execution is simulated; there is no funded exchange broker.
 
 <!-- PROJECT_STATUS_START -->
-**Status as of 22 October 2026:** source, historical strategy research and the requested LSTM comparison are implemented. **Real Telegram BUY/SELL delivery was verified with synthetic trades. Gmail still needs Google authorization, and continuous 24/7 operation was not achieved.** The real-data log preserves interruptions and separate accounts. GitHub publication was newly authorized by the owner; YouTube was waived. Read the [requirements audit](reports/submission/requirements.md), [LSTM result](reports/lstm-comparison/review.md) and [real-data log](reports/real-data-evaluation/review.md) before interpreting the project as fully validated.
+**Status as of 26 October 2026:** source, historical research and the requested LSTM comparison are implemented. Real Telegram BUY/SELL test delivery and a send-only Gmail test email have provider receipts. A new AWS paper week and real local-model shadow observation have started; the continuous week has not yet passed. The separate Monday Gmail sender is prepared but still awaits server installation. Earlier interrupted accounts remain preserved. GitHub publication is owner-authorized; YouTube is waived. Read the [requirements audit](reports/submission/requirements.md) and [Gmail deployment status](docs/cloud-gmail.md) before treating the project as fully validated.
 <!-- PROJECT_STATUS_END -->
 
 [LSTM comparison](reports/lstm-comparison/review.md) | [Requirements audit](reports/submission/requirements.md) | [Formula guide](docs/modeling-guide.md) | [Telegram/Gmail setup](docs/notification-setup.md) | [Real-data logs](reports/real-data-evaluation/review.md)
@@ -176,7 +176,7 @@ These inspect an existing local run; its runtime files are not included in a fre
 
 The [local demo inbox](reports/milestone-4/inbox/index.html) shows saved paper trade alerts and a weekly report without email, Telegram or paid APIs. The code includes restricted Google Sheet controls, a persistent notification outbox and bounded shadow-adviser adapters.
 
-Real Telegram delivery passed an isolated synthetic BUY/SELL test through the persistent fill outbox, with provider receipts and no duplicate messages on re-scan; see the [verification record](reports/submission/telegram-verification.json). Gmail delivery, runtime Google Sheet OAuth and actual LLM calls remain unverified. The demo adviser is an explicitly labeled deterministic fixture. No LLM response changes orders or risk settings. Google configuration edits and LLM advice are disabled in the frozen forward run; notification delivery is local.
+Real Telegram delivery passed an isolated synthetic BUY/SELL test through the persistent fill outbox, with provider receipts and no duplicate messages on re-scan; see the [verification record](reports/submission/telegram-verification.json). A real send-only Gmail test now has a provider receipt; [weekly AWS installation remains pending](docs/cloud-gmail.md). Runtime Google Sheet OAuth remains unverified. The new AWS run has a genuine local-model receipt, separate from the deterministic demo fixture. LLM suggestions remain in shadow mode and do not change orders or risk settings. The frozen paper collector has external notification delivery disabled; the new Gmail sender reads it separately.
 
 See the [integration guide](docs/integrations.md) for configuration and recovery behavior. Credential names are listed in [.env.example](.env.example); populated credentials and private Sheet identifiers stay local.
 
@@ -217,8 +217,8 @@ Offline narration requires PowerShell 7 with System.Speech and Microsoft David D
 ## Remaining work and limitations
 
 <!-- COMPLETION_WORK_START -->
-- Complete Gmail authorization and verify its real provider receipt using the [setup guide](docs/notification-setup.md). Telegram BUY/SELL provider receipts are verified; bot credentials and the numeric chat ID stay local.
-- Verify runtime Google Sheet OAuth separately. The free local LLM has a pinned model and CPU runtime; its actual server inference preflight and seven-day collection remain to be verified. Shadow suggestions do not control trades.
+- Install and verify the [separate AWS Gmail sender](docs/cloud-gmail.md). Local Gmail delivery and Telegram BUY/SELL test receipts are verified; credentials and personal destinations remain private.
+- Verify runtime Google Sheet OAuth separately. The free local LLM has a pinned model and CPU runtime; its server preflight and first in-run receipt are verified; seven-day collection and the final independent audit remain incomplete. Shadow suggestions do not control trades.
 - Validate uninterrupted operation on an always-available host before claiming 24/7 reliability. The old failed week remains preserved.
 - GitHub source publication is authorized. Apziva submission remains the owner's action; YouTube is waived.
 <!-- COMPLETION_WORK_END -->

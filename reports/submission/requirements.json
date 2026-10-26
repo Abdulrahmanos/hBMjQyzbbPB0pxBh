@@ -1,5 +1,5 @@
 {
-  "reviewed_on": "2026-10-25",
+  "reviewed_on": "2026-10-26",
   "source": "Full project brief pasted by the owner on 22 October; original page requires sign-in.",
   "claims_all_live_requirements_verified": false,
   "youtube_owner_waived": true,
@@ -28,9 +28,10 @@
     },
     {
       "requirement": "Gmail weekly report Monday 09:00",
-      "status": "implemented_schedule_and_report_tests_pass_real_delivery_pending_oauth",
-      "evidence": "bitcoin_agent/notifications.py; tools/setup_gmail_oauth.py; docs/notification-setup.md",
-      "timezone": "Asia/Riyadh"
+      "status": "real_gmail_self_test_verified_isolated_cloud_schedule_awaits_installation",
+      "evidence": "reports/submission/gmail-verification.json; tools/cloud_gmail.py; docs/cloud-gmail.md",
+      "timezone": "Asia/Riyadh",
+      "limit": "Local provider receipt verified; AWS-originated delivery and the scheduled Monday report are not yet observed."
     },
     {
       "requirement": "Dockerized locally runnable and cloud-deployable",
