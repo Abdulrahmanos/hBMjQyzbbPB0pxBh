@@ -1,7 +1,7 @@
 {
-  "verified_at": "2026-10-25T13:22:17.521747+00:00",
+  "verified_at": "2026-10-26T07:21:18.343561+00:00",
   "all_tests_passed": true,
-  "tests_run": 143,
+  "tests_run": 149,
   "failures": 0,
   "errors": 0,
   "command": "python -B -m unittest discover -s tests -v",
@@ -26,5 +26,7 @@
   "real_local_model_response_verified": false,
   "cloud_week_started": false,
   "actual_aws_base_image_and_market_preflight_verified": true,
-  "free_model_server_preflight_verified": false
+  "free_model_server_preflight_verified": false,
+  "storage_recovery_unit_tests": 6,
+  "storage_recovery_container_verified": false
 }

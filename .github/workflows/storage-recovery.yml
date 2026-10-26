@@ -1,0 +1,25 @@
+name: Verify frozen-account storage recovery
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  readonly-storage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the existing unchanged paper image
+        run: docker build -t bitcoin-storage:test .
+      - name: Prepare synthetic WAL account with closed sidecar files
+        run: |
+          docker volume create bitcoin-storage-regression
+          docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var -v "$PWD/tests:/app/tests:ro" bitcoin-storage:test python tests/cloud_storage_docker_check.py prepare
+      - name: Reproduce read-only WAL failure
+        run: docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var:ro -v "$PWD/tests:/app/tests:ro" bitcoin-storage:test python tests/cloud_storage_docker_check.py expect-wal-failure
+      - name: Apply SQLite storage recovery and independently audit
+        run: docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var -v "$PWD/tools/repair_cloud_storage.py:/app/tools/repair_cloud_storage.py:ro" bitcoin-storage:test python tools/repair_cloud_storage.py --apply
+      - name: Verify read-only observer access and blocked writes
+        run: docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var:ro -v "$PWD/tests:/app/tests:ro" bitcoin-storage:test python tests/cloud_storage_docker_check.py verify
+      - name: Verify continued collection and unchanged original start
+        run: |
+          docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var -v "$PWD/tests:/app/tests:ro" bitcoin-storage:test python tests/cloud_storage_docker_check.py update
+          docker run --rm --read-only --tmpfs /tmp -v bitcoin-storage-regression:/app/var:ro -v "$PWD/tests:/app/tests:ro" bitcoin-storage:test python tests/cloud_storage_docker_check.py verify
