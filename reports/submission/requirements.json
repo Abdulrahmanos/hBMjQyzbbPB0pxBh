@@ -1,5 +1,5 @@
 {
-  "reviewed_on": "2026-10-26",
+  "reviewed_on": "2026-10-27",
   "source": "Full project brief pasted by the owner on 22 October; original page requires sign-in.",
   "claims_all_live_requirements_verified": false,
   "youtube_owner_waived": true,
@@ -28,10 +28,10 @@
     },
     {
       "requirement": "Gmail weekly report Monday 09:00",
-      "status": "real_gmail_self_test_verified_isolated_cloud_schedule_awaits_installation",
+      "status": "aws_test_delivery_verified_weekly_sender_running",
       "evidence": "reports/submission/gmail-verification.json; tools/cloud_gmail.py; docs/cloud-gmail.md",
       "timezone": "Asia/Riyadh",
-      "limit": "Local provider receipt verified; AWS-originated delivery and the scheduled Monday report are not yet observed."
+      "limit": "AWS-originated test has a provider receipt and separate weekly sender is running. First scheduled report is due 2 November 09:00 Asia/Riyadh; scheduled delivery not yet observed. Testing OAuth requires renewal for later weeks."
     },
     {
       "requirement": "Dockerized locally runnable and cloud-deployable",

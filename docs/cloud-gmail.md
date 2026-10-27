@@ -2,7 +2,7 @@
 
 The real Gmail send-only OAuth flow and one labelled test email were verified on 26 October 2026. The provider returned a receipt. Addresses, client secrets, refresh tokens and the receipt ID remain in ignored local files. See [the redacted record](../reports/submission/gmail-verification.json).
 
-The cloud sender is prepared and locally tested; **AWS installation and an AWS-originated delivery receipt are still required**. A local email test does not prove that Monday delivery is running on the server.
+**AWS setup verified on 27 October 2026:** the server-originated connection test was delivered in one attempt with a provider receipt, and the separate weekly sender is running with automatic restart enabled. A follow-up check found exactly one outbox item and no error. The paper container, image and original start remained unchanged. Scheduled Monday delivery has not yet occurred.
 
 ## Isolation and schedule
 
@@ -14,7 +14,7 @@ The cloud sender is prepared and locally tested; **AWS installation and an AWS-o
 
 For the run that began on 26 October at 09:52 Riyadh, the first due report is **2 November at 09:00 Riyadh**. It is a partial weekly report. The experiment's original seven-day boundary is 09:52:34 that day and is unchanged.
 
-## Owner-operated AWS installation
+## Installation procedure (already completed on the owner server)
 
 Prepare the four fields from the locally authorized `.env` as a one-line JSON file under ignored `var/secrets/cloud-gmail.json`: `GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET`, `GMAIL_REFRESH_TOKEN`, `GMAIL_REPORT_RECIPIENT`. Do not copy the whole project .env to the server; other integrations have separate credentials.
 
@@ -26,7 +26,7 @@ Run in the existing EC2 terminal:
 sudo python3 /opt/bitcoin-gmail/install_cloud_gmail.py
 ```
 
-At its hidden prompt, paste the one-line private JSON directly from your local file, then press Enter. It is not a shell command and is not saved to shell history. Do not paste it into chat or take a screenshot of it.
+At its hidden prompt, paste the one-line private JSON directly from your local file, then press Enter. It is not a shell command and is not saved to shell history. Do not paste it into chat or take a screenshot of it. For the verified owner deployment, a one-time RSA-4096 OAEP SHA-256 envelope avoided the clipboard issue: the server decrypted the four fields, validated them through the same installer routine, saved them with root-only access, and removed the temporary transport key. No plaintext credential was placed in shell history or public artifacts.
 
 The installer checks the existing paper container identity, health and evidence volume, stores only Gmail fields in a root-private directory, and sends a labelled AWS connection test using a persistent outbox. Only after that test succeeds does it start the separate worker. Look for `GMAIL_SERVER_READY`; then confirm the second test email in the destination inbox.
 

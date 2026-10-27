@@ -5,12 +5,20 @@
   "provider_receipt_received": true,
   "test_type": "labelled_paper_integration_self_test",
   "real_money_traded": false,
-  "scheduled_aws_sender_deployed": false,
+  "scheduled_aws_sender_deployed": true,
   "scheduled_weekly_delivery_observed": false,
   "recipient_and_credentials_published": false,
   "scope": "https://www.googleapis.com/auth/gmail.send",
   "schedule": "Monday 09:00 Asia/Riyadh",
   "cloud_sender_tests_passed": 8,
   "existing_integration_tests_passed": 25,
-  "limitation": "Google External/Testing refresh token expires after seven days. AWS sender installation and server-originated delivery still pending."
+  "limitation": "Google External/Testing refresh token expires after seven days. AWS test delivery and running sender are verified; the first scheduled Monday report has not yet occurred.",
+  "aws_verified_at": "2026-10-27T12:00:55.556451+00:00",
+  "aws_originated_test_delivery_verified": true,
+  "aws_provider_receipt_verified": true,
+  "aws_test_delivered_at": "2026-10-27T11:59:52.928840+00:00",
+  "aws_sender_running": true,
+  "paper_evidence_access": "read_only",
+  "original_paper_run_preserved": true,
+  "first_due_report": "2026-11-02T09:00:00+03:00"
 }
