@@ -1,5 +1,11 @@
 # Completion and publication plan
 
+## Current owner direction — 27 October 2026
+
+The owner requested completing Google Sheets and Telegram on AWS and explicitly approved the dedicated read-only Sheet service account/key and removal of its unused download key. Both isolated workers are deployed and verified. See docs/cloud-connectors.md and reports/submission/aws-connectors-verification.json. Google Sheets reads and caches all 16 controls hourly; edits are staged and are not applied to the current frozen paper account. Telegram delivered the two existing real-market paper fills as labelled catch-up alerts, each once with a provider receipt, and now scans for new fills every 30 seconds. Gmail is already deployed separately.
+
+The current cloud account started 26 October at 09:52:34 Asia/Riyadh and ends 2 November at 09:52:34. Its original container, image and start remain unchanged. Do not modify frozen application/configuration/library files or restart the experiment for integration work. The first Gmail Monday report at 09:00 occurs before that boundary and is partial. No new chat heartbeat, Windows collector task, YouTube upload or Apziva submission is authorized. GitHub source publication remains authorized. Credentials, private Sheet/recipient identifiers and server details remain ignored/private.
+
 ## Current owner direction — 25 October 2026
 
 The owner selected a free open model instead of OpenAI API billing. Use the pinned Qwen2.5-0.5B GGUF and CPU-only llama.cpp image in config/open-model.json. No OpenAI account or API key is needed for the current cloud deployment. See docs/cloud-evaluation.md.

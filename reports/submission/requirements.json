@@ -11,20 +11,21 @@
     },
     {
       "requirement": "Adaptive behavior and justified LLM use",
-      "status": "rule_adaptation_and_free_local_llm_prepared",
+      "status": "rule_adaptation_and_real_local_llm_shadow_receipt_verified",
       "evidence": "bitcoin_agent/local_adviser.py; config/open-model.json; docs/cloud-evaluation.md",
-      "limit": "Actual CPU inference is checked separately from unit fixtures; owner-server real-data inference still needs verification. Shadow suggestions cannot change trades and no profit improvement is claimed."
+      "limit": "Genuine AWS CPU inference and a first in-run receipt were observed after a documented read-only database repair. Suggestions stay in shadow mode, and improved profitability has not been established."
     },
     {
       "requirement": "Google Sheet hourly configuration with cached fallback",
-      "status": "implemented_native_sheet_demo_verified_runtime_oauth_unverified",
-      "evidence": "bitcoin_agent/remote_config.py; reports/milestone-4/review.md"
+      "status": "aws_service_account_reads_and_hourly_cache_verified_staging_only",
+      "evidence": "tools/cloud_connectors.py; docs/cloud-connectors.md; reports/submission/aws-connectors-verification.json",
+      "limit": "All 16 controls read and validated on AWS. Changes remain staged to preserve the current frozen experiment; live modification of this account is deliberately disabled."
     },
     {
       "requirement": "Telegram alert on every committed buy/sell",
-      "status": "real_buy_sell_outbox_delivery_verified_with_synthetic_prices",
-      "evidence": "bitcoin_agent/notifications.py; reports/submission/telegram-verification.json",
-      "limit": "Actual Telegram transport and persistent fill-outbox delivery verified; no continuous service or real-market trading result claimed."
+      "status": "aws_fill_alert_worker_running_real_receipts_verified",
+      "evidence": "tools/cloud_connectors.py; reports/submission/aws-connectors-verification.json; reports/submission/telegram-verification.json",
+      "limit": "Two existing real-market paper fills delivered as catch-up once each. Earlier synthetic BUY/SELL transport proof remains separate. Future delivery and continuous uptime require observation."
     },
     {
       "requirement": "Gmail weekly report Monday 09:00",
@@ -35,17 +36,17 @@
     },
     {
       "requirement": "Dockerized locally runnable and cloud-deployable",
-      "status": "ci_build_compose_and_container_config_verified_no_cloud_uptime",
+      "status": "aws_services_running_and_ci_verified",
       "evidence": "Dockerfile; compose.yaml; compose.notifications.yaml; .github/workflows/verify.yml",
-      "limit": "Actual Linux CI image build and container configuration command passed. No cloud service or uninterrupted deployment verified.",
+      "limit": "AWS paper/model/adviser and separate Gmail/Telegram/Sheets workers are deployed. A completed uninterrupted week is still pending.",
       "ci_url": "https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488",
-      "cloud_preparation": "Separate frozen week, read-only OpenAI observer and boot service prepared; actual server pending eligible AWS Free-plan signup."
+      "cloud_preparation": "AWS Free-plan deployment started a separate frozen paper account on 26 October; no OpenAI billing required."
     },
     {
       "requirement": "One-week real-data evaluation log",
-      "status": "interrupted_logs_delivered_continuous_week_not_achieved",
+      "status": "aws_prospective_week_in_progress_earlier_interruptions_preserved",
       "evidence": "reports/real-data-evaluation/review.md",
-      "limit": "Actual logs span 11\u00e2\u20ac\u201c22 October across separate accounts; missing periods remain missing."
+      "limit": "The current AWS window is 26 October 09:52:34 to 2 November 09:52:34 Asia/Riyadh. Earlier 11-22 October logs have explicit gaps and separate accounts. Actual daily coverage and final audit are still required."
     },
     {
       "requirement": "Clean code and setup/system report",
@@ -69,13 +70,13 @@
     "composition": "compose.evaluation.yaml",
     "automated_local_tests": 143,
     "new_cloud_isolation_tests": 11,
-    "actual_cloud_deployment_verified": false,
+    "actual_cloud_deployment_verified": true,
     "actual_openai_response_verified": false,
-    "new_week_started": false,
+    "new_week_started": true,
     "owner_selected_free_hosting": true,
     "provider": "free local Qwen model",
     "api_key_required": false,
     "base_aws_image_and_market_feed_preflight": true,
-    "actual_model_server_inference_verified": false
+    "actual_model_server_inference_verified": true
   }
 }

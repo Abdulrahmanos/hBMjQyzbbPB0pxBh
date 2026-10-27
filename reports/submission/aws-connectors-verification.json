@@ -1,0 +1,61 @@
+{
+  "verified_on": "2026-10-27",
+  "source_commit": "e973e5d187bc45704af35640feb70b1f2907b974",
+  "telegram": {
+    "aws_worker_running": true,
+    "persistent_restart_policy": "unless-stopped",
+    "paper_fills_seen": 2,
+    "messages_delivered": 2,
+    "provider_receipts_verified": true,
+    "attempts_per_message": 1,
+    "duplicates_after_rescan": 0,
+    "historical_alerts_labelled_catchup": true,
+    "checked_at": "2026-10-27T12:52:46.398541+00:00",
+    "future_trade_delivery_requires_worker_and_network": true
+  },
+  "google_sheets": {
+    "api_read_verified": true,
+    "authentication": "dedicated_service_account",
+    "permission": "viewer_on_configuration_sheet_only",
+    "oauth_scope": "spreadsheets.readonly",
+    "project_iam_roles_granted": false,
+    "domain_wide_delegation": false,
+    "controls_validated": 16,
+    "last_success_at": "2026-10-27T12:51:41.711782+00:00",
+    "next_refresh_at": "2026-10-27T13:51:41.711782+00:00",
+    "refresh_seconds": 3600,
+    "cache": "validated-config.json",
+    "mode": "staged_during_frozen_experiment",
+    "applied_to_trades": false,
+    "aws_worker_running": true,
+    "private_key_generated_and_kept_on_aws": true,
+    "unused_download_key_deleted": true,
+    "key_expires_on": "2027-10-27"
+  },
+  "isolation": {
+    "original_paper_container_and_start_preserved": true,
+    "frozen_image_reused": true,
+    "paper_health_verified": true,
+    "gmail_sender_still_running": true,
+    "evidence_mounts_read_only": true,
+    "no_inbound_ports_added": true,
+    "separate_state_volumes": true,
+    "root_only_host_credentials_directory": true
+  },
+  "validation": {
+    "new_focused_tests": 7,
+    "existing_gmail_and_integration_tests": 33,
+    "all_40_passed": true,
+    "ci_urls": [
+      "https://github.com/Abdulrahmanos/hBMjQyzbbPB0pxBh/actions/runs/40506490493",
+      "https://github.com/Abdulrahmanos/hBMjQyzbbPB0pxBh/actions/runs/40506490501"
+    ],
+    "ci_conclusion": "success"
+  },
+  "limits": [
+    "No seven-day completion or profitability claim.",
+    "Scheduled Monday Gmail delivery has not yet occurred.",
+    "Sheets staging is not live modification of the frozen trading account.",
+    "The first hourly re-read is scheduled; initial authenticated read and cache are verified."
+  ]
+}

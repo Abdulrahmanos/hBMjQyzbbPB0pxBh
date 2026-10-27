@@ -1,40 +1,28 @@
 # Apziva requirements audit
 
-Reviewed against the full brief pasted by the owner on **22 October 2026**. The repository is ready for code/research review, but **not every live integration or deployment criterion has been verified**. Credentials and a reliable host cannot be invented by a backtest.
+Current evidence as of **27 October 2026**, reviewed against the full brief supplied by the owner. Source and research are ready for review. **The new seven-day experiment and first scheduled weekly email have not yet completed.**
 
-| Requirement | Evidence | Actual status |
-| --- | --- | --- |
-| Configurable budget; time/dip DCA; ATR swing stops; strategy modes | [Operational engine](../../bitcoin_agent/paper_engine.py), [configuration](../../config/paper.json), tests | Implemented and tested with simulated capital |
-| Adaptive strategy behavior; justified LLM use | [Methodology](../../docs/methodology.md), [adviser](../../bitcoin_agent/adviser.py) | Rule adaptation works; LLM is restricted to shadow suggestions; real calls unverified |
-| Hourly Google Sheet controls and cached fallback | [Configuration module](../../bitcoin_agent/remote_config.py), [integration review](../milestone-4/review.md) | Code/cache tests and native Sheet demonstration complete; runtime OAuth unverified |
-| Telegram alerts for every buy and sell | [Notification module](../../bitcoin_agent/notifications.py), [real delivery verification](telegram-verification.json) | Two synthetic fills passed through the real Telegram outbox with BUY/SELL receipts, one attempt each and no duplicate delivery on re-scan |
-| Gmail report each Monday at 09:00 | [Notification setup](../../docs/notification-setup.md), [saved report](../milestone-4/weekly-report.md) | Local and AWS test emails have provider receipts; separate Monday 09:00 Asia/Riyadh sender is running; first scheduled delivery is due 2 November ([record](gmail-verification.json)) |
-| Dockerized and cloud-deployable operation | [Dockerfile](../../Dockerfile), [Compose](../../compose.yaml), [actual CI run](https://github.com/Abdulrahmanos/qytbcf1pULIvwxUO/actions/runs/39750052488) | Image build, Compose validation and container configuration command passed on Linux; no cloud server or uninterrupted service verified |
-| One-week real-data evaluation log | [Actual observations and daily coverage](../real-data-evaluation/review.md) | Logs span 11–22 October with separate accounts and explicit gaps; continuous 24/7 week failed |
-| Clean code and setup/system report | [README](../../README.md), [project report](../../docs/project-report.md) | Provided |
-| Public YouTube video | Owner's explicit correction | Waived by owner; no video upload performed |
-| LSTM comparison requested by owner | [Protocol](../../docs/lstm-experiment.md), [results](../lstm-comparison/review.md) | Complete exploratory historical experiment; no advantage over always holding cash |
+| Requirement | Actual status and evidence |
+| --- | --- |
+| Configurable budget, DCA, ATR swing stops and strategy modes | Implemented and tested with simulated capital; [engine](../../bitcoin_agent/paper_engine.py) and [methodology](../../docs/methodology.md). The current frozen configuration has swing disabled. |
+| Adaptive behavior and justified LLM use | Rules operate; genuine free local-model inference and an in-run receipt were observed on AWS. The model is a shadow adviser and does not control trades or prove improved returns. |
+| Hourly Google Sheets controls and cached fallback | AWS service-account read of all 16 controls verified; hourly validated cache worker running. **Edits are staged during the frozen experiment**, not applied to its trades. [Deployment and limitations](../../docs/cloud-connectors.md). |
+| Telegram alert on each committed buy/sell | AWS worker running; both existing candidate paper fills delivered as labelled catch-up, once each with receipts. Earlier synthetic BUY/SELL checks remain separate. [AWS evidence](aws-connectors-verification.json). |
+| Gmail summary Monday at 09:00 | Local and AWS tests have provider receipts. Separate sender runs on AWS, due Monday 09:00 Asia/Riyadh. First scheduled delivery is 2 November and remains unobserved. [Gmail evidence](gmail-verification.json). |
+| Dockerized, cloud-deployable operation | AWS services are deployed and running; Linux CI checks passed. Current healthy operation is not proof of uninterrupted seven-day uptime. |
+| One-week real-data evaluation | AWS window started 26 October 09:52:34 and ends 2 November 09:52:34 Asia/Riyadh. Await the actual boundary and independent coverage, freeze, ledger, quote-pairing and backup audit. Earlier interrupted accounts remain preserved. |
+| Clean code and setup/system report | [README](../../README.md), [project report](../../docs/project-report.md), deployment guides, tests and redacted evidence provided. |
+| Public YouTube video | Explicitly waived by the owner; not a remaining completion requirement. |
+| Owner-requested historical LSTM comparison | Completed exploratory experiment; the model chose cash throughout the test and did not outperform the cash baseline. [Results](../lstm-comparison/review.md). |
 
-The brief does not mandate LSTM, a 99% uptime threshold, or seven separately qualifying daily windows. Those were additional research/operational choices. Their failures remain documented. The supplied brief still asks for real-data evaluation and robust operation; an interrupted log cannot prove reliable 24/7 deployment.
+## Remaining evidence and limits
 
-## What the owner still needs to supply
+The final week cannot be manufactured from historical data, synthetic tests or elapsed calendar time. The run's initial adviser outage and storage repair must remain in its report. No reset, extension or change to the frozen source/settings is authorized by these integration deployments.
 
-Telegram bot/private-chat setup and real BUY/SELL delivery have been verified using synthetic prices. Gmail Desktop OAuth, local and AWS tests, and the separate scheduled sender are now verified. Observe its first scheduled report and renew Testing authorization before later weeks. Phone numbers and private usernames alone cannot configure Telegram Bot API delivery. Personal destinations and secrets stay in ignored `.env`.
+The first Monday Gmail snapshot occurs about 52 minutes before the seven-day experiment closes, so it is explicitly a partial report, not the final audit. Gmail's External/Testing authorization expires after seven days and needs renewal for later weekly deliveries. The Sheets service account is separate and does not inherit that seven-day user-token expiry.
 
-For unattended operation, keep the process/network available or deploy the supplied container on an appropriate host. Google Sheet and optional LLM providers require their own credentials and verification. The noisy Codex heartbeat was deleted, and the obsolete Windows collector task was disabled. Nothing in this repository silently reinstalls them.
+Sheet reads, validation, cache fallback and staging are verified. Live application of edited controls to the current frozen account is deliberately disabled; do not describe staged changes as trades driven by the Sheet. A later declared configuration can use the existing validated configuration mechanism.
 
-## 24 October cloud preparation
+Personal destinations, Sheet identifiers, account IDs and credentials remain outside public source. No new Codex heartbeat or Windows collector task was created. The owner submits the repository; no Apziva submission or video upload has been performed.
 
-The owner requested real LLM use and a new week on an always-on server, then selected a free hosting alternative. [AWS Free-plan setup](../../docs/cloud-evaluation.md), a separate paper account and a read-only OpenAI observer are prepared. All 127 local tests pass, including ten new cloud checks. The owner is creating the free account and saving their own API key locally. **No server deployment, actual OpenAI response or new prospective day is yet verified.** Earlier results and missing Gmail/Sheet authorization remain as stated above.
-
-## 25 October free-model update
-
-The owner chose a free local Qwen model instead of OpenAI API billing. A pinned CPU runtime, model-file verification, private inference network and bounded shadow adviser are prepared. All 143 local tests pass. The AWS base image and market-feed preflight are confirmed; a real model response on the owner's server and a completed continuous week remain pending. No API key is required for this deployment. Gmail and runtime Sheet OAuth remain separately unverified.
-
-## Gmail update — 26 October 2026
-
-Send-only OAuth and one labelled real Gmail test email have been verified. The isolated cloud sender passes eight new tests plus 25 existing integration tests. It has not yet been installed on AWS, and no scheduled weekly report has yet been observed. See [cloud Gmail setup](../../docs/cloud-gmail.md). Personal destinations and secrets remain private.
-
-## Gmail deployment verified — 27 October 2026
-
-The AWS-originated Gmail connection test was delivered once with a provider receipt. The separate sender is running with automatic restart enabled, and reads paper evidence through a read-only mount. The frozen collector container, image and original start were preserved. The first scheduled report is due 2 November at 09:00 Asia/Riyadh; it is a partial weekly snapshot, before the experiment's 09:52:34 seven-day boundary. This does not certify the week. Testing OAuth has a seven-day lifetime. See the [redacted verification](gmail-verification.json).
+The brief does not require profitable results, LSTM, a 99% uptime threshold or seven separately qualifying daily windows. Those model/protocol choices are reported honestly, including failures. The project still needs the actual prospective evidence and final review before claiming full validation.
